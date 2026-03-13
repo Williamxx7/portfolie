@@ -459,42 +459,42 @@
 
         /* ── CONTACT ── */
         .contact-section {
-            background: var(--ink);
-            color: var(--paper);
+        background: var(--paper-warm);
+        color: var(--ink);
         }
 
         .contact-section .section-label {
-            color: var(--accent-light);
+            color: var(--accent);
         }
 
         .contact-section .section-label::after {
-            background: rgba(255,255,255,0.1);
+            background: var(--paper-mid);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid var(--paper-mid);
         }
 
         .contact-card {
             padding: 2.5rem 2rem;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid var(--paper-mid);
             transition: background 0.2s;
         }
 
         .contact-card:last-child { border-right: none; }
 
         .contact-card:hover {
-            background: rgba(255,255,255,0.04);
+            background: var(--paper-mid);
         }
 
         .contact-type {
             font-size: 0.72rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
+            color: var(--ink-faint);
             margin-bottom: 0.75rem;
         }
 
@@ -502,14 +502,14 @@
             font-family: var(--serif);
             font-size: 1.2rem;
             font-weight: 300;
-            color: var(--paper);
+            color: var(--ink);
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
             transition: color 0.2s;
         }
 
-        .contact-value:hover { color: var(--accent-light); }
+        .contact-value:hover { color: var(--accent); }
 
         /* ── FOOTER ── */
         footer {
@@ -737,7 +737,7 @@
     <!-- CONTACT -->
     <section id="kontakt" class="contact-section">
         <div class="section-inner">
-            <p class="section-label reveal">Lad os connecte</p>
+            <p class="section-label reveal">Kontakt</p>
             <div class="contact-grid reveal" style="transition-delay: 0.1s">
                 <div class="contact-card">
                     <p class="contact-type">Email</p>
