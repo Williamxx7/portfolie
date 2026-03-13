@@ -23,7 +23,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -34,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* ── NAV ── */
+        /* NAV */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -80,13 +79,65 @@
 
         .nav-links a:hover { color: var(--ink); }
 
-        /* ── HERO ── */
+        /* HAMBURGER */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 200;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--ink);
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(250, 249, 247, 0.97);
+            backdrop-filter: blur(16px);
+            z-index: 150;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a:active { color: var(--accent); }
+
+        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 0 5%;
-            position: relative;
         }
 
         .hero-inner {
@@ -99,8 +150,6 @@
             align-items: center;
             padding-top: 6rem;
         }
-
-        .hero-text {}
 
         .hero-eyebrow {
             font-size: 0.78rem;
@@ -132,10 +181,7 @@
             color: var(--ink);
         }
 
-        .hero h1 em {
-            font-style: italic;
-            color: var(--accent);
-        }
+        .hero h1 em { font-style: italic; color: var(--accent); }
 
         .hero-desc {
             font-size: 1rem;
@@ -145,11 +191,7 @@
             margin-bottom: 2.5rem;
         }
 
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+        .hero-actions { display: flex; gap: 1rem; align-items: center; }
 
         .btn-primary {
             display: inline-block;
@@ -181,12 +223,9 @@
             transition: all 0.2s;
         }
 
-        .btn-ghost:hover {
-            border-color: var(--ink);
-            color: var(--ink);
-        }
+        .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
-        /* ── PROFILE IMAGE ── */
+        /* PROFILE IMAGE */
         .hero-image-wrap {
             display: flex;
             justify-content: center;
@@ -216,25 +255,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
             display: block;
-        }
-
-        /* SVG placeholder avatar */
-        .profile-placeholder {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            background: var(--paper-warm);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .profile-placeholder svg {
-            width: 72%;
-            opacity: 0.35;
         }
 
         .profile-badge {
@@ -251,15 +273,10 @@
             text-transform: uppercase;
         }
 
-        /* ── SECTIONS ── */
-        section {
-            padding: 7rem 5%;
-        }
+        /* SECTIONS */
+        section { padding: 7rem 5%; }
 
-        .section-inner {
-            max-width: var(--max);
-            margin: 0 auto;
-        }
+        .section-inner { max-width: var(--max); margin: 0 auto; }
 
         .section-label {
             font-size: 0.72rem;
@@ -280,7 +297,7 @@
             background: var(--paper-mid);
         }
 
-        /* ── ABOUT CARDS ── */
+        /* ABOUT CARDS */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -295,10 +312,7 @@
         }
 
         .about-card:last-child { border-right: none; }
-
-        .about-card:hover {
-            background: var(--paper-warm);
-        }
+        .about-card:hover { background: var(--paper-warm); }
 
         .about-card-num {
             font-family: var(--serif);
@@ -323,10 +337,8 @@
             line-height: 1.7;
         }
 
-        /* ── SKILLS ── */
-        .skills-section {
-            background: var(--paper-warm);
-        }
+        /* SKILLS */
+        .skills-section { background: var(--paper-warm); }
 
         .skills-grid {
             display: grid;
@@ -344,13 +356,8 @@
             gap: 1.5rem;
         }
 
-        .skill-row:nth-child(even) {
-            border-right: none;
-        }
-
-        .skill-row:nth-last-child(-n+2) {
-            border-bottom: none;
-        }
+        .skill-row:nth-child(even) { border-right: none; }
+        .skill-row:nth-last-child(-n+2) { border-bottom: none; }
 
         .skill-name {
             font-size: 0.88rem;
@@ -359,11 +366,7 @@
             font-weight: 400;
         }
 
-        .skill-bar-wrap {
-            flex: 1;
-            height: 2px;
-            background: var(--paper-mid);
-        }
+        .skill-bar-wrap { flex: 1; height: 2px; background: var(--paper-mid); }
 
         .skill-bar-fill {
             height: 100%;
@@ -380,12 +383,8 @@
             font-family: var(--serif);
         }
 
-        /* ── TIMELINE ── */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
+        /* TIMELINE */
+        .timeline { display: flex; flex-direction: column; }
 
         .tl-item {
             display: grid;
@@ -428,10 +427,7 @@
             margin-top: 6px;
         }
 
-        .tl-item:last-child .tl-connector {
-            display: none;
-        }
-
+        .tl-item:last-child .tl-connector { display: none; }
         .tl-body { padding-top: 0.1rem; }
 
         .tl-title {
@@ -457,19 +453,10 @@
             max-width: 560px;
         }
 
-        /* ── CONTACT ── */
-        .contact-section {
-        background: var(--paper-warm);
-        color: var(--ink);
-        }
-
-        .contact-section .section-label {
-            color: var(--accent);
-        }
-
-        .contact-section .section-label::after {
-            background: var(--paper-mid);
-        }
+        /* CONTACT */
+        .contact-section { background: var(--paper-warm); color: var(--ink); }
+        .contact-section .section-label { color: var(--accent); }
+        .contact-section .section-label::after { background: var(--paper-mid); }
 
         .contact-grid {
             display: grid;
@@ -485,10 +472,7 @@
         }
 
         .contact-card:last-child { border-right: none; }
-
-        .contact-card:hover {
-            background: var(--paper-mid);
-        }
+        .contact-card:hover { background: var(--paper-mid); }
 
         .contact-type {
             font-size: 0.72rem;
@@ -511,7 +495,7 @@
 
         .contact-value:hover { color: var(--accent); }
 
-        /* ── FOOTER ── */
+        /* FOOTER */
         footer {
             padding: 2rem 5%;
             border-top: 1px solid var(--paper-mid);
@@ -520,32 +504,20 @@
             align-items: center;
         }
 
-        footer p {
-            font-size: 0.78rem;
-            color: var(--ink-faint);
-            letter-spacing: 0.04em;
-        }
+        footer p { font-size: 0.78rem; color: var(--ink-faint); letter-spacing: 0.04em; }
 
-        /* ── ANIMATIONS ── */
+        /* ANIMATIONS */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
-        }
+        .reveal.visible { opacity: 1; transform: none; }
 
-        /* ── RESPONSIVE ── */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-
+            .hero-inner { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
             .hero-eyebrow { justify-content: center; }
             .hero-desc { margin-left: auto; margin-right: auto; }
             .hero-actions { justify-content: center; }
@@ -562,22 +534,36 @@
             .skill-row:last-child { border-bottom: none; }
 
             .tl-item { grid-template-columns: 80px 1px 1fr; gap: 0 1.5rem; }
+
             .contact-grid { grid-template-columns: 1fr; }
-            .contact-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .contact-card { border-right: none; border-bottom: 1px solid var(--paper-mid); }
             .contact-card:last-child { border-bottom: none; }
         }
 
         @media (max-width: 600px) {
             .nav-links { display: none; }
+            .hamburger { display: flex; }
+
             .about-grid { grid-template-columns: 1fr; }
             .about-card { border-right: none; border-bottom: 1px solid var(--paper-mid); }
+            .about-card:last-child { border-bottom: none; }
+
             .tl-item { grid-template-columns: 1fr; }
             .tl-date { text-align: left; padding-bottom: 0.5rem; }
             .tl-line { display: none; }
+
+            .profile-frame { width: 240px; height: 290px; }
+            .profile-badge { bottom: -1rem; right: -1rem; }
         }
     </style>
 </head>
 <body>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="mobile-link">Home</a>
+        <a href="projekter.html" class="mobile-link">Projekter</a>
+        <a href="#kontakt" class="mobile-link">Kontakt</a>
+    </div>
 
     <header>
         <nav>
@@ -588,10 +574,14 @@
                 <li><a href="#kompetencer">Kompetencer</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="hero-inner">
             <div class="hero-text reveal">
@@ -610,23 +600,15 @@
                     <a href="#kontakt" class="btn-ghost">Kontakt</a>
                 </div>
             </div>
-
             <div class="hero-image-wrap reveal" style="transition-delay: 0.15s">
                 <div class="profile-frame">
-                
-                    <div class="profile-placeholder">
-                         <img class="profile-img" src="67.png" alt="William Larsen">
-                            <ellipse cx="100" cy="82" rx="52" ry="56" fill="var(--accent)" opacity="0.5"/>
-                            <path d="M0 240 C0 170 40 145 100 145 C160 145 200 170 200 240Z" fill="var(--accent)" opacity="0.4"/>
-                        </svg>
-                    </div>
+                    <img class="profile-img" src="67.png" alt="William Larsen">
                     <div class="profile-badge">William Larsen</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="om">
         <div class="section-inner">
             <p class="section-label reveal">Hvad jeg laver</p>
@@ -655,7 +637,6 @@
         </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="kompetencer" class="skills-section">
         <div class="section-inner">
             <p class="section-label reveal">Tekniske kompetencer</p>
@@ -694,12 +675,10 @@
         </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section id="erfaring">
         <div class="section-inner">
             <p class="section-label reveal">Min rejse</p>
             <div class="timeline">
-
                 <div class="tl-item reveal">
                     <div class="tl-date">2023 — nu</div>
                     <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
@@ -709,7 +688,6 @@
                         <p class="tl-text">Avanceret cybersikkerhed, netværksdesign, kryptografi og sikker systemudvikling. Arbejder med penetration testing og sikkerhedsanalyse.</p>
                     </div>
                 </div>
-
                 <div class="tl-item reveal" style="transition-delay: 0.1s">
                     <div class="tl-date">2024 — nu</div>
                     <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
@@ -719,7 +697,6 @@
                         <p class="tl-text">Udvikler AI-drevne booking- og kundeserviceløsninger til danske håndværkere og SMV'er. 90-dages action plan fokuseret på automation og procesoptimering.</p>
                     </div>
                 </div>
-
                 <div class="tl-item reveal" style="transition-delay: 0.2s">
                     <div class="tl-date">2024</div>
                     <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
@@ -729,12 +706,10 @@
                         <p class="tl-text">Opbygget diversificeret investeringsportefølje med fokus på langsigtede ETF-investeringer (IWDA/EIMI) gennem Nordnet Aktiesparekonto og Endavu.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="kontakt" class="contact-section">
         <div class="section-inner">
             <p class="section-label reveal">Kontakt</p>
@@ -755,7 +730,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <p>© 2026 William Larsen</p>
         <p>Bygget med sans-serif og rolig hånd</p>
@@ -774,7 +748,7 @@
         }, { threshold: 0.12 });
         reveals.forEach(el => io.observe(el));
 
-        // Animate skill bars
+        // Skill bars
         const bars = document.querySelectorAll('.skill-bar-fill');
         const barIO = new IntersectionObserver((entries) => {
             entries.forEach(e => {
@@ -791,6 +765,24 @@
             a.addEventListener('click', e => {
                 const t = document.querySelector(a.getAttribute('href'));
                 if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        // Hamburger
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
             });
         });
     </script>
