@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* ── NAV ── */
+        /* NAV */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -61,26 +61,6 @@
             text-decoration: none;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: 0.82rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--ink-soft);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active { color: var(--ink); }
-
         .nav-back {
             font-size: 0.78rem;
             letter-spacing: 0.08em;
@@ -95,7 +75,7 @@
 
         .nav-back:hover { gap: 0.8rem; }
 
-        /* ── PAGE HERO ── */
+        /* PAGE HERO */
         .page-hero {
             padding: 10rem 5% 5rem;
             max-width: var(--max);
@@ -131,10 +111,7 @@
             margin-bottom: 1.25rem;
         }
 
-        .page-hero h1 em {
-            font-style: italic;
-            color: var(--accent);
-        }
+        .page-hero h1 em { font-style: italic; color: var(--accent); }
 
         .page-hero p {
             font-size: 1rem;
@@ -143,18 +120,25 @@
             line-height: 1.75;
         }
 
-        /* ── FILTER TABS ── */
+        /* FILTER TABS */
         .filter-bar {
             padding: 2.5rem 5% 0;
             max-width: var(--max);
             margin: 0 auto;
         }
 
+        /* The key fix: allow horizontal scroll on the tab row,
+           hide the scrollbar visually but keep it functional */
         .tabs {
             display: flex;
             gap: 0;
             border-bottom: 1px solid var(--paper-mid);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+
+        .tabs::-webkit-scrollbar { display: none; }
 
         .tab-btn {
             padding: 1rem 1.75rem;
@@ -169,6 +153,8 @@
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: -1px;
+            white-space: nowrap;   /* prevent wrapping */
+            flex-shrink: 0;        /* prevent squishing */
         }
 
         .tab-btn:hover { color: var(--ink); }
@@ -178,7 +164,7 @@
             border-bottom-color: var(--accent);
         }
 
-        /* ── SECTIONS ── */
+        /* SECTIONS */
         .content-section {
             padding: 4rem 5%;
             max-width: var(--max);
@@ -207,7 +193,7 @@
             background: var(--paper-mid);
         }
 
-        /* ── CODE PROJECTS ── */
+        /* CODE PROJECTS */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -225,7 +211,6 @@
 
         .project-card:nth-child(even) { border-right: none; }
         .project-card:nth-last-child(-n+2) { border-bottom: none; }
-
         .project-card:hover { background: var(--paper-warm); }
 
         .project-tag {
@@ -269,10 +254,7 @@
             padding: 0.25rem 0.65rem;
         }
 
-        .project-links {
-            display: flex;
-            gap: 1.25rem;
-        }
+        .project-links { display: flex; gap: 1.25rem; }
 
         .project-link {
             font-size: 0.78rem;
@@ -287,21 +269,12 @@
         }
 
         .project-link:hover { color: var(--accent); }
+        .project-link svg { width: 12px; height: 12px; }
 
-        .project-link svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        /* placeholder card styling */
-        .project-card.placeholder {
-            opacity: 0.4;
-            cursor: default;
-        }
-
+        .project-card.placeholder { opacity: 0.4; cursor: default; }
         .project-card.placeholder:hover { background: none; }
 
-        /* ── PHOTOGRAPHY ── */
+        /* PHOTOGRAPHY */
         .photo-intro {
             font-size: 1rem;
             color: var(--ink-soft);
@@ -324,8 +297,6 @@
             cursor: pointer;
         }
 
-        .photo-item:nth-child(1) { aspect-ratio: 4/5; }
-        .photo-item:nth-child(2) { aspect-ratio: 4/5; grid-row: span 1; }
         .photo-item:nth-child(4) { aspect-ratio: 8/5; grid-column: span 2; }
 
         .photo-placeholder {
@@ -340,15 +311,9 @@
             transition: background 0.3s;
         }
 
-        .photo-item:hover .photo-placeholder {
-            background: var(--paper-mid);
-        }
+        .photo-item:hover .photo-placeholder { background: var(--paper-mid); }
 
-        .photo-placeholder svg {
-            width: 32px;
-            height: 32px;
-            opacity: 0.25;
-        }
+        .photo-placeholder svg { width: 32px; height: 32px; opacity: 0.25; }
 
         .photo-placeholder span {
             font-size: 0.72rem;
@@ -393,7 +358,7 @@
             color: var(--ink);
         }
 
-        /* ── CERTIFICATES ── */
+        /* CERTIFICATES */
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -415,11 +380,7 @@
         .cert-card:nth-last-child(-n+3) { border-bottom: none; }
         .cert-card:hover { background: var(--paper-warm); }
 
-        .cert-issuer-row {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+        .cert-issuer-row { display: flex; align-items: center; gap: 0.75rem; }
 
         .cert-logo {
             width: 32px;
@@ -442,10 +403,7 @@
             letter-spacing: 0;
         }
 
-        .cert-logo.placeholder-logo {
-            background: var(--paper-mid);
-            color: var(--ink-faint);
-        }
+        .cert-logo.placeholder-logo { background: var(--paper-mid); color: var(--ink-faint); }
 
         .cert-issuer {
             font-size: 0.72rem;
@@ -483,23 +441,9 @@
             padding: 0.2rem 0.6rem;
         }
 
-        .cert-badge.earned {
-            background: #eef4ee;
-            color: #3a6b3a;
-            border: 1px solid #b8d4b8;
-        }
-
-        .cert-badge.inprogress {
-            background: var(--paper-warm);
-            color: var(--accent);
-            border: 1px solid var(--accent-light);
-        }
-
-        .cert-badge.planned {
-            background: var(--paper-mid);
-            color: var(--ink-faint);
-            border: 1px solid var(--paper-mid);
-        }
+        .cert-badge.earned { background: #eef4ee; color: #3a6b3a; border: 1px solid #b8d4b8; }
+        .cert-badge.inprogress { background: var(--paper-warm); color: var(--accent); border: 1px solid var(--accent-light); }
+        .cert-badge.planned { background: var(--paper-mid); color: var(--ink-faint); border: 1px solid var(--paper-mid); }
 
         .cert-link {
             font-size: 0.75rem;
@@ -515,7 +459,7 @@
 
         .cert-link:hover { gap: 0.5rem; }
 
-        /* THM Stats banner */
+        /* THM Banner */
         .thm-banner {
             margin-bottom: 2.5rem;
             padding: 2rem 2.5rem;
@@ -534,13 +478,7 @@
             letter-spacing: 0.02em;
         }
 
-        .thm-stats {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .thm-stat {}
+        .thm-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
 
         .thm-stat-num {
             font-family: var(--serif);
@@ -570,33 +508,25 @@
 
         .thm-link:hover { color: #c11111; }
 
-        /* ── REVEAL ── */
+        /* REVEAL */
         .reveal {
             opacity: 0;
             transform: translateY(18px);
             transition: opacity 0.65s ease, transform 0.65s ease;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
-        }
+        .reveal.visible { opacity: 1; transform: none; }
 
-        /* ── FOOTER ── */
+        /* FOOTER */
         footer {
             padding: 2rem 5%;
             border-top: 1px solid var(--paper-mid);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 100%;
         }
 
-        footer p {
-            font-size: 0.78rem;
-            color: var(--ink-faint);
-            letter-spacing: 0.04em;
-        }
+        footer p { font-size: 0.78rem; color: var(--ink-faint); letter-spacing: 0.04em; }
 
         footer a {
             font-size: 0.78rem;
@@ -606,30 +536,40 @@
             text-transform: uppercase;
         }
 
-        /* ── RESPONSIVE ── */
+        /* RESPONSIVE */
         @media (max-width: 860px) {
             .projects-grid { grid-template-columns: 1fr; }
             .project-card { border-right: none !important; }
+            .project-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--paper-mid); }
             .project-card:last-child { border-bottom: none; }
 
             .certs-grid { grid-template-columns: 1fr 1fr; }
             .cert-card:nth-child(3n) { border-right: 1px solid var(--paper-mid); }
             .cert-card:nth-child(even) { border-right: none; }
+            .cert-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--paper-mid); }
             .cert-card:nth-last-child(-n+2) { border-bottom: none; }
 
             .photo-grid { grid-template-columns: 1fr 1fr; }
-            .photo-item:nth-child(4) { grid-column: span 2; }
+            .photo-item:nth-child(4) { grid-column: span 2; aspect-ratio: 8/5; }
         }
 
         @media (max-width: 600px) {
-            .nav-links { display: none; }
+            /* Tighten tab padding on small screens */
+            .tab-btn {
+                padding: 0.85rem 1.1rem;
+                font-size: 0.72rem;
+                letter-spacing: 0.06em;
+            }
+
             .certs-grid { grid-template-columns: 1fr; }
             .cert-card { border-right: none !important; }
             .cert-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--paper-mid); }
             .cert-card:last-child { border-bottom: none; }
+
             .photo-grid { grid-template-columns: 1fr; }
             .photo-item:nth-child(4) { grid-column: span 1; aspect-ratio: 4/5; }
-            .thm-banner { gap: 1.5rem; }
+
+            .thm-banner { gap: 1.5rem; padding: 1.5rem; }
             .thm-stats { gap: 1.5rem; }
             .thm-link { margin-left: 0; }
         }
@@ -640,45 +580,40 @@
     <header>
         <nav>
             <a class="logo" href="index.html">William Larsen</a>
-            </ul>
             <a class="nav-back" href="index.html">← Tilbage</a>
         </nav>
     </header>
 
-    <!-- PAGE HERO -->
     <div class="page-hero reveal">
         <p class="page-eyebrow">Arbejde &amp; certifikater</p>
         <h1>Projekter,<br><em>fotografering</em><br>&amp; certifikater</h1>
         <p>Et samlet overblik over kode jeg har skrevet, billeder jeg har taget og kompetencer jeg har dokumenteret.</p>
     </div>
 
-    <!-- FILTER TABS -->
     <div class="filter-bar">
-        <div class="tabs">
+        <div class="tabs" id="tabBar">
             <button class="tab-btn active" data-tab="kode">Kodeprojekter</button>
             <button class="tab-btn" data-tab="foto">Fotografering</button>
             <button class="tab-btn" data-tab="certs">Certifikater</button>
         </div>
     </div>
 
-    <!-- ═══════════════ KODE PROJEKTER ═══════════════ -->
+    <!-- KODE PROJEKTER -->
     <div class="content-section active" id="tab-kode">
-
         <p class="section-label reveal">Kode &amp; builds</p>
-
         <div class="projects-grid reveal" style="transition-delay:0.1s">
 
             <div class="project-card">
-            <span class="project-tag">Digital Management System</span>
+                <span class="project-tag">Digital Management System</span>
                 <h3 class="project-title">Digital Management System for Waste Pickers in Brasília</h3>
                 <p class="project-desc">
-                    International collaboration building technology to improve working conditions for 
-                    waste pickers in Brasília — streamlining collection logistics, enabling fair pay 
+                    International collaboration building technology to improve working conditions for
+                    waste pickers in Brasília — streamlining collection logistics, enabling fair pay
                     tracking and reducing physical strain through smarter digital tools.
                 </p>
                 <div class="project-stack">
                     <span class="stack-tag">Java</span>
-                    <span class="stack-tag">PostgresSQL</span>
+                    <span class="stack-tag">PostgreSQL</span>
                     <span class="stack-tag">Thymeleaf</span>
                 </div>
                 <div class="project-links">
@@ -686,23 +621,23 @@
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
                         GitHub
                     </a>
-           
                 </div>
             </div>
 
             <div class="project-card">
                 <span class="project-tag">Cybersecurity</span>
-                <h3 class="project-title">Cybersecurity terminal program</h3>
+                <h3 class="project-title">Cybersecurity Terminal Toolkit</h3>
                 <p class="project-desc">
-                Python-baseret cybersecurity toolkit designet til brug på egne systemer, CTF-udfordringer og laboratoriemiljøer. 
-                Det samler en bred vifte af sikkerheds- og netværksværktøjer i én terminal-applikation, eksempelvis port scanning, OSINT/domæne rekognoscering og JWT-analyse.
-                            </p>
+                    Python-based security toolkit for own systems, CTF challenges and lab environments.
+                    Consolidates a broad range of security and network tools into one terminal application —
+                    port scanning, OSINT/domain reconnaissance, JWT analysis and more.
+                </p>
                 <div class="project-stack">
                     <span class="stack-tag">Python</span>
                     <span class="stack-tag">Network</span>
                     <span class="stack-tag">Hashing</span>
                     <span class="stack-tag">Kryptografi</span>
-                    <span class="stack-tag">AI-Developement</span>
+                    <span class="stack-tag">AI</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
@@ -733,29 +668,19 @@
 
             <div class="project-card placeholder">
                 <span class="project-tag">Kommende</span>
-                <h3 class="project-title">A space for a new funny project</h3>
-                <p class="project-desc">
-                </p>
-                <div class="project-stack">
-                    <span class="stack-tag">???</span>
-                </div>
+                <h3 class="project-title">A space for a new project</h3>
+                <p class="project-desc"></p>
+                <div class="project-stack"><span class="stack-tag">???</span></div>
             </div>
 
         </div>
     </div>
 
-    <!-- ═══════════════ FOTOGRAFERING ═══════════════ -->
+    <!-- FOTOGRAFERING -->
     <div class="content-section" id="tab-foto">
-
         <p class="section-label reveal">Fotografering</p>
-
-        <p class="photo-intro reveal">
-          <!-- Et øje for komposition og detalje.-->  
-        </p>
-
         <div class="photo-grid reveal" style="transition-delay:0.1s">
 
-            <!-- Udskift src med dine egne billeder, fx: <img src="foto/01.jpg" ...> -->
             <div class="photo-item">
                 <div class="photo-placeholder">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
@@ -807,17 +732,14 @@
         </div>
 
         <div class="photo-upload-note reveal" style="transition-delay:0.2s">
-            <strong>Tilføj dine billeder:</strong> Udskift <code>&lt;div class="photo-placeholder"&gt;</code> med <code>&lt;img src="sti/til/billede.jpg" alt="beskrivelse"&gt;</code> for hvert billede. Anbefalet størrelse: minimum 1200px bredde for portræt-format.
+            <strong>Tilføj dine billeder:</strong> Udskift <code>&lt;div class="photo-placeholder"&gt;</code> med <code>&lt;img src="sti/til/billede.jpg" alt="beskrivelse"&gt;</code> for hvert billede.
         </div>
-
     </div>
 
-    <!-- ═══════════════ CERTIFIKATER ═══════════════ -->
+    <!-- CERTIFIKATER -->
     <div class="content-section" id="tab-certs">
-
         <p class="section-label reveal">Dokumenterede kompetencer</p>
 
-        <!-- TryHackMe banner -->
         <div class="thm-banner reveal">
             <span class="thm-logo-text">TryHackMe</span>
             <div class="thm-stats">
@@ -839,7 +761,6 @@
 
         <div class="certs-grid reveal" style="transition-delay:0.15s">
 
-            <!-- TryHackMe certs — opdater efterhånden som du gennemfører dem -->
             <div class="cert-card">
                 <div class="cert-issuer-row">
                     <div class="cert-logo tryhackme">THM</div>
@@ -879,7 +800,6 @@
                 <a href="https://tryhackme.com/paths" target="_blank" class="cert-link">Se path →</a>
             </div>
 
-            <!-- Andre certs -->
             <div class="cert-card">
                 <div class="cert-issuer-row">
                     <div class="cert-logo placeholder-logo">AAU</div>
@@ -899,7 +819,7 @@
                 </div>
                 <p class="cert-title">Dit næste certifikat her</p>
                 <div class="cert-meta">
-                    <span class="cert-date">— </span>
+                    <span class="cert-date">—</span>
                     <span class="cert-badge planned">Planlagt</span>
                 </div>
             </div>
@@ -911,7 +831,7 @@
                 </div>
                 <p class="cert-title">Dit næste certifikat her</p>
                 <div class="cert-meta">
-                    <span class="cert-date">— </span>
+                    <span class="cert-date">—</span>
                     <span class="cert-badge planned">Planlagt</span>
                 </div>
             </div>
@@ -919,24 +839,30 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <p>© 2026 William Larsen</p>
-        <a href="portfolio.html">← Tilbage til portfolio</a>
+        <a href="index.html">← Tilbage til portfolio</a>
     </footer>
 
     <script>
-        // Tab switching
+        // Tab switching — scroll active tab into view on mobile
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabSections = document.querySelectorAll('.content-section');
+        const tabBar = document.getElementById('tabBar');
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const target = btn.dataset.tab;
+
                 tabBtns.forEach(b => b.classList.remove('active'));
                 tabSections.forEach(s => s.classList.remove('active'));
+
                 btn.classList.add('active');
                 document.getElementById('tab-' + target).classList.add('active');
+
+                // Scroll the clicked tab into view within the bar
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
                 window.scrollTo({ top: document.querySelector('.filter-bar').offsetTop - 80, behavior: 'smooth' });
                 triggerReveals();
             });
