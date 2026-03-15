@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="image"
+    href="optimized/xlarge/67.webp"
+    imagesrcset="
+        optimized/medium/67.webp 480w,
+        optimized/large/67.webp 900w,
+        optimized/xlarge/67.webp 1400w"
+    imagesizes="(max-width: 480px) 100vw, (max-width: 900px) 280px, 380px">
+    
+    
     <title>William Larsen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -603,8 +613,31 @@
             </div>
             <div class="hero-image-wrap reveal" style="transition-delay: 0.15s">
                 <div class="profile-frame">
-                    <img class="profile-img" src="67.png" alt="William Larsen">
-                    <div class="profile-badge">William Larsen</div>
+            <picture>
+                <!-- Thumbnail bruges som placeholder mens siden loader -->
+                <source
+                    media="(max-width: 480px)"
+                    srcset="optimized/medium/67.webp"
+                    type="image/webp">
+                <source
+                    media="(max-width: 900px)"
+                    srcset="optimized/large/67.webp"
+                    type="image/webp">
+                <source
+                    media="(min-width: 901px)"
+                    srcset="optimized/xlarge/67.webp"
+                    type="image/webp">
+                <!-- Fallback til PNG hvis browser ikke støtter WebP -->
+                <img
+                    class="profile-img"
+                    src="optimized/large/67.jpg"
+                    alt="William Larsen"
+                    loading="eager"
+                    decoding="async"
+                    width="380"
+                    height="460">
+            </picture>                    
+            <div class="profile-badge">William Larsen</div>
                 </div>
             </div>
         </div>
