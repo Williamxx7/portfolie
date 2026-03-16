@@ -483,6 +483,29 @@
             flex-wrap: wrap;
         }
 
+
+
+
+        .thm-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            }
+
+            .thm-badge {
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            @media (max-width: 700px) {
+                .thm-banner { flex-direction: column; }
+                .thm-badge iframe { width: 100%; }
+            }
+
+
+
+
+            
         .thm-logo-text {
             font-family: var(--serif);
             font-size: 1.3rem;
@@ -753,24 +776,28 @@
     <div class="content-section" id="tab-certs">
         <p class="section-label reveal">Dokumenterede kompetencer</p>
 
-        <div class="thm-banner reveal">
-            <span class="thm-logo-text">TryHackMe</span>
-            <div class="thm-stats">
-                <div class="thm-stat">
-                    <div class="thm-stat-num">Top 15%</div>
-                    <div class="thm-stat-label">Global rank</div>
-                </div>
-                <div class="thm-stat">
-                    <div class="thm-stat-num"> 43</div>
-                    <div class="thm-stat-label">Rooms completed</div>
-                </div>
-                <div class="thm-stat">
-                    <div class="thm-stat-num">9</div>
-                    <div class="thm-stat-label">Badges</div>
-                </div>
-            </div>
-            <a href="https://tryhackme.com/p/William05" target="_blank" class="thm-link">Åbn profil →</a>
+      <div class="thm-banner reveal">
+    <span class="thm-logo-text">TryHackMe</span>
+    <div class="thm-stats" id="thm-stats">
+        <div class="thm-stat">
+            <div class="thm-stat-num" id="thm-rank">...</div>
+            <div class="thm-stat-label">Global rank</div>
         </div>
+        <div class="thm-stat">
+            <div class="thm-stat-num" id="thm-rooms">...</div>
+            <div class="thm-stat-label">Rooms completed</div>
+        </div>
+        <div class="thm-stat">
+            <div class="thm-stat-num" id="thm-badges">...</div>
+            <div class="thm-stat-label">Badges</div>
+        </div>
+        <div class="thm-stat">
+            <div class="thm-stat-num" id="thm-streak">...</div>
+            <div class="thm-stat-label">Day streak</div>
+        </div>
+    </div>
+    <a href="https://tryhackme.com/p/r3dp4nda" target="_blank" class="thm-link">Åbn profil →</a>
+</div>
 
             
     <div class="thm-badge">
@@ -902,6 +929,32 @@
         }
 
         triggerReveals();
+
+
+// Hent TryHackMe stats
+async function loadTHMStats() {
+    try {
+        const res = await fetch('https://tryhackme.com/api/v2/hackers/r3dp4nda');
+        const data = await res.json();
+
+        const rank = data?.data?.globalRank ?? '—';
+        const rooms = data?.data?.completedRooms ?? '—';
+        const badges = data?.data?.badgeCount ?? '—';
+        const streak = data?.data?.currentStreak ?? '—';
+
+        document.getElementById('thm-rank').textContent = rank ? `Top ${rank}%` : '—';
+        document.getElementById('thm-rooms').textContent = rooms;
+        document.getElementById('thm-badges').textContent = badges;
+        document.getElementById('thm-streak').textContent = streak + (streak !== '—' ? ' days' : '');
+    } catch (e) {
+        // API fejlede — vis bare streger
+        ['thm-rank','thm-rooms','thm-badges','thm-streak'].forEach(id => {
+            document.getElementById(id).textContent = '—';
+        });
+    }
+}
+
+loadTHMStats();
     </script>
 
 </body>
