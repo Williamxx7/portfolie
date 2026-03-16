@@ -931,30 +931,7 @@
         triggerReveals();
 
 
-// Hent TryHackMe stats
-async function loadTHMStats() {
-    try {
-        const res = await fetch('https://tryhackme.com/api/v2/hackers/r3dp4nda');
-        const data = await res.json();
 
-        const rank = data?.data?.globalRank ?? '—';
-        const rooms = data?.data?.completedRooms ?? '—';
-        const badges = data?.data?.badgeCount ?? '—';
-        const streak = data?.data?.currentStreak ?? '—';
-
-        document.getElementById('thm-rank').textContent = rank ? `Top ${rank}%` : '—';
-        document.getElementById('thm-rooms').textContent = rooms;
-        document.getElementById('thm-badges').textContent = badges;
-        document.getElementById('thm-streak').textContent = streak + (streak !== '—' ? ' days' : '');
-    } catch (e) {
-        // API fejlede — vis bare streger
-        ['thm-rank','thm-rooms','thm-badges','thm-streak'].forEach(id => {
-            document.getElementById(id).textContent = '—';
-        });
-    }
-}
-
-loadTHMStats();
     </script>
 
 </body>
