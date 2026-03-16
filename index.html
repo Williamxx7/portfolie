@@ -160,8 +160,8 @@
             display: flex;
             align-items: center;
             padding: 0 5%;
+            position: relative;
         }
-
         .hero-inner {
             max-width: var(--max);
             margin: 0 auto;
@@ -360,50 +360,67 @@
         }
 
         /* SKILLS */
-        .skills-section { background: var(--paper-warm); }
+       /* SKILLS — domæner */
+.skills-section { background: var(--paper-warm); }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border: 1px solid var(--paper-mid);
-        }
+.skills-domains {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-mid);
+}
 
-        .skill-row {
-            display: flex;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--paper-mid);
-            border-right: 1px solid var(--paper-mid);
-            gap: 1.5rem;
-        }
+.domain-col {
+    padding: 2rem;
+    border-right: 1px solid var(--paper-mid);
+}
 
-        .skill-row:nth-child(even) { border-right: none; }
-        .skill-row:nth-last-child(-n+2) { border-bottom: none; }
+.domain-col:last-child { border-right: none; }
 
-        .skill-name {
-            font-size: 0.88rem;
-            color: var(--ink);
-            min-width: 200px;
-            font-weight: 400;
-        }
+.domain-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--paper-mid);
+}
 
-        .skill-bar-wrap { flex: 1; height: 2px; background: var(--paper-mid); }
+.domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
 
-        .skill-bar-fill {
-            height: 100%;
-            background: var(--accent);
-            width: 0;
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+.dtag {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    background: var(--paper);
+    color: var(--ink-soft);
+    border: 1px solid var(--paper-mid);
+    padding: 0.3rem 0.7rem;
+    transition: all 0.2s;
+}
 
-        .skill-pct {
-            font-size: 0.78rem;
-            color: var(--ink-faint);
-            min-width: 36px;
-            text-align: right;
-            font-family: var(--serif);
-        }
+.dtag:hover {
+    background: var(--paper-mid);
+    color: var(--ink);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .skills-domains { grid-template-columns: 1fr 1fr; }
+    .domain-col:nth-child(2) { border-right: none; }
+    .domain-col:nth-child(1),
+    .domain-col:nth-child(2) { border-bottom: 1px solid var(--paper-mid); }
+}
+
+@media (max-width: 600px) {
+    .skills-domains { grid-template-columns: 1fr; }
+    .domain-col { border-right: none; border-bottom: 1px solid var(--paper-mid); }
+    .domain-col:last-child { border-bottom: none; }
+}
 
         /* TIMELINE */
         .timeline { display: flex; flex-direction: column; }
@@ -537,6 +554,39 @@
 
         .reveal.visible { opacity: 1; transform: none; }
 
+        /* SCROLL ARROW */
+        .scroll-arrow {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--ink-faint);
+            text-decoration: none;
+            animation: arrowBounce 2s ease-in-out infinite;
+            transition: opacity 0.4s ease, color 0.2s;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .scroll-arrow svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        .scroll-arrow:hover {
+            color: var(--accent);
+            animation: none;
+            transform: translateX(-50%) translateY(4px);
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+
+
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .hero-inner { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
@@ -592,9 +642,6 @@
             <a class="logo" href="#">WX7</a>
             <ul class="nav-links">
                 <li><a href="projekter.html">Projekter</a></li>
-                <li><a href="#om">Om</a></li>
-                <li><a href="#kompetencer">Kompetencer</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
@@ -603,6 +650,12 @@
             </button>
         </nav>
     </header>
+
+    <a href="#om" class="scroll-arrow" aria-label="Scroll ned">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+    </a>
 
     <section class="hero">
         <div class="hero-inner">
@@ -686,37 +739,55 @@
     <section id="kompetencer" class="skills-section">
         <div class="section-inner">
             <p class="section-label reveal">Tekniske kompetencer</p>
-            <div class="skills-grid reveal" style="transition-delay: 0.1s">
-                <div class="skill-row">
-                    <span class="skill-name">Fundamental Cybersecurity &amp; netværkssikkerhed</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="85"></div></div>
-                    <span class="skill-pct">85</span>
+            <div class="skills-domains reveal" style="transition-delay: 0.1s">
+
+                <div class="domain-col">
+                    <p class="domain-title">Cybersecurity</p>
+                    <div class="domain-tags">
+                        <span class="dtag">Network Security</span>
+                        <span class="dtag">Penetration Testing</span>
+                        <span class="dtag">Kryptografi</span>
+                        <span class="dtag">Linux</span>
+                        <span class="dtag">CTF</span>
+                        <span class="dtag">Wireshark</span>
+                        <span class="dtag">Nmap</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-name">Programmering</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="80"></div></div>
-                    <span class="skill-pct">75</span>
+
+                <div class="domain-col">
+                    <p class="domain-title">Programmering</p>
+                    <div class="domain-tags">
+                        <span class="dtag">Python</span>
+                        <span class="dtag">Java</span>
+                        <span class="dtag">C</span>
+                        <span class="dtag">JavaScript</span>
+                        <span class="dtag">SQL</span>
+                        <span class="dtag">Bash</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-name">Web Development (HTML/CSS/JS)</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="85"></div></div>
-                    <span class="skill-pct">70</span>
+
+                <div class="domain-col">
+                    <p class="domain-title">Web & Udvikling</p>
+                    <div class="domain-tags">
+                        <span class="dtag">HTML / CSS</span>
+                        <span class="dtag">Git</span>
+                        <span class="dtag">GitHub Actions</span>
+                        <span class="dtag">Linux Admin</span>
+                        <span class="dtag">PostgreSQL</span>
+                        <span class="dtag">Thymeleaf</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-name">AI &amp; Machine Learning</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="70"></div></div>
-                    <span class="skill-pct">70</span>
+
+                <div class="domain-col">
+                    <p class="domain-title">AI & Automation</p>
+                    <div class="domain-tags">
+                        <span class="dtag">OpenAI API</span>
+                        <span class="dtag">n8n</span>
+                        <span class="dtag">Prompt Engineering</span>
+                        <span class="dtag">AI Agenter</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-name">Git &amp; version control</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="75"></div></div>
-                    <span class="skill-pct">75</span>
-                </div>
-                <div class="skill-row">
-                    <span class="skill-name">Linux &amp; systemadministration</span>
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" data-w="70"></div></div>
-                    <span class="skill-pct">70</span>
-                </div>
+
             </div>
         </div>
     </section>
@@ -830,6 +901,24 @@
                 document.body.style.overflow = '';
             });
         });
+
+        // Scroll arrow — skjul ved scroll eller klik
+        // Scroll arrow
+        const scrollArrow = document.querySelector('.scroll-arrow');
+
+        if (scrollArrow) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollArrow.style.opacity = '0';
+                    scrollArrow.style.pointerEvents = 'none';
+                } else {
+                    scrollArrow.style.opacity = '1';
+                    scrollArrow.style.pointerEvents = 'auto';
+                }
+            }, { passive: true });
+        }
+
+
     </script>
 
 </body>
