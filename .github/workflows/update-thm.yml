@@ -8,9 +8,6 @@ on:
 jobs:
   update-stats:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: portfolie
 
     steps:
       - name: Checkout repo
@@ -24,13 +21,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Debug — vis filstruktur
+        run: find . -name "*.py" | head -20
+
       - name: Fetch and update THM stats
-        run: python scripts/update_thm.py
+        run: python portfolie/scripts/update_thm.py
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add projekter.html
+          git add portfolie/projekter.html
           git diff --staged --quiet || git commit -m "Auto: opdater TryHackMe stats"
           git push
