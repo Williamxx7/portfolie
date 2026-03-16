@@ -8,6 +8,10 @@ on:
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolie
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
