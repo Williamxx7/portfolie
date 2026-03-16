@@ -1,88 +1,67 @@
 import requests
 import re
+import sys
 
 USERNAME = "r3dp4nda"
-USER_ID = "6309351"
 HTML_FILE = "projekter.html"
 
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+}
+
+def safe_get(url):
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=10)
+        res.raise_for_status()
+        return res.json()
+    except Exception as e:
+        print(f"  Fejl ved {url}: {e}")
+        return None
+
 def fetch_thm_stats():
-    """Hent stats fra TryHackMe's offentlige API endpoints"""
-    stats = {
-        "rank": "—",
-        "rooms": "—",
-        "badges": "—",
-        "streak": "—"
-    }
+    stats = {"rank": "—", "rooms": "—", "badges": "—", "streak": "—"}
 
-    try:
-        # Profil endpoint
-        headers = {"User-Agent": "Mozilla/5.0"}
-        res = requests.get(
-            f"https://tryhackme.com/api/user/rank/{USERNAME}",
-            headers=headers,
-            timeout=10
-        )
-        if res.status_code == 200:
-            data = res.json()
-            if data.get("success"):
-                stats["rank"] = str(data.get("userRank", "—"))
+    # Rank
+    data = safe_get(f"https://tryhackme.com/api/user/rank/{USERNAME}")
+    if data and data.get("success"):
+        rank = data.get("userRank")
+        if rank:
+            stats["rank"] = f"#{rank}"
 
-    except Exception as e:
-        print(f"Rank fetch fejlede: {e}")
+    # Badges
+    data = safe_get(f"https://tryhackme.com/api/no-auth/user/{USERNAME}/badges/count")
+    if data:
+        badges = data.get("badges") or data.get("count")
+        if badges is not None:
+            stats["badges"] = str(badges)
 
-    try:
-        # Badge/completion endpoint
-        headers = {"User-Agent": "Mozilla/5.0"}
-        res = requests.get(
-            f"https://tryhackme.com/api/no-auth/user/{USERNAME}/badges/count",
-            headers=headers,
-            timeout=10
-        )
-        if res.status_code == 200:
-            data = res.json()
-            stats["badges"] = str(data.get("badges", "—"))
+    # Rooms completed
+    data = safe_get(f"https://tryhackme.com/api/no-auth/user/{USERNAME}/completed-rooms/count")
+    if data:
+        rooms = data.get("completed") or data.get("count")
+        if rooms is not None:
+            stats["rooms"] = str(rooms)
 
-    except Exception as e:
-        print(f"Badge fetch fejlede: {e}")
-
-    try:
-        res = requests.get(
-            f"https://tryhackme.com/api/no-auth/user/{USERNAME}/completed-rooms/count",
-            headers={"User-Agent": "Mozilla/5.0"},
-            timeout=10
-        )
-        if res.status_code == 200:
-            data = res.json()
-            stats["rooms"] = str(data.get("completed", "—"))
-
-    except Exception as e:
-        print(f"Rooms fetch fejlede: {e}")
-
-    try:
-        res = requests.get(
-            f"https://tryhackme.com/api/no-auth/user/{USERNAME}/streak",
-            headers={"User-Agent": "Mozilla/5.0"},
-            timeout=10
-        )
-        if res.status_code == 200:
-            data = res.json()
-            current = data.get("currentStreak", "—")
-            stats["streak"] = f"{current} days" if current != "—" else "—"
-
-    except Exception as e:
-        print(f"Streak fetch fejlede: {e}")
+    # Streak
+    data = safe_get(f"https://tryhackme.com/api/no-auth/user/{USERNAME}/streak")
+    if data:
+        streak = data.get("currentStreak") or data.get("streak")
+        if streak is not None:
+            stats["streak"] = f"{streak} days"
 
     return stats
 
-
 def update_html(stats):
-    """Opdater HTML-filen med nye stats"""
-    with open(HTML_FILE, "r", encoding="utf-8") as f:
-        html = f.read()
+    try:
+        with open(HTML_FILE, "r", encoding="utf-8") as f:
+            html = f.read()
+    except FileNotFoundError:
+        print(f"FEJL: Kan ikke finde {HTML_FILE}")
+        sys.exit(1)
 
     replacements = {
-        r'id="thm-rank">[^<]*<': f'id="thm-rank">{stats["rank"]}<',
-        r'id="thm-rooms">[^<]*<': f'id="thm-rooms">{stats["rooms"]}<',
+        r'id="thm-rank">[^<]*<':   f'id="thm-rank">{stats["rank"]}<',
+        r'id="thm-rooms">[^<]*<':  f'id="thm-rooms">{stats["rooms"]}<',
         r'id="thm-badges">[^<]*<': f'id="thm-badges">{stats["badges"]}<',
         r'id="thm-streak">[^<]*<': f'id="thm-streak">{stats["streak"]}<',
     }
@@ -93,11 +72,12 @@ def update_html(stats):
     with open(HTML_FILE, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"✅ HTML opdateret med stats: {stats}")
-
+    print(f"✅ Opdateret: {stats}")
 
 if __name__ == "__main__":
-    print(f"Henter TryHackMe stats for {USERNAME}...")
+    print(f"Henter stats for {USERNAME}...")
     stats = fetch_thm_stats()
-    print(f"Stats hentet: {stats}")
+    print(f"Stats: {stats}")
     update_html(stats)
+    # Afslut altid med 0 så workflow ikke fejler selvom API returnerer —
+    sys.exit(0)

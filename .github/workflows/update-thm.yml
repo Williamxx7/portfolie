@@ -2,8 +2,8 @@ name: Update TryHackMe Stats
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Kører hver dag kl. 06:00 UTC
-  workflow_dispatch:       # Tillader manuel kørsel fra GitHub Actions
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
   update-stats:
@@ -15,10 +15,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        run: pip install requests
 
       - name: Fetch and update THM stats
         run: python scripts/update_thm.py
