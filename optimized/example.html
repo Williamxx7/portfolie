@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Billedegalleri</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        /* Grid Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 1 / 1;
+        }
+        
+        /* Lazy loading blur effect */
+        .gallery-item img {
+            filter: blur(0);
+            transition: filter 0.3s;
+        }
+        
+        .gallery-item img[loading="lazy"]:not([src]) {
+            filter: blur(10px);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            padding: 2rem;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .lightbox-close:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>📸 Portfolio Galleri</h1>
+    
+    <div class="gallery" id="gallery"></div>
+    
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <picture id="lightbox-picture"></picture>
+    </div>
+    
+    <script>
+        // Image data
+        const images = [
+        {
+                "filename": "Golde",
+                "original_size": "3294x4941",
+                "aspect_ratio": 1.5,
+                "sizes": {
+                        "thumbnail": {
+                                "width": 400,
+                                "height": 600,
+                                "jpeg": "thumbnail/Golde.jpg",
+                                "webp": "thumbnail/Golde.webp",
+                                "jpeg_size": 52197,
+                                "webp_size": 46912
+                        },
+                        "medium": {
+                                "width": 800,
+                                "height": 1200,
+                                "jpeg": "medium/Golde.jpg",
+                                "webp": "medium/Golde.webp",
+                                "jpeg_size": 195104,
+                                "webp_size": 175858
+                        },
+                        "large": {
+                                "width": 1200,
+                                "height": 1800,
+                                "jpeg": "large/Golde.jpg",
+                                "webp": "large/Golde.webp",
+                                "jpeg_size": 414447,
+                                "webp_size": 362194
+                        },
+                        "xlarge": {
+                                "width": 1920,
+                                "height": 2880,
+                                "jpeg": "xlarge/Golde.jpg",
+                                "webp": "xlarge/Golde.webp",
+                                "jpeg_size": 962777,
+                                "webp_size": 806338
+                        }
+                }
+        },
+        {
+                "filename": "Low-tide",
+                "original_size": "3449x5173",
+                "aspect_ratio": 1.499855030443607,
+                "sizes": {
+                        "thumbnail": {
+                                "width": 400,
+                                "height": 599,
+                                "jpeg": "thumbnail/Low-tide.jpg",
+                                "webp": "thumbnail/Low-tide.webp",
+                                "jpeg_size": 44373,
+                                "webp_size": 33538
+                        },
+                        "medium": {
+                                "width": 800,
+                                "height": 1199,
+                                "jpeg": "medium/Low-tide.jpg",
+                                "webp": "medium/Low-tide.webp",
+                                "jpeg_size": 144582,
+                                "webp_size": 105954
+                        },
+                        "large": {
+                                "width": 1200,
+                                "height": 1799,
+                                "jpeg": "large/Low-tide.jpg",
+                                "webp": "large/Low-tide.webp",
+                                "jpeg_size": 291589,
+                                "webp_size": 205074
+                        },
+                        "xlarge": {
+                                "width": 1920,
+                                "height": 2879,
+                                "jpeg": "xlarge/Low-tide.jpg",
+                                "webp": "xlarge/Low-tide.webp",
+                                "jpeg_size": 674809,
+                                "webp_size": 439632
+                        }
+                }
+        },
+        {
+                "filename": "Sunset",
+                "original_size": "3445x5168",
+                "aspect_ratio": 1.500145137880987,
+                "sizes": {
+                        "thumbnail": {
+                                "width": 400,
+                                "height": 600,
+                                "jpeg": "thumbnail/Sunset.jpg",
+                                "webp": "thumbnail/Sunset.webp",
+                                "jpeg_size": 24602,
+                                "webp_size": 13824
+                        },
+                        "medium": {
+                                "width": 800,
+                                "height": 1200,
+                                "jpeg": "medium/Sunset.jpg",
+                                "webp": "medium/Sunset.webp",
+                                "jpeg_size": 73420,
+                                "webp_size": 38790
+                        },
+                        "large": {
+                                "width": 1200,
+                                "height": 1800,
+                                "jpeg": "large/Sunset.jpg",
+                                "webp": "large/Sunset.webp",
+                                "jpeg_size": 139851,
+                                "webp_size": 71036
+                        },
+                        "xlarge": {
+                                "width": 1920,
+                                "height": 2880,
+                                "jpeg": "xlarge/Sunset.jpg",
+                                "webp": "xlarge/Sunset.webp",
+                                "jpeg_size": 300004,
+                                "webp_size": 140528
+                        }
+                }
+        }
+];
+        
+        // Generate gallery
+        const gallery = document.getElementById('gallery');
+        
+        images.forEach((img, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.onclick = () => openLightbox(index);
+            
+            // Create responsive picture element
+            const picture = document.createElement('picture');
+            
+            // Add WebP sources
+            if (img.sizes.thumbnail) {
+                const webpSource = document.createElement('source');
+                webpSource.srcset = `optimized/${img.sizes.thumbnail.webp}`;
+                webpSource.type = 'image/webp';
+                picture.appendChild(webpSource);
+                
+                // Add JPEG fallback
+                const jpegImg = document.createElement('img');
+                jpegImg.src = `optimized/${img.sizes.thumbnail.jpeg}`;
+                jpegImg.alt = img.filename;
+                jpegImg.loading = 'lazy';
+                picture.appendChild(jpegImg);
+            }
+            
+            item.appendChild(picture);
+            gallery.appendChild(item);
+        });
+        
+        // Lightbox functions
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const picture = document.getElementById('lightbox-picture');
+            const img = images[index];
+            
+            picture.innerHTML = '';
+            
+            // Use largest available size
+            const size = img.sizes.xlarge || img.sizes.large || img.sizes.medium;
+            
+            if (size) {
+                // WebP source
+                const webpSource = document.createElement('source');
+                webpSource.srcset = `optimized/${size.webp}`;
+                webpSource.type = 'image/webp';
+                picture.appendChild(webpSource);
+                
+                // JPEG fallback
+                const jpegImg = document.createElement('img');
+                jpegImg.src = `optimized/${size.jpeg}`;
+                jpegImg.alt = img.filename;
+                picture.appendChild(jpegImg);
+            }
+            
+            lightbox.classList.add('active');
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+        
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+    </script>
+</body>
+</html>

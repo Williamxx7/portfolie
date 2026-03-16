@@ -1,0 +1,119 @@
+[
+  {
+    "filename": "Golde",
+    "original_size": "3294x4941",
+    "aspect_ratio": 1.5,
+    "sizes": {
+      "thumbnail": {
+        "width": 400,
+        "height": 600,
+        "jpeg": "thumbnail/Golde.jpg",
+        "webp": "thumbnail/Golde.webp",
+        "jpeg_size": 52197,
+        "webp_size": 46912
+      },
+      "medium": {
+        "width": 800,
+        "height": 1200,
+        "jpeg": "medium/Golde.jpg",
+        "webp": "medium/Golde.webp",
+        "jpeg_size": 195104,
+        "webp_size": 175858
+      },
+      "large": {
+        "width": 1200,
+        "height": 1800,
+        "jpeg": "large/Golde.jpg",
+        "webp": "large/Golde.webp",
+        "jpeg_size": 414447,
+        "webp_size": 362194
+      },
+      "xlarge": {
+        "width": 1920,
+        "height": 2880,
+        "jpeg": "xlarge/Golde.jpg",
+        "webp": "xlarge/Golde.webp",
+        "jpeg_size": 962777,
+        "webp_size": 806338
+      }
+    }
+  },
+  {
+    "filename": "Low-tide",
+    "original_size": "3449x5173",
+    "aspect_ratio": 1.499855030443607,
+    "sizes": {
+      "thumbnail": {
+        "width": 400,
+        "height": 599,
+        "jpeg": "thumbnail/Low-tide.jpg",
+        "webp": "thumbnail/Low-tide.webp",
+        "jpeg_size": 44373,
+        "webp_size": 33538
+      },
+      "medium": {
+        "width": 800,
+        "height": 1199,
+        "jpeg": "medium/Low-tide.jpg",
+        "webp": "medium/Low-tide.webp",
+        "jpeg_size": 144582,
+        "webp_size": 105954
+      },
+      "large": {
+        "width": 1200,
+        "height": 1799,
+        "jpeg": "large/Low-tide.jpg",
+        "webp": "large/Low-tide.webp",
+        "jpeg_size": 291589,
+        "webp_size": 205074
+      },
+      "xlarge": {
+        "width": 1920,
+        "height": 2879,
+        "jpeg": "xlarge/Low-tide.jpg",
+        "webp": "xlarge/Low-tide.webp",
+        "jpeg_size": 674809,
+        "webp_size": 439632
+      }
+    }
+  },
+  {
+    "filename": "Sunset",
+    "original_size": "3445x5168",
+    "aspect_ratio": 1.500145137880987,
+    "sizes": {
+      "thumbnail": {
+        "width": 400,
+        "height": 600,
+        "jpeg": "thumbnail/Sunset.jpg",
+        "webp": "thumbnail/Sunset.webp",
+        "jpeg_size": 24602,
+        "webp_size": 13824
+      },
+      "medium": {
+        "width": 800,
+        "height": 1200,
+        "jpeg": "medium/Sunset.jpg",
+        "webp": "medium/Sunset.webp",
+        "jpeg_size": 73420,
+        "webp_size": 38790
+      },
+      "large": {
+        "width": 1200,
+        "height": 1800,
+        "jpeg": "large/Sunset.jpg",
+        "webp": "large/Sunset.webp",
+        "jpeg_size": 139851,
+        "webp_size": 71036
+      },
+      "xlarge": {
+        "width": 1920,
+        "height": 2880,
+        "jpeg": "xlarge/Sunset.jpg",
+        "webp": "xlarge/Sunset.webp",
+        "jpeg_size": 300004,
+        "webp_size": 140528
+      }
+    }
+  }
+]
