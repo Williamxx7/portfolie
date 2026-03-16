@@ -21,11 +21,8 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Debug — vis filstruktur
-        run: find . -name "*.py" | head -20
-
       - name: Fetch and update THM stats
-        run: python portfolie/scripts/update_thm.py
+        run: python scripts/update_thm.py
 
       - name: Commit and push if changed
         run: |
