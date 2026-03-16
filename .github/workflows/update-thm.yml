@@ -22,7 +22,7 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Fetch and update THM stats
-        run: python scripts/update-thm.py
+        run: python scripts/update_thm.py
 
       - name: Commit and push if changed
         run: |
