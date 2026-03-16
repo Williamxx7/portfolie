@@ -19,10 +19,10 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests beautifulsoup4
 
       - name: Fetch and update THM stats
-        run: python scripts/update_thm.py
+        run: python scripts/update-thm.py
 
       - name: Commit and push if changed
         run: |
@@ -31,10 +31,3 @@ jobs:
           git add projekter.html
           git diff --staged --quiet || git commit -m "Auto: opdater TryHackMe stats"
           git push
-
-      - name: Debug — test THM API
-        run: |
-          curl -s "https://tryhackme.com/api/user/rank/r3dp4nda"
-          curl -s "https://tryhackme.com/api/no-auth/user/r3dp4nda/badges/count"
-          curl -s "https://tryhackme.com/api/no-auth/user/r3dp4nda/completed-rooms/count"
-          curl -s "https://tryhackme.com/api/no-auth/user/r3dp4nda/streak"
