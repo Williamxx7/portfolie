@@ -296,6 +296,19 @@
             border: 0.5px solid var(--paper-mid);
             cursor: pointer;
         }
+        .photo-item picture {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .photo-item picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
 
         .photo-item:nth-child(4) { aspect-ratio: 8/5; grid-column: span 2; }
 
@@ -676,66 +689,66 @@
         </div>
     </div>
 
-    <!-- FOTOGRAFERING -->
-    <div class="content-section" id="tab-foto">
-        <p class="section-label reveal">Fotografering</p>
-        <div class="photo-grid reveal" style="transition-delay:0.1s">
+<!-- FOTOGRAFERING -->
+<div class="content-section" id="tab-foto">
+    <p class="section-label reveal">Fotografering</p>
 
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Portræt</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 01</p></div>
-            </div>
+    <div class="photo-grid reveal" style="transition-delay:0.1s">
 
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Urban</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 02</p></div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Natur</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 03</p></div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Landscape</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 04</p></div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Detalje</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 05</p></div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Arkitektur</span>
-                </div>
-                <div class="photo-overlay"><p class="photo-caption">Billede 06</p></div>
-            </div>
-
+        <div class="photo-item">
+            <picture>
+                <source media="(max-width: 480px)" srcset="optimized/medium/Golde.webp" type="image/webp">
+                <source media="(max-width: 900px)" srcset="optimized/large/Golde.webp" type="image/webp">
+                <source media="(min-width: 901px)" srcset="optimized/xlarge/Golde.webp" type="image/webp">
+                <img src="optimized/large/Golde.jpg" alt="Golde" loading="lazy" decoding="async">
+            </picture>
+            <div class="photo-overlay"><p class="photo-caption">Golde</p></div>
         </div>
 
-        <div class="photo-upload-note reveal" style="transition-delay:0.2s">
-            <strong>Tilføj dine billeder:</strong> Udskift <code>&lt;div class="photo-placeholder"&gt;</code> med <code>&lt;img src="sti/til/billede.jpg" alt="beskrivelse"&gt;</code> for hvert billede.
+        <div class="photo-item">
+            <picture>
+                <source media="(max-width: 480px)" srcset="optimized/medium/Low-tide.webp" type="image/webp">
+                <source media="(max-width: 900px)" srcset="optimized/large/Low-tide.webp" type="image/webp">
+                <source media="(min-width: 901px)" srcset="optimized/xlarge/Low-tide.webp" type="image/webp">
+                <img src="optimized/large/Low-tide.jpg" alt="Low tide" loading="lazy" decoding="async">
+            </picture>
+            <div class="photo-overlay"><p class="photo-caption">Low tide</p></div>
         </div>
+
+        <div class="photo-item">
+            <picture>
+                <source media="(max-width: 480px)" srcset="optimized/medium/Sunset.webp" type="image/webp">
+                <source media="(max-width: 900px)" srcset="optimized/large/Sunset.webp" type="image/webp">
+                <source media="(min-width: 901px)" srcset="optimized/xlarge/Sunset.webp" type="image/webp">
+                <img src="optimized/large/Sunset.jpg" alt="Sunset" loading="lazy" decoding="async">
+            </picture>
+            <div class="photo-overlay"><p class="photo-caption">Sunset</p></div>
+        </div>
+
+        <!-- Placeholder slots til fremtidige billeder -->
+        <div class="photo-item">
+            <div class="photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                <span>Kommende</span>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                <span>Kommende</span>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                <span>Kommende</span>
+            </div>
+        </div>
+
     </div>
-
+</div>
     <!-- CERTIFIKATER -->
     <div class="content-section" id="tab-certs">
         <p class="section-label reveal">Dokumenterede kompetencer</p>
