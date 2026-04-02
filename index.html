@@ -12,7 +12,13 @@
         optimized/xlarge/67.webp 1400w"
     imagesizes="(max-width: 480px) 100vw, (max-width: 900px) 280px, 380px">
     
-    
+    <script>
+      if (window.location.pathname.endsWith('/index.html')) {
+        window.location.replace(
+          window.location.href.replace('/index.html', '/')
+        );
+      }
+    </script>
     <!-- Open Graph / link preview -->
     <meta property="og:title" content="William Larsen — Cybersecurity & IT">
     <meta property="og:description" content="Cybersecurity-studerende med passion for sikre systemer, AI-løsninger og fotografering.">
