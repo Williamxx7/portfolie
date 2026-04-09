@@ -61,6 +61,39 @@
             text-decoration: none;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-lab {
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            text-decoration: none;
+            border: 1px solid var(--paper-mid);
+            padding: 0.35rem 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .nav-lab:hover {
+            border-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .nav-lab-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: inline-block;
+        }
+
         .nav-back {
             font-size: 0.78rem;
             letter-spacing: 0.08em;
@@ -127,8 +160,6 @@
             margin: 0 auto;
         }
 
-        /* The key fix: allow horizontal scroll on the tab row,
-           hide the scrollbar visually but keep it functional */
         .tabs {
             display: flex;
             gap: 0;
@@ -153,8 +184,8 @@
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: -1px;
-            white-space: nowrap;   /* prevent wrapping */
-            flex-shrink: 0;        /* prevent squishing */
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .tab-btn:hover { color: var(--ink); }
@@ -254,7 +285,7 @@
             padding: 0.25rem 0.65rem;
         }
 
-        .project-links { display: flex; gap: 1.25rem; }
+        .project-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 
         .project-link {
             font-size: 0.78rem;
@@ -271,18 +302,20 @@
         .project-link:hover { color: var(--accent); }
         .project-link svg { width: 12px; height: 12px; }
 
+        .project-link.lab-link {
+            color: var(--accent);
+            border: 1px solid var(--accent-light);
+            padding: 0.25rem 0.65rem;
+        }
+
+        .project-link.lab-link:hover {
+            background: var(--paper-warm);
+        }
+
         .project-card.placeholder { opacity: 0.4; cursor: default; }
         .project-card.placeholder:hover { background: none; }
 
         /* PHOTOGRAPHY */
-        .photo-intro {
-            font-size: 1rem;
-            color: var(--ink-soft);
-            line-height: 1.75;
-            max-width: 560px;
-            margin-bottom: 3rem;
-        }
-
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -296,11 +329,8 @@
             border: 0.5px solid var(--paper-mid);
             cursor: pointer;
         }
-        .photo-item picture {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
+
+        .photo-item picture { width: 100%; height: 100%; display: block; }
 
         .photo-item picture img {
             width: 100%;
@@ -325,7 +355,6 @@
         }
 
         .photo-item:hover .photo-placeholder { background: var(--paper-mid); }
-
         .photo-placeholder svg { width: 32px; height: 32px; opacity: 0.25; }
 
         .photo-placeholder span {
@@ -351,24 +380,6 @@
             font-size: 0.95rem;
             font-style: italic;
             color: rgba(250,249,247,0.9);
-        }
-
-        .photo-upload-note {
-            margin-top: 2rem;
-            padding: 1.5rem 2rem;
-            background: var(--paper-warm);
-            border-left: 2px solid var(--accent-light);
-            font-size: 0.85rem;
-            color: var(--ink-soft);
-            line-height: 1.7;
-        }
-
-        .photo-upload-note code {
-            font-family: monospace;
-            font-size: 0.82rem;
-            background: var(--paper-mid);
-            padding: 0.1rem 0.4rem;
-            color: var(--ink);
         }
 
         /* CERTIFICATES */
@@ -475,7 +486,7 @@
         /* THM Banner */
         .thm-banner {
             margin-bottom: 2rem;
-            padding: 2rem 2rem;
+            padding: 2rem;
             background: #1a1f2e;
             display: flex;
             align-items: center;
@@ -483,29 +494,9 @@
             flex-wrap: wrap;
         }
 
+        .thm-left { display: flex; flex-direction: column; gap: 1.5rem; }
+        .thm-badge { overflow: hidden; flex-shrink: 0; }
 
-
-
-        .thm-left {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            }
-
-            .thm-badge {
-                overflow: hidden;
-                flex-shrink: 0;
-            }
-
-            @media (max-width: 700px) {
-                .thm-banner { flex-direction: column; }
-                .thm-badge iframe { width: 100%; }
-            }
-
-
-
-
-            
         .thm-logo-text {
             font-family: var(--serif);
             font-size: 1.3rem;
@@ -590,12 +581,8 @@
         }
 
         @media (max-width: 600px) {
-            /* Tighten tab padding on small screens */
-            .tab-btn {
-                padding: 0.85rem 1.1rem;
-                font-size: 0.72rem;
-                letter-spacing: 0.06em;
-            }
+            .tab-btn { padding: 0.85rem 1.1rem; font-size: 0.72rem; letter-spacing: 0.06em; }
+            .nav-lab span:last-child { display: none; }
 
             .certs-grid { grid-template-columns: 1fr; }
             .cert-card { border-right: none !important; }
@@ -616,7 +603,13 @@
     <header>
         <nav>
             <a class="logo" href="/">WX7 - Projekter</a>
-            <a class="nav-back" href="/">← Tilbage</a>
+            <div class="nav-right">
+                <a class="nav-lab" href="https://lab.williamlarsen.dk">
+                    <span class="nav-lab-dot"></span>
+                    <span>Lab</span>
+                </a>
+                <a class="nav-back" href="/">← Tilbage</a>
+            </div>
         </nav>
     </header>
 
@@ -702,111 +695,126 @@
                 </div>
             </div>
 
-            <div class="project-card placeholder">
-                <span class="project-tag">Kommende</span>
-                <h3 class="project-title">A space for a new project</h3>
-                <p class="project-desc"></p>
-                <div class="project-stack"><span class="stack-tag">???</span></div>
+            <div class="project-card">
+                <span class="project-tag">Finans</span>
+                <h3 class="project-title">Dansk Skat-beregner</h3>
+                <p class="project-desc">
+                    Beregn din danske indkomstskat hurtigt og enkelt. Håndterer personfradrag, AM-bidrag og kommuneskat. Bygget som et standalone værktøj under lab.williamlarsen.dk.
+                </p>
+                <div class="project-stack">
+                    <span class="stack-tag">HTML</span>
+                    <span class="stack-tag">CSS</span>
+                    <span class="stack-tag">JavaScript</span>
+                    <span class="stack-tag">Cloudflare Workers</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://lab.williamlarsen.dk/skat-beregner" target="_blank" class="project-link lab-link">
+                        ⬡ Åbn i Lab
+                    </a>
+                    <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
+                        GitHub
+                    </a>
+                </div>
             </div>
 
         </div>
     </div>
 
-<!-- FOTOGRAFERING -->
-<div class="content-section" id="tab-foto">
-    <p class="section-label reveal">Fotografering</p>
+    <!-- FOTOGRAFERING -->
+    <div class="content-section" id="tab-foto">
+        <p class="section-label reveal">Fotografering</p>
+        <div class="photo-grid reveal" style="transition-delay:0.1s">
 
-    <div class="photo-grid reveal" style="transition-delay:0.1s">
-
-        <div class="photo-item">
-            <picture>
-                <source media="(max-width: 480px)" srcset="/optimized/medium/Golde.webp" type="image/webp">
-                <source media="(max-width: 900px)" srcset="/optimized/large/Golde.webp" type="image/webp">
-                <source media="(min-width: 901px)" srcset="/optimized/xlarge/Golde.webp" type="image/webp">
-                <img src="/optimized/large/Golde.jpg" alt="Golde" loading="lazy" decoding="async">
-            </picture>
-            <div class="photo-overlay"><p class="photo-caption">Golde</p></div>
-        </div>
-
-        <div class="photo-item">
-            <picture>
-                <source media="(max-width: 480px)" srcset="/optimized/medium/Low-tide.webp" type="image/webp">
-                <source media="(max-width: 900px)" srcset="/optimized/large/Low-tide.webp" type="image/webp">
-                <source media="(min-width: 901px)" srcset="/optimized/xlarge/Low-tide.webp" type="image/webp">
-                <img src="/optimized/large/Low-tide.jpg" alt="Low tide" loading="lazy" decoding="async">
-            </picture>
-            <div class="photo-overlay"><p class="photo-caption">Low tide</p></div>
-        </div>
-
-        <div class="photo-item">
-            <picture>
-                <source media="(max-width: 480px)" srcset="/optimized/medium/Sunset.webp" type="image/webp">
-                <source media="(max-width: 900px)" srcset="/optimized/large/Sunset.webp" type="image/webp">
-                <source media="(min-width: 901px)" srcset="/optimized/xlarge/Sunset.webp" type="image/webp">
-                <img src="/optimized/large/Sunset.jpg" alt="Sunset" loading="lazy" decoding="async">
-            </picture>
-            <div class="photo-overlay"><p class="photo-caption">Sunset</p></div>
-        </div>
-
-        <!-- Placeholder slots til fremtidige billeder -->
-        <div class="photo-item">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                <span>Kommende</span>
+            <div class="photo-item">
+                <picture>
+                    <source media="(max-width: 480px)" srcset="/optimized/medium/Golde.webp" type="image/webp">
+                    <source media="(max-width: 900px)" srcset="/optimized/large/Golde.webp" type="image/webp">
+                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Golde.webp" type="image/webp">
+                    <img src="/optimized/large/Golde.jpg" alt="Golde" loading="lazy" decoding="async">
+                </picture>
+                <div class="photo-overlay"><p class="photo-caption">Golde</p></div>
             </div>
-        </div>
 
-        <div class="photo-item">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                <span>Kommende</span>
+            <div class="photo-item">
+                <picture>
+                    <source media="(max-width: 480px)" srcset="/optimized/medium/Low-tide.webp" type="image/webp">
+                    <source media="(max-width: 900px)" srcset="/optimized/large/Low-tide.webp" type="image/webp">
+                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Low-tide.webp" type="image/webp">
+                    <img src="/optimized/large/Low-tide.jpg" alt="Low tide" loading="lazy" decoding="async">
+                </picture>
+                <div class="photo-overlay"><p class="photo-caption">Low tide</p></div>
             </div>
-        </div>
 
-        <div class="photo-item">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                <span>Kommende</span>
+            <div class="photo-item">
+                <picture>
+                    <source media="(max-width: 480px)" srcset="/optimized/medium/Sunset.webp" type="image/webp">
+                    <source media="(max-width: 900px)" srcset="/optimized/large/Sunset.webp" type="image/webp">
+                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Sunset.webp" type="image/webp">
+                    <img src="/optimized/large/Sunset.jpg" alt="Sunset" loading="lazy" decoding="async">
+                </picture>
+                <div class="photo-overlay"><p class="photo-caption">Sunset</p></div>
             </div>
-        </div>
 
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                    <span>Kommende</span>
+                </div>
+            </div>
+
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                    <span>Kommende</span>
+                </div>
+            </div>
+
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
+                    <span>Kommende</span>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+
     <!-- CERTIFIKATER -->
     <div class="content-section" id="tab-certs">
         <p class="section-label reveal">Dokumenterede kompetencer</p>
 
-      <div class="thm-banner reveal">
-    <span class="thm-logo-text">TryHackMe</span>
-    <div class="thm-stats" id="thm-stats">
-        <div class="thm-stat">
-            <div class="thm-stat-num" id="thm-rank">[0x8]</div>
-            <div class="thm-stat-label">Global rank</div>
+        <div class="thm-banner reveal">
+            <span class="thm-logo-text">TryHackMe</span>
+            <div class="thm-stats" id="thm-stats">
+                <div class="thm-stat">
+                    <div class="thm-stat-num" id="thm-rank">[0x8]</div>
+                    <div class="thm-stat-label">Global rank</div>
+                </div>
+                <div class="thm-stat">
+                    <div class="thm-stat-num" id="thm-rooms">48</div>
+                    <div class="thm-stat-label">Rooms completed</div>
+                </div>
+                <div class="thm-stat">
+                    <div class="thm-stat-num" id="thm-badges">11</div>
+                    <div class="thm-stat-label">Badges</div>
+                </div>
+                <div class="thm-stat">
+                    <div class="thm-stat-num" id="thm-streak">33 days</div>
+                    <div class="thm-stat-label">Day streak</div>
+                </div>
+            </div>
+            <a href="https://tryhackme.com/p/r3dp4nda" target="_blank" class="thm-link">Åbn profil →</a>
         </div>
-        <div class="thm-stat">
-            <div class="thm-stat-num" id="thm-rooms">48</div>
-            <div class="thm-stat-label">Rooms completed</div>
-        </div>
-        <div class="thm-stat">
-            <div class="thm-stat-num" id="thm-badges">11</div>
-            <div class="thm-stat-label">Badges</div>
-        </div>
-        <div class="thm-stat">
-            <div class="thm-stat-num" id="thm-streak">33 days</div>
-            <div class="thm-stat-label">Day streak</div>
-        </div>
-    </div>
-    <a href="https://tryhackme.com/p/r3dp4nda" target="_blank" class="thm-link">Åbn profil →</a>
-</div>
 
-            
-   <div class="thm-badge">
-    <iframe 
-        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=6309351" 
-        style="border:none; width:100%; height:100%;"
-        scrolling="no">
-    </iframe>
-</div>
+        <div class="thm-badge">
+            <iframe
+                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=6309351"
+                style="border:none; width:100%; height:100%;"
+                scrolling="no">
+            </iframe>
+        </div>
+
         <div class="certs-grid reveal" style="transition-delay:0.15s">
             <div class="cert-card">
                 <div class="cert-issuer-row">
@@ -858,30 +866,31 @@
                     <span class="cert-badge inprogress">I gang</span>
                 </div>
             </div>
-        <div class="cert-card">
-            <div class="cert-issuer-row">
-                <div class="cert-logo placeholder-logo">AAU</div>
-                <span class="cert-issuer">Aalborg Universitet</span>
-            </div>
-            <p class="cert-title">Kandidat i Cybersikkerhed</p>
-            <div class="cert-meta">
-                <span class="cert-date">2028 — planlagt</span>
-                <span class="cert-badge planned">Planlagt</span>
-            </div>
-        </div>
 
-        <div class="cert-card">
-            <div class="cert-issuer-row">
-                <div class="cert-logo tryhackme">THM</div>
-                <span class="cert-issuer">TryHackMe</span>
+            <div class="cert-card">
+                <div class="cert-issuer-row">
+                    <div class="cert-logo placeholder-logo">AAU</div>
+                    <span class="cert-issuer">Aalborg Universitet</span>
+                </div>
+                <p class="cert-title">Kandidat i Cybersikkerhed</p>
+                <div class="cert-meta">
+                    <span class="cert-date">2028 — planlagt</span>
+                    <span class="cert-badge planned">Planlagt</span>
+                </div>
             </div>
-            <p class="cert-title">Security Engineer</p>
-            <div class="cert-meta">
-                <span class="cert-date"></span>
-                <span class="cert-badge planned">Planlagt</span>
+
+            <div class="cert-card">
+                <div class="cert-issuer-row">
+                    <div class="cert-logo tryhackme">THM</div>
+                    <span class="cert-issuer">TryHackMe</span>
+                </div>
+                <p class="cert-title">Security Engineer</p>
+                <div class="cert-meta">
+                    <span class="cert-date"></span>
+                    <span class="cert-badge planned">Planlagt</span>
+                </div>
+                <a href="https://tryhackme.com/paths" target="_blank" class="cert-link">Se path →</a>
             </div>
-            <a href="https://tryhackme.com/paths" target="_blank" class="cert-link">Se path →</a>
-        </div>
         </div>
     </div>
 
@@ -890,30 +899,22 @@
     </footer>
 
     <script>
-        // Tab switching — scroll active tab into view on mobile
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabSections = document.querySelectorAll('.content-section');
-        const tabBar = document.getElementById('tabBar');
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const target = btn.dataset.tab;
-
                 tabBtns.forEach(b => b.classList.remove('active'));
                 tabSections.forEach(s => s.classList.remove('active'));
-
                 btn.classList.add('active');
                 document.getElementById('tab-' + target).classList.add('active');
-
-                // Scroll the clicked tab into view within the bar
                 btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-
                 window.scrollTo({ top: document.querySelector('.filter-bar').offsetTop - 80, behavior: 'smooth' });
                 triggerReveals();
             });
         });
 
-        // Scroll reveal
         function triggerReveals() {
             const reveals = document.querySelectorAll('.reveal:not(.visible)');
             const io = new IntersectionObserver((entries) => {
@@ -928,9 +929,6 @@
         }
 
         triggerReveals();
-
-
-
     </script>
 
 </body>
