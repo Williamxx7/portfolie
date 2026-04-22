@@ -1,0 +1,30 @@
+name: Process Images
+
+on:
+  push:
+    paths:
+      - 'content/photography/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: npm init -y
+      - run: npm install sharp fs-extra
+
+      - run: node scripts/process-images.js
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "Auto process images" || echo "No changes"
+          git push
