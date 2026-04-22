@@ -987,7 +987,7 @@
     let lightboxIndex   = 0;
     let lightboxEl      = null;
 
-    fetch("/public/data/gallery.json")
+    fetch("/data/gallery.json")
         .then(r => r.json())
         .then(data => {
             galleryData = data;

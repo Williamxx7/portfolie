@@ -83,7 +83,7 @@ async function processImage(file, category, cache) {
       .webp({ quality: 78, smartSubsample: true })
       .toFile(`${base}.webp`);
 
-    const urlBase = `/public/images/photography/${category}/${name}-${w}`;
+    const urlBase = `/images/photography/${category}/${name}-${w}`;
     avifSrcset.push(`${urlBase}.avif ${w}w`);
     webpSrcset.push(`${urlBase}.webp ${w}w`);
   }
