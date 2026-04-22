@@ -308,14 +308,12 @@
             padding: 0.25rem 0.65rem;
         }
 
-        .project-link.lab-link:hover {
-            background: var(--paper-warm);
-        }
+        .project-link.lab-link:hover { background: var(--paper-warm); }
 
         .project-card.placeholder { opacity: 0.4; cursor: default; }
         .project-card.placeholder:hover { background: none; }
 
-        /* PHOTOGRAPHY */
+        /* PHOTOGRAPHY — same 3-col grid as original */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -328,23 +326,47 @@
             overflow: hidden;
             border: 0.5px solid var(--paper-mid);
             cursor: pointer;
+            background: var(--paper-warm);
         }
 
-        .photo-item picture { width: 100%; height: 100%; display: block; }
+        /* Blur-up */
+        .photo-item .thumb-blur {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: blur(12px);
+            transform: scale(1.05);
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .photo-item.loaded .thumb-blur { opacity: 0; }
+
+        .photo-item picture {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            display: block;
+            z-index: 2;
+        }
 
         .photo-item picture img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: center;
             display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease,
+                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .photo-item:nth-child(4) { aspect-ratio: 8/5; grid-column: span 2; }
+        .photo-item picture img.loaded { opacity: 1; }
+        .photo-item:hover picture img.loaded { transform: scale(1.04); }
 
+        /* Placeholder tiles */
         .photo-placeholder {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background: var(--paper-warm);
             display: flex;
             flex-direction: column;
@@ -367,10 +389,12 @@
         .photo-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 1.25rem;
-            background: linear-gradient(transparent, rgba(26,25,23,0.7));
+            padding: 2rem 1.25rem 1.25rem;
+            background: linear-gradient(transparent, rgba(26,25,23,0.65));
             opacity: 0;
             transition: opacity 0.3s;
+            z-index: 3;
+            pointer-events: none;
         }
 
         .photo-item:hover .photo-overlay { opacity: 1; }
@@ -381,6 +405,102 @@
             font-style: italic;
             color: rgba(250,249,247,0.9);
         }
+
+        /* Photo category filters */
+        #photo-filters {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        #photo-filters button {
+            border: 1px solid var(--paper-mid);
+            background: none;
+            padding: 0.45rem 1rem;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            transition: all 0.2s;
+        }
+
+        #photo-filters button:hover { color: var(--ink); border-color: var(--ink-faint); }
+        #photo-filters button.active { border-color: var(--accent); color: var(--accent); }
+
+        /* LIGHTBOX */
+        .lightbox-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(10,9,8,0.97);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-bg.open { opacity: 1; }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            transform: scale(0.96);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-bg.open .lightbox-inner { transform: scale(1); }
+
+        .lightbox-inner picture img {
+            display: block;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -2rem; left: 0;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.04em;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.5rem; right: 1.5rem;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10000;
+        }
+        .lightbox-close:hover { color: #fff; }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.75rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10000;
+            user-select: none;
+        }
+        .lightbox-nav:hover { color: #fff; }
+        .lightbox-nav.prev { left: 1.5rem; }
+        .lightbox-nav.next { right: 1.5rem; }
 
         /* CERTIFICATES */
         .certs-grid {
@@ -407,12 +527,9 @@
         .cert-issuer-row { display: flex; align-items: center; gap: 0.75rem; }
 
         .cert-logo {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 0.04em;
@@ -465,9 +582,9 @@
             padding: 0.2rem 0.6rem;
         }
 
-        .cert-badge.earned { background: #eef4ee; color: #3a6b3a; border: 1px solid #b8d4b8; }
+        .cert-badge.earned     { background: #eef4ee; color: #3a6b3a; border: 1px solid #b8d4b8; }
         .cert-badge.inprogress { background: var(--paper-warm); color: var(--accent); border: 1px solid var(--accent-light); }
-        .cert-badge.planned { background: var(--paper-mid); color: var(--ink-faint); border: 1px solid var(--paper-mid); }
+        .cert-badge.planned    { background: var(--paper-mid); color: var(--ink-faint); border: 1px solid var(--paper-mid); }
 
         .cert-link {
             font-size: 0.75rem;
@@ -480,7 +597,6 @@
             gap: 0.3rem;
             transition: gap 0.15s;
         }
-
         .cert-link:hover { gap: 0.5rem; }
 
         /* THM Banner */
@@ -532,7 +648,6 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-
         .thm-link:hover { color: #c11111; }
 
         /* REVEAL */
@@ -541,7 +656,6 @@
             transform: translateY(18px);
             transition: opacity 0.65s ease, transform 0.65s ease;
         }
-
         .reveal.visible { opacity: 1; transform: none; }
 
         /* FOOTER */
@@ -577,7 +691,6 @@
             .cert-card:nth-last-child(-n+2) { border-bottom: none; }
 
             .photo-grid { grid-template-columns: 1fr 1fr; }
-            .photo-item:nth-child(4) { grid-column: span 2; aspect-ratio: 8/5; }
         }
 
         @media (max-width: 600px) {
@@ -590,7 +703,6 @@
             .cert-card:last-child { border-bottom: none; }
 
             .photo-grid { grid-template-columns: 1fr; }
-            .photo-item:nth-child(4) { grid-column: span 1; aspect-ratio: 4/5; }
 
             .thm-banner { gap: 1.5rem; padding: 1.5rem; }
             .thm-stats { gap: 1.5rem; }
@@ -724,60 +836,8 @@
     <!-- FOTOGRAFERING -->
     <div class="content-section" id="tab-foto">
         <p class="section-label reveal">Fotografering</p>
-        <div class="photo-grid reveal" style="transition-delay:0.1s">
-
-            <div class="photo-item">
-                <picture>
-                    <source media="(max-width: 480px)" srcset="/optimized/medium/Golde.webp" type="image/webp">
-                    <source media="(max-width: 900px)" srcset="/optimized/large/Golde.webp" type="image/webp">
-                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Golde.webp" type="image/webp">
-                    <img src="/optimized/large/Golde.jpg" alt="Golde" loading="lazy" decoding="async">
-                </picture>
-                <div class="photo-overlay"><p class="photo-caption">Golde</p></div>
-            </div>
-
-            <div class="photo-item">
-                <picture>
-                    <source media="(max-width: 480px)" srcset="/optimized/medium/Low-tide.webp" type="image/webp">
-                    <source media="(max-width: 900px)" srcset="/optimized/large/Low-tide.webp" type="image/webp">
-                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Low-tide.webp" type="image/webp">
-                    <img src="/optimized/large/Low-tide.jpg" alt="Low tide" loading="lazy" decoding="async">
-                </picture>
-                <div class="photo-overlay"><p class="photo-caption">Low tide</p></div>
-            </div>
-
-            <div class="photo-item">
-                <picture>
-                    <source media="(max-width: 480px)" srcset="/optimized/medium/Sunset.webp" type="image/webp">
-                    <source media="(max-width: 900px)" srcset="/optimized/large/Sunset.webp" type="image/webp">
-                    <source media="(min-width: 901px)" srcset="/optimized/xlarge/Sunset.webp" type="image/webp">
-                    <img src="/optimized/large/Sunset.jpg" alt="Sunset" loading="lazy" decoding="async">
-                </picture>
-                <div class="photo-overlay"><p class="photo-caption">Sunset</p></div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Kommende</span>
-                </div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Kommende</span>
-                </div>
-            </div>
-
-            <div class="photo-item">
-                <div class="photo-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M9 5l1-2h4l1 2"/></svg>
-                    <span>Kommende</span>
-                </div>
-            </div>
-
-        </div>
+        <div id="photo-filters"></div>
+        <div id="photo-gallery" class="photo-grid reveal" style="transition-delay:0.1s"></div>
     </div>
 
     <!-- CERTIFIKATER -->
@@ -899,36 +959,243 @@
     </footer>
 
     <script>
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabSections = document.querySelectorAll('.content-section');
+    /* =========================
+       TABS
+    ========================= */
+    const tabBtns     = document.querySelectorAll('.tab-btn');
+    const tabSections = document.querySelectorAll('.content-section');
 
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.tab;
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabSections.forEach(s => s.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('tab-' + target).classList.add('active');
-                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                window.scrollTo({ top: document.querySelector('.filter-bar').offsetTop - 80, behavior: 'smooth' });
-                triggerReveals();
-            });
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.tab;
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabSections.forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + target).classList.add('active');
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            window.scrollTo({ top: document.querySelector('.filter-bar').offsetTop - 80, behavior: 'smooth' });
+            triggerReveals();
+        });
+    });
+
+    /* =========================
+       GALLERY SYSTEM
+    ========================= */
+    let galleryData     = {};
+    let currentCategory = "all";
+    let flatImages      = [];
+    let lightboxIndex   = 0;
+    let lightboxEl      = null;
+
+    fetch("/public/data/gallery.json")
+        .then(r => r.json())
+        .then(data => {
+            galleryData = data;
+            buildFilters();
+            renderGallery();
+        })
+        .catch(() => console.warn("gallery.json ikke fundet"));
+
+    /* --- Filters --- */
+    function buildFilters() {
+        const wrap = document.getElementById("photo-filters");
+        wrap.innerHTML = "";
+
+        ["all", ...Object.keys(galleryData)].forEach(cat => {
+            const btn = document.createElement("button");
+            btn.textContent = cat === "all" ? "Alle" : cat;
+            btn.dataset.cat = cat;
+            if (cat === "all") btn.classList.add("active");
+            btn.onclick = () => {
+                currentCategory = cat;
+                wrap.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                renderGallery();
+            };
+            wrap.appendChild(btn);
+        });
+    }
+
+    /* --- Gallery render --- */
+    function renderGallery() {
+        const grid = document.getElementById("photo-gallery");
+        grid.innerHTML = "";
+
+        flatImages = currentCategory === "all"
+            ? Object.values(galleryData).flat()
+            : (galleryData[currentCategory] || []);
+
+        flatImages.forEach((img, idx) => {
+            const item = document.createElement("div");
+            item.className = "photo-item";
+
+            // Blur-up placeholder
+            const blur = document.createElement("img");
+            blur.className = "thumb-blur";
+            blur.src = img.placeholder;
+            blur.alt = "";
+            blur.setAttribute("aria-hidden", "true");
+
+            // Responsive <picture>
+            const picture = document.createElement("picture");
+
+            const avifSrc = document.createElement("source");
+            avifSrc.type   = "image/avif";
+            avifSrc.srcset = img.avifSrcset;
+            avifSrc.sizes  = "(max-width:600px) 100vw, (max-width:860px) 50vw, 33vw";
+
+            const webpSrc = document.createElement("source");
+            webpSrc.type   = "image/webp";
+            webpSrc.srcset = img.webpSrcset;
+            webpSrc.sizes  = "(max-width:600px) 100vw, (max-width:860px) 50vw, 33vw";
+
+            const imgEl = document.createElement("img");
+            imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
+            imgEl.alt      = friendlyName(img.name);
+            imgEl.loading  = "lazy";
+            imgEl.decoding = "async";
+
+            imgEl.onload = () => {
+                imgEl.classList.add("loaded");
+                item.classList.add("loaded");
+            };
+
+            picture.appendChild(avifSrc);
+            picture.appendChild(webpSrc);
+            picture.appendChild(imgEl);
+
+            // Caption overlay
+            const overlay = document.createElement("div");
+            overlay.className = "photo-overlay";
+            const caption = document.createElement("p");
+            caption.className = "photo-caption";
+            caption.textContent = friendlyName(img.name);
+            overlay.appendChild(caption);
+
+            item.appendChild(blur);
+            item.appendChild(picture);
+            item.appendChild(overlay);
+
+            item.addEventListener("click", () => openLightbox(idx));
+            grid.appendChild(item);
+        });
+    }
+
+    /* --- Lightbox --- */
+    function openLightbox(idx) {
+        lightboxIndex = idx;
+        if (!lightboxEl) buildLightbox();
+        updateLightboxImage();
+        document.body.appendChild(lightboxEl);
+        document.body.style.overflow = "hidden";
+        requestAnimationFrame(() => lightboxEl.classList.add("open"));
+        document.addEventListener("keydown", lightboxKeyHandler);
+    }
+
+    function buildLightbox() {
+        lightboxEl = document.createElement("div");
+        lightboxEl.className = "lightbox-bg";
+
+        const inner = document.createElement("div");
+        inner.className = "lightbox-inner";
+
+        const picture = document.createElement("picture");
+        const avifSrc = document.createElement("source");
+        avifSrc.type = "image/avif";
+        const webpSrc = document.createElement("source");
+        webpSrc.type = "image/webp";
+        const imgEl = document.createElement("img");
+        imgEl.alt = "";
+
+        picture.appendChild(avifSrc);
+        picture.appendChild(webpSrc);
+        picture.appendChild(imgEl);
+
+        const caption = document.createElement("p");
+        caption.className = "lightbox-caption";
+
+        inner.appendChild(picture);
+        inner.appendChild(caption);
+
+        const close = document.createElement("div");
+        close.className = "lightbox-close";
+        close.innerHTML = "×";
+        close.onclick = closeLightbox;
+
+        const prev = document.createElement("div");
+        prev.className = "lightbox-nav prev";
+        prev.innerHTML = "‹";
+        prev.onclick = (e) => { e.stopPropagation(); navigate(-1); };
+
+        const next = document.createElement("div");
+        next.className = "lightbox-nav next";
+        next.innerHTML = "›";
+        next.onclick = (e) => { e.stopPropagation(); navigate(1); };
+
+        lightboxEl.appendChild(inner);
+        lightboxEl.appendChild(close);
+        lightboxEl.appendChild(prev);
+        lightboxEl.appendChild(next);
+
+        lightboxEl.addEventListener("click", (e) => {
+            if (e.target === lightboxEl) closeLightbox();
         });
 
-        function triggerReveals() {
-            const reveals = document.querySelectorAll('.reveal:not(.visible)');
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('visible');
-                        io.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            reveals.forEach(el => io.observe(el));
-        }
+        lightboxEl._avifSrc = avifSrc;
+        lightboxEl._webpSrc = webpSrc;
+        lightboxEl._imgEl   = imgEl;
+        lightboxEl._caption = caption;
+    }
 
-        triggerReveals();
+    function updateLightboxImage() {
+        const img = flatImages[lightboxIndex];
+        if (!img) return;
+        lightboxEl._avifSrc.srcset = img.avifSrcset;
+        lightboxEl._webpSrc.srcset = img.webpSrcset;
+        lightboxEl._imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
+        lightboxEl._imgEl.alt      = friendlyName(img.name);
+        lightboxEl._caption.textContent = friendlyName(img.name);
+    }
+
+    function navigate(dir) {
+        lightboxIndex = (lightboxIndex + dir + flatImages.length) % flatImages.length;
+        updateLightboxImage();
+    }
+
+    function closeLightbox() {
+        lightboxEl.classList.remove("open");
+        document.body.style.overflow = "";
+        document.removeEventListener("keydown", lightboxKeyHandler);
+        setTimeout(() => { if (lightboxEl.parentNode) lightboxEl.parentNode.removeChild(lightboxEl); }, 300);
+    }
+
+    function lightboxKeyHandler(e) {
+        if (e.key === "Escape")     closeLightbox();
+        if (e.key === "ArrowRight") navigate(1);
+        if (e.key === "ArrowLeft")  navigate(-1);
+    }
+
+    function friendlyName(name) {
+        return name.replace(/[-_]/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+    }
+
+    /* =========================
+       REVEAL
+    ========================= */
+    function triggerReveals() {
+        const reveals = document.querySelectorAll('.reveal:not(.visible)');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => io.observe(el));
+    }
+
+    triggerReveals();
     </script>
 
 </body>
