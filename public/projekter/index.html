@@ -313,100 +313,7 @@
         .project-card.placeholder { opacity: 0.4; cursor: default; }
         .project-card.placeholder:hover { background: none; }
 
-        /* PHOTOGRAPHY — same 3-col grid as original */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-        }
-
-        .photo-item {
-            position: relative;
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            border: 0.5px solid var(--paper-mid);
-            cursor: pointer;
-            background: var(--paper-warm);
-        }
-
-        /* Blur-up */
-        .photo-item .thumb-blur {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: blur(12px);
-            transform: scale(1.05);
-            transition: opacity 0.5s ease;
-            z-index: 1;
-        }
-
-        .photo-item.loaded .thumb-blur { opacity: 0; }
-
-        .photo-item picture {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            display: block;
-            z-index: 2;
-        }
-
-        .photo-item picture img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.5s ease,
-                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .photo-item picture img.loaded { opacity: 1; }
-        .photo-item:hover picture img.loaded { transform: scale(1.04); }
-
-        /* Placeholder tiles */
-        .photo-placeholder {
-            width: 100%; height: 100%;
-            background: var(--paper-warm);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            transition: background 0.3s;
-        }
-
-        .photo-item:hover .photo-placeholder { background: var(--paper-mid); }
-        .photo-placeholder svg { width: 32px; height: 32px; opacity: 0.25; }
-
-        .photo-placeholder span {
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--ink-faint);
-        }
-
-        .photo-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 2rem 1.25rem 1.25rem;
-            background: linear-gradient(transparent, rgba(26,25,23,0.65));
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .photo-item:hover .photo-overlay { opacity: 1; }
-
-        .photo-caption {
-            font-family: var(--serif);
-            font-size: 0.95rem;
-            font-style: italic;
-            color: rgba(250,249,247,0.9);
-        }
-
-        /* Photo category filters */
+        /* PHOTOGRAPHY — masonry */
         #photo-filters {
             margin-bottom: 2rem;
             display: flex;
@@ -429,6 +336,79 @@
 
         #photo-filters button:hover { color: var(--ink); border-color: var(--ink-faint); }
         #photo-filters button.active { border-color: var(--accent); color: var(--accent); }
+
+        /* Masonry via CSS columns */
+        .photo-masonry {
+            columns: 3;
+            column-gap: 3px;
+        }
+
+        @media (max-width: 860px) { .photo-masonry { columns: 2; } }
+        @media (max-width: 480px) { .photo-masonry { columns: 1; } }
+
+        .photo-item {
+            break-inside: avoid;
+            position: relative;
+            display: block;
+            margin-bottom: 3px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--paper-warm);
+            /* aspect-ratio sættes dynamisk via JS fra JSON */
+        }
+
+        /* Blur-up placeholder */
+        .photo-item .thumb-blur {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: blur(12px);
+            transform: scale(1.05);
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .photo-item.loaded .thumb-blur { opacity: 0; }
+
+        .photo-item picture {
+            display: block;
+            width: 100%;
+        }
+
+        .photo-item picture img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .photo-item picture img.loaded { opacity: 1; }
+        .photo-item:hover picture img.loaded { transform: scale(1.03); }
+
+        /* Caption overlay */
+        .photo-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem 1.25rem 1.25rem;
+            background: linear-gradient(transparent, rgba(26,25,23,0.65));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .photo-item:hover .photo-overlay { opacity: 1; }
+
+        .photo-caption {
+            font-family: var(--serif);
+            font-size: 0.95rem;
+            font-style: italic;
+            color: rgba(250,249,247,0.9);
+        }
 
         /* LIGHTBOX */
         .lightbox-bg {
@@ -689,8 +669,6 @@
             .cert-card:nth-child(even) { border-right: none; }
             .cert-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--paper-mid); }
             .cert-card:nth-last-child(-n+2) { border-bottom: none; }
-
-            .photo-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 600px) {
@@ -701,8 +679,6 @@
             .cert-card { border-right: none !important; }
             .cert-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--paper-mid); }
             .cert-card:last-child { border-bottom: none; }
-
-            .photo-grid { grid-template-columns: 1fr; }
 
             .thm-banner { gap: 1.5rem; padding: 1.5rem; }
             .thm-stats { gap: 1.5rem; }
@@ -837,7 +813,7 @@
     <div class="content-section" id="tab-foto">
         <p class="section-label reveal">Fotografering</p>
         <div id="photo-filters"></div>
-        <div id="photo-gallery" class="photo-grid reveal" style="transition-delay:0.1s"></div>
+        <div id="photo-gallery" class="photo-masonry reveal" style="transition-delay:0.1s"></div>
     </div>
 
     <!-- CERTIFIKATER -->
@@ -1029,6 +1005,10 @@
             const item = document.createElement("div");
             item.className = "photo-item";
 
+            // Brug billedets faktiske aspect ratio fra JSON
+            const ratio = img.aspectRatio || 0.75;
+            item.style.aspectRatio = ratio;
+
             // Blur-up placeholder
             const blur = document.createElement("img");
             blur.className = "thumb-blur";
@@ -1042,12 +1022,12 @@
             const avifSrc = document.createElement("source");
             avifSrc.type   = "image/avif";
             avifSrc.srcset = img.avifSrcset;
-            avifSrc.sizes  = "(max-width:600px) 100vw, (max-width:860px) 50vw, 33vw";
+            avifSrc.sizes  = "(max-width:480px) 100vw, (max-width:860px) 50vw, 33vw";
 
             const webpSrc = document.createElement("source");
             webpSrc.type   = "image/webp";
             webpSrc.srcset = img.webpSrcset;
-            webpSrc.sizes  = "(max-width:600px) 100vw, (max-width:860px) 50vw, 33vw";
+            webpSrc.sizes  = "(max-width:480px) 100vw, (max-width:860px) 50vw, 33vw";
 
             const imgEl = document.createElement("img");
             imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
