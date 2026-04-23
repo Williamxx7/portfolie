@@ -7,14 +7,15 @@
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1673078505244c2d84f6eac9004c266e"}'></script><!-- End Cloudflare Web Analytics -->
     
 <!-- preload tag -->
+<!-- ERSTAT den eksisterende preload med dette -->
 <link rel="preload" as="image"
-    href="/images/photography/portræt/William_Larsen_1-1600.webp"
+    href="/images/photography/portræt/William_Larsen_1-800.webp"
     imagesrcset="
         /images/photography/portræt/William_Larsen_1-400.webp 400w,
         /images/photography/portræt/William_Larsen_1-800.webp 800w,
+        /images/photography/portræt/William_Larsen_1-1200.webp 1200w,
         /images/photography/portræt/William_Larsen_1-1600.webp 1600w"
-    imagesizes="(max-width: 480px) 100vw, (max-width: 900px) 280px, 380px">
-    
+    imagesizes="(max-width: 600px) 100vw, (max-width: 900px) 280px, 380px">
  
     <!-- Open Graph / link preview -->
     <meta property="og:title" content="William Larsen — Cybersecurity & IT">
@@ -687,22 +688,30 @@
             </div>
             <div class="hero-image-wrap reveal" style="transition-delay: 0.15s">
                 <div class="profile-frame">
-            <picture>
-                <!-- Thumbnail bruges som placeholder mens siden loader -->
-                <source media="(max-width: 400px)"
-                        srcset="/images/photography/portræt/William_Larsen_1-400.webp" type="image/webp">
-                    <source media="(max-width: 800px)"
-                        srcset="/images/photography/portræt/William_Larsen_1-800.webp" type="image/webp">
-                    <source media="(min-width: 801px)"
-                        srcset="/images/photography/portræt/William_Larsen_1-1600.webp" type="image/webp">
-                    <img class="profile-img"
-                        src="/images/photography/portræt/William_Larsen_1-1600.webp"
-                    alt="William Larsen"
-                    loading="eager"
-                    decoding="async"
-                    width="380"
-                    height="460">
-            </picture>                    
+<picture>
+    <source type="image/avif"
+        srcset="
+            /images/photography/portræt/William_Larsen_1-400.avif 400w,
+            /images/photography/portræt/William_Larsen_1-800.avif 800w,
+            /images/photography/portræt/William_Larsen_1-1200.avif 1200w,
+            /images/photography/portræt/William_Larsen_1-1600.avif 1600w"
+        sizes="(max-width: 600px) 100vw, (max-width: 900px) 280px, 380px">
+    <source type="image/webp"
+        srcset="
+            /images/photography/portræt/William_Larsen_1-400.webp 400w,
+            /images/photography/portræt/William_Larsen_1-800.webp 800w,
+            /images/photography/portræt/William_Larsen_1-1200.webp 1200w,
+            /images/photography/portræt/William_Larsen_1-1600.webp 1600w"
+        sizes="(max-width: 600px) 100vw, (max-width: 900px) 280px, 380px">
+    <img class="profile-img"
+        src="/images/photography/portræt/William_Larsen_1-800.webp"
+        alt="William Larsen"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        width="380"
+        height="460">
+</picture>  
             <div class="profile-badge">William Larsen</div>
                 </div>
             </div>
