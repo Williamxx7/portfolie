@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 USERNAME = "r3dp4nda"
 USER_ID = "6309351"
-HTML_FILE = "projekter/index.html"
+HTML_FILE = "public/projekter/index.html"
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 def fetch_thm_stats():
