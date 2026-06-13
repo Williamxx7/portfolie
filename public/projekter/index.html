@@ -657,6 +657,20 @@
             text-transform: uppercase;
         }
 
+        /* PHOTO INTRO TEXT */
+        .photo-intro {
+            max-width: 640px;
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+        }
+
+        .photo-intro strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 860px) {
             .projects-grid { grid-template-columns: 1fr; }
@@ -812,6 +826,12 @@
     <!-- FOTOGRAFERING -->
     <div class="content-section" id="tab-foto">
         <p class="section-label reveal">Fotografering</p>
+        <p class="photo-intro reveal">
+            Jeg har arbejdet i en fotografbutik, hvor jeg har taget en bred vifte af <strong>portrætter</strong>
+            og fotograferet <strong>bryllupper</strong> for private kunder.
+            Derudover har jeg løst fotoopgaver for virksomheder som
+            <strong>Løberen</strong>, <strong>Campfire Security</strong> og <strong>Verpan</strong>.
+        </p>
         <div id="photo-filters"></div>
         <div id="photo-gallery" class="photo-masonry reveal" style="transition-delay:0.1s"></div>
     </div>
