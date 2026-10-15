@@ -1,4 +1,55 @@
 {
+  "Bryllup": [
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_0332-400.avif 400w, /images/photography/Bryllup/PX7_0332-800.avif 800w, /images/photography/Bryllup/PX7_0332-1200.avif 1200w, /images/photography/Bryllup/PX7_0332-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_0332-400.webp 400w, /images/photography/Bryllup/PX7_0332-800.webp 800w, /images/photography/Bryllup/PX7_0332-1200.webp 1200w, /images/photography/Bryllup/PX7_0332-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAABwBACdASoUAB4APzmIuFOvKSUoMBgMAeAnCUAY/IXzqXN2pQEVAW9XwDe5AAD+6pdpGfBaoCLmvOGJUZyVbrOx8B7+ooVmHeSzh0I3610nuEK7Abv5FYRcrOArclWOtkhxNlrMn55XMu3/2pPG0D6X8RjcukamYcKNEZBznahAAAAA",
+      "aspectRatio": 0.6667,
+      "name": "PX7_0332"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_0832-400.avif 400w, /images/photography/Bryllup/PX7_0832-800.avif 800w, /images/photography/Bryllup/PX7_0832-1200.avif 1200w, /images/photography/Bryllup/PX7_0832-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_0832-400.webp 400w, /images/photography/Bryllup/PX7_0832-800.webp 800w, /images/photography/Bryllup/PX7_0832-1200.webp 1200w, /images/photography/Bryllup/PX7_0832-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAACwBACdASoUAB4APzWEsVOvKKQisAwB4CaJZAAAW+oWBoHN/e6+LAG6wVcKR3cAAP7i9D3JaK9WrsFD9z/FbmIO9z6Dyw8DuGUolzcEB+RyvspYJaV8yeC2QkucHfROuTOYi1/UObf+uaqMoOj5VScJ/MI5mKMJybuAdK+whpAjB+mDrRXwAA==",
+      "aspectRatio": 0.6653,
+      "name": "PX7_0832"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_1054-400.avif 400w, /images/photography/Bryllup/PX7_1054-800.avif 800w, /images/photography/Bryllup/PX7_1054-1200.avif 1200w, /images/photography/Bryllup/PX7_1054-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_1054-400.webp 400w, /images/photography/Bryllup/PX7_1054-800.webp 800w, /images/photography/Bryllup/PX7_1054-1200.webp 1200w, /images/photography/Bryllup/PX7_1054-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABQBQCdASoUAB4APzmMwFcvKScjqAqp4CcJZgC2yBEGMT7Rs8xPzNS6Wfp7+TTekcKzrgAA/ts/OFPFzS/5YBHRMFCBtm98rRLtjKETpmXRYX0XyIV+Mu3SGiWgk45Rdlt47BXsiwxxkEtUVqBUPapm2c78fEJLs5r/eB5pcRNyvW/rnslCZsK4/i8E3v36aUUYX+TUtAqm1YwofbPaGISq46Ybd8NOhUQw8gy2fVgAAA==",
+      "aspectRatio": 0.6667,
+      "name": "PX7_1054"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_1056-400.avif 400w, /images/photography/Bryllup/PX7_1056-800.avif 800w, /images/photography/Bryllup/PX7_1056-1200.avif 1200w, /images/photography/Bryllup/PX7_1056-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_1056-400.webp 400w, /images/photography/Bryllup/PX7_1056-800.webp 800w, /images/photography/Bryllup/PX7_1056-1200.webp 1200w, /images/photography/Bryllup/PX7_1056-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAACQBQCdASoUAB4APzmMwFcvKScjqAqp4CcJaAC7IP8Bh0pZ4miK7fD0YlFXP8MhCfNcImi8YAD+hj0XgmLFaTCSqOwhcdpudjTl593zuaI8OKy/MIrtmOktF+v30JH+TNPM012H/BTe9HFq8b88sPbA4UNdWyBjraS3vB09VEsQihFaRI7E42rGSU0LZGNi9BO08naFdFAVs44xMwTViTrId9k0R0I7abCyNXDdPlK85D5qMd62JxlLp9y36+NtaEMOHMFaACbzgAAA",
+      "aspectRatio": 0.6653,
+      "name": "PX7_1056"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_6203-400.avif 400w, /images/photography/Bryllup/PX7_6203-800.avif 800w, /images/photography/Bryllup/PX7_6203-1200.avif 1200w, /images/photography/Bryllup/PX7_6203-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_6203-400.webp 400w, /images/photography/Bryllup/PX7_6203-800.webp 800w, /images/photography/Bryllup/PX7_6203-1200.webp 1200w, /images/photography/Bryllup/PX7_6203-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwAwCdASoUAA0APzmEuVOvKKWisAgB4CcJYgCsABaGZC0tu2p3AAD+GbdqgsxwqIsz+MmWofsisJ7WB6GxB4/snMShnED7wI/9EZFG48CUK1Hhr47CapnQpHVZDiJCEzVU4gAA",
+      "aspectRatio": 1.5,
+      "name": "PX7_6203"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_6205-400.avif 400w, /images/photography/Bryllup/PX7_6205-800.avif 800w, /images/photography/Bryllup/PX7_6205-1200.avif 1200w, /images/photography/Bryllup/PX7_6205-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_6205-400.webp 400w, /images/photography/Bryllup/PX7_6205-800.webp 800w, /images/photography/Bryllup/PX7_6205-1200.webp 1200w, /images/photography/Bryllup/PX7_6205-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAACwBACdASoUAB4APzmSvlmvKaYjqAgB4CcJYgDKABGsseG2pWERN6/jMeb8zjeAAMsz3DsJFo4ngsSQh3QqlSt7mh1jCXxDqXw2ZMOAMbG7frZOtqpmlwMYl43Qnv+I3Df7/xutLy+xsd6cSR2TCKMkAuCHp28ZM91xDnCZzrUDTRb3AvsiF5I8NAAAAA==",
+      "aspectRatio": 0.6667,
+      "name": "PX7_6205"
+    },
+    {
+      "avifSrcset": "/images/photography/Bryllup/PX7_6210-400.avif 400w, /images/photography/Bryllup/PX7_6210-800.avif 800w, /images/photography/Bryllup/PX7_6210-1200.avif 1200w, /images/photography/Bryllup/PX7_6210-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Bryllup/PX7_6210-400.webp 400w, /images/photography/Bryllup/PX7_6210-800.webp 800w, /images/photography/Bryllup/PX7_6210-1200.webp 1200w, /images/photography/Bryllup/PX7_6210-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAQBQCdASoUAB4APzmQulivKaUjqAqp4CcJQBl0gkXJr37FejPt9H+irs9+uqGyyZaAAP4CgOXaSXiLIa8Gh9/6/RZMANiIVkf5+G8anXT3gpPvURuFJarsVzZ/W5WCyfA7Ugf8dsaQOSV7NcZkC0wzt44XEHYz+D8MQf8vnCB06VHxyFUaWgAA",
+      "aspectRatio": 0.6653,
+      "name": "PX7_6210"
+    }
+  ],
   "Sport": [
     {
       "avifSrcset": "/images/photography/Sport/WX7_8724-400.avif 400w, /images/photography/Sport/WX7_8724-800.avif 800w, /images/photography/Sport/WX7_8724-1200.avif 1200w, /images/photography/Sport/WX7_8724-1600.avif 1600w",
