@@ -4,3 +4,8 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# dependencies and build output
+node_modules/
+dist/
+.DS_Store
