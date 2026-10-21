@@ -13,6 +13,7 @@ const cases = [
     description: "Et personligt dashboard til enheder, uptime, hændelser, breach-check og krypterede noter. Bygget til at give overblik over hjemmelabbet uden at samle data i løse regneark.",
     period: "2025 til 2026",
     status: "Live",
+    statusClass: "live",
     tech: ["Astro", "TypeScript", "Cloudflare Workers", "D1", "Tailwind"],
     sections: [
       {
@@ -59,6 +60,97 @@ const cases = [
     note: "Projektet er personligt og kræver login. Derfor er der ingen offentlig demo."
   },
   {
+    slug: "egalitarian",
+    tag: "P1 + P2 · AAU",
+    title: "Egalitarian",
+    displayTitle: "Egalitarian: Digital Management System",
+    description: "Et internationalt studieprojekt om affaldsindsamlere i Brasilien. P1 var en ESP32-vægtenhed med Bluetooth, og P2 var en multi-kooperativ platform med rollebaseret adgang og JWT.",
+    period: "2025 til 2026",
+    status: "Studieprojekt",
+    statusClass: "study",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "React Native", "TypeScript", "C++", "ESP32", "BLE", "JWT"],
+    sections: [
+      {
+        title: "Problemet",
+        paragraphs: [
+          "Projektet skulle styrke gennemsigtighed og indtjening for affaldsindsamlere i Brasilien. Løsningen blev udviklet i et internationalt samarbejde med universiteter i Brasilien, Portugal og Holland."
+        ]
+      },
+      {
+        title: "P1: Vægtenhed og mobilapp",
+        paragraphs: [
+          "Første fase var en ESP32-baseret vægtenhed, der sender vægtdata til en mobilapp via Bluetooth. Løsningen gjorde det muligt at registrere indsamlede mængder digitalt i stedet for på papir."
+        ]
+      },
+      {
+        title: "P2: Multi-kooperativ platform",
+        paragraphs: [
+          "Anden fase var en platform med rollebaseret adgang, tenant-isolation og JWT-autentificering. Platformen samlede kooperativer, brugere og indsamlinger i én løsning."
+        ]
+      },
+      {
+        title: "Test og resultat",
+        paragraphs: [
+          "Løsningen opfyldte 13 funktionelle krav og blev valideret med acceptance-, funktionelle og integrationstest. Projektet blev udviklet i studiegruppen på AAU."
+        ]
+      }
+    ],
+    features: [
+      "ESP32-vægtenhed",
+      "Bluetooth til mobilappen",
+      "Multi-kooperativ platform",
+      "Rollebaseret adgang",
+      "Tenant-isolation",
+      "JWT-autentificering",
+      "13 funktionelle krav",
+      "Acceptance- og integrationstest"
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/Williamxx7/Brasilien-p1" }
+    ],
+    note: "Gruppeprojekt på AAU. P1 og P2 er samlet her, fordi de udgør samme løsning."
+  },
+  {
+    slug: "p3",
+    tag: "P3 · AAU",
+    title: "P3",
+    displayTitle: "Akustisk tastetryk",
+    description: "Et igangværende studieprojekt om akustisk genkendelse af tastetryk med Raspberry Pi, INMP441-mikrofon og PyTorch.",
+    period: "2026",
+    status: "I gang",
+    statusClass: "wip",
+    tech: ["Python", "PyTorch", "Raspberry Pi", "INMP441", "Signalbehandling"],
+    sections: [
+      {
+        title: "Problemet",
+        paragraphs: [
+          "Projektet undersøger, om akustiske signaler fra tastetryk kan bruges til at genkende, hvilke taster der bliver trykket på. Det er et sikkerhedsprojekt om side-channel-information fra lyd."
+        ]
+      },
+      {
+        title: "Løsningen",
+        paragraphs: [
+          "Vi optager lyd med en INMP441-mikrofon på en Raspberry Pi og arbejder med signalbehandling og klassifikation i PyTorch. Målet er at vurdere, hvor stabilt og sikkert et sådant system kan genkende tastetryk."
+        ]
+      },
+      {
+        title: "Status",
+        paragraphs: [
+          "Projektet er i gang på 3. semester og er ikke afsluttet endnu. Derfor er der ingen offentlig demo eller repo-link."
+        ]
+      }
+    ],
+    features: [
+      "Raspberry Pi-opsætning",
+      "INMP441-mikrofon",
+      "Lydoptagelse og signalbehandling",
+      "Klassifikation med PyTorch",
+      "Sikkerhedsperspektiv på side-channels"
+    ],
+    links: [],
+    note: "Projektet er i gang og har ikke et offentligt repo endnu."
+  },
+  {
     slug: "skat",
     tag: "Finans",
     title: "Skatteberegner 2026",
@@ -66,6 +158,7 @@ const cases = [
     description: "En dansk skatteberegner med mellemregninger, effektiv skattesats, SU, studiejob, sammenligning og eksport.",
     period: "2026",
     status: "Live",
+    statusClass: "live",
     tech: ["HTML", "CSS", "JavaScript", "xlsx", "jsPDF", "Cloudflare Workers"],
     sections: [
       {
@@ -115,6 +208,7 @@ const cases = [
     description: "Et browserbaseret værktøj til at læse EXIF-metadata og konvertere billedfiler uden upload.",
     period: "2026",
     status: "Live",
+    statusClass: "live",
     tech: ["HTML", "CSS", "JavaScript", "exif-js", "JSZip", "Cloudflare Workers"],
     sections: [
       {
@@ -262,7 +356,7 @@ const page = item => {
   <h1>${esc(item.displayTitle)}</h1>
   <p class="lead">${esc(description)}</p>
   <div class="meta-row">
-    <span class="meta-chip live">${esc(item.status)}</span>
+    <span class="meta-chip ${esc(item.statusClass || "live")}">${esc(item.status)}</span>
     <span class="meta-chip">${esc(item.period)}</span>
   </div>
   <div class="tech-tags">
