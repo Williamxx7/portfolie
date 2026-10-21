@@ -31,3 +31,7 @@ https://portfolio.williamlarsen2005.workers.dev/*
 /fotografi/*.js
   ! Cache-Control
   Cache-Control: public, max-age=2592000
+
+/projekter/case.css
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
