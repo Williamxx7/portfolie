@@ -4,7 +4,7 @@ import path from "node:path";
 const root = new URL("../", import.meta.url);
 const publicDir = new URL("public/", root);
 const outDir = new URL("fotografi/", publicDir);
-const origin = "https://portfolio.williamlarsen.dk";
+const origin = "https://williamlarsen.dk";
 const lastmod = "2026-10-21";
 
 const gallery = JSON.parse(await readFile(new URL("data/gallery.json", publicDir), "utf8"));
