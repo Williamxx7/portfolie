@@ -35,3 +35,19 @@ https://portfolio.williamlarsen2005.workers.dev/*
 /projekter/case.css
   ! Cache-Control
   Cache-Control: public, max-age=2592000
+
+/certifikater/*.css
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/certifikater/*.png
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/certifikater/*.jpg
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/certifikater/*.webp
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
