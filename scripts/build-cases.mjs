@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 
 const root = new URL("../", import.meta.url);
 const publicDir = new URL("public/", root);
-const origin = "https://portfolio.williamlarsen.dk";
+const origin = "https://williamlarsen.dk";
 
 const cases = [
   {
