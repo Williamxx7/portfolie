@@ -8,6 +8,9 @@
     <meta property="og:title" content="Projekter — William Larsen">
     <meta property="og:description" content="Projekter, fotografering og certifikater fra William Larsen — cybersikkerhed, softwareudvikling og foto.">
     <meta property="og:image" content="https://portfolio.williamlarsen.dk/image.png">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="1260">
+    <meta property="og:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
     <meta property="og:url" content="https://portfolio.williamlarsen.dk/projekter/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="William Larsen">
@@ -16,6 +19,7 @@
     <meta name="twitter:title" content="Projekter — William Larsen">
     <meta name="twitter:description" content="Projekter, fotografering og certifikater fra William Larsen — cybersikkerhed, softwareudvikling og foto.">
     <meta name="twitter:image" content="https://portfolio.williamlarsen.dk/image.png">
+    <meta name="twitter:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
     <meta name="theme-color" content="#8b6c4f">
     <title>Projekter — William Larsen</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -204,6 +208,11 @@
         }
 
         .tab-btn:hover { color: var(--ink); }
+
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
 
         .tab-btn.active {
             color: var(--ink);
@@ -788,16 +797,16 @@
     </div>
 
     <div class="filter-bar">
-        <div class="tabs" id="tabBar">
-            <button class="tab-btn active" data-tab="kode">Kodeprojekter</button>
-            <button class="tab-btn" data-tab="foto">Fotografering</button>
-            <button class="tab-btn" data-tab="certs">Certifikater</button>
+        <div class="tabs" id="tabBar" role="tablist" aria-label="Projektkategorier">
+            <button class="tab-btn active" id="tab-btn-kode" data-tab="kode" role="tab" aria-selected="true" aria-controls="tab-kode" tabindex="0">Kodeprojekter</button>
+            <button class="tab-btn" id="tab-btn-foto" data-tab="foto" role="tab" aria-selected="false" aria-controls="tab-foto" tabindex="-1">Fotografering</button>
+            <button class="tab-btn" id="tab-btn-certs" data-tab="certs" role="tab" aria-selected="false" aria-controls="tab-certs" tabindex="-1">Certifikater</button>
         </div>
     </div>
 
     <!-- KODE PROJEKTER -->
-    <div class="content-section active" id="tab-kode">
-        <p class="section-label reveal">Kode &amp; builds</p>
+    <div class="content-section active" id="tab-kode" role="tabpanel" aria-labelledby="tab-btn-kode" tabindex="0">
+        <h2 class="section-label reveal">Kode &amp; builds</h2>
         <div class="projects-grid reveal" style="transition-delay:0.1s">
 
             <div class="project-card">
@@ -951,8 +960,8 @@
     </div>
 
     <!-- FOTOGRAFERING -->
-    <div class="content-section" id="tab-foto">
-        <p class="section-label reveal">Fotografering</p>
+    <div class="content-section" id="tab-foto" role="tabpanel" aria-labelledby="tab-btn-foto" tabindex="0" hidden>
+        <h2 class="section-label reveal">Fotografering</h2>
         <p class="photo-intro reveal">
             Jeg har arbejdet i en fotoforretning, hvor jeg har taget en bred vifte af <strong>portrætter</strong>
             og fotograferet <strong>bryllupper</strong> for private kunder.
@@ -964,8 +973,8 @@
     </div>
 
     <!-- CERTIFIKATER -->
-    <div class="content-section" id="tab-certs">
-        <p class="section-label reveal">Dokumenterede kompetencer</p>
+    <div class="content-section" id="tab-certs" role="tabpanel" aria-labelledby="tab-btn-certs" tabindex="0" hidden>
+        <h2 class="section-label reveal">Dokumenterede kompetencer</h2>
 
         <div class="thm-banner reveal">
             <span class="thm-logo-text">TryHackMe</span>
@@ -1092,11 +1101,18 @@
         const btn = Array.from(tabBtns).find(b => b.dataset.tab === target);
         if (!btn) return;
 
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabSections.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const section = document.getElementById('tab-' + target);
-        if (section) section.classList.add('active');
+        tabBtns.forEach(button => {
+            const active = button === btn;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-selected', active ? 'true' : 'false');
+            button.tabIndex = active ? 0 : -1;
+        });
+
+        tabSections.forEach(section => {
+            const active = section.id === 'tab-' + target;
+            section.classList.toggle('active', active);
+            section.hidden = !active;
+        });
 
         if (scroll) {
             btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -1111,6 +1127,23 @@
             activateTab(btn.dataset.tab);
             history.replaceState(null, '', '#' + btn.dataset.tab);
         });
+    });
+
+    const tabBar = document.getElementById('tabBar');
+    tabBar.addEventListener('keydown', event => {
+        const current = event.target.closest('.tab-btn');
+        if (!current) return;
+        const tabs = Array.from(tabBtns);
+        const index = tabs.indexOf(current);
+        let next;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        tabs[next].focus();
+        tabs[next].click();
     });
 
     const initialTab = location.hash.replace('#', '');
