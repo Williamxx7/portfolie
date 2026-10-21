@@ -26,6 +26,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/projekter/case.css">
+<link rel="stylesheet" href="/nav.css">
+<script src="/nav.js" defer></script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -68,14 +70,20 @@
 }</script>
 </head>
 <body>
-<header class="site-header">
-  <a class="logo" href="/">WX7</a>
-  <nav class="site-nav" aria-label="Primær navigation">
-    <a href="/">Forside</a>
-    <a href="/projekter/" aria-current="page">Projekter</a>
-    <a href="/fotografi/">Fotografi</a>
-    <a href="https://lab.williamlarsen.dk/">Lab</a>
-  </nav>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+      <a href="/">Forside</a>
+      <a href="/projekter/" class="is-active" aria-current="page">Projekter</a>
+      <a href="/fotografi/">Fotografi</a>
+      <a href="/certifikater/">Certifikater</a>
+      <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
 </header>
 <main class="wrap">
   <nav class="breadcrumbs" aria-label="Brødkrumme">
