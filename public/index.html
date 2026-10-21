@@ -821,36 +821,26 @@
       }
     }
     </script>
+    <link rel="stylesheet" href="/nav.css">
+    <script src="/nav.js" defer></script>
 </head>
 <body>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="/" class="mobile-link">Forside</a>
-        <a href="#uddannelse" class="mobile-link">Uddannelse</a>
-        <a href="#erfaring" class="mobile-link">Erfaring</a>
-        <a href="/projekter/" class="mobile-link">Projekter</a>
-        <a href="/fotografi/" class="mobile-link">Fotografi</a>
-        <a href="/certifikater/" class="mobile-link">Certifikater</a>
-        <a href="#kontakt" class="mobile-link">Kontakt</a>
-    </div>
-
-    <header>
-        <nav>
-            <a class="logo" href="/">WX7</a>
-            <ul class="nav-links">
-                <li><a href="#uddannelse">Uddannelse</a></li>
-                <li><a href="#erfaring">Erfaring</a></li>
-                <li><a href="/projekter/">Projekter</a></li>
-                <li><a href="/fotografi/">Fotografi</a></li>
-                <li><a href="/certifikater/">Certifikater</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-    </header>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+        <a href="/" class="is-active" aria-current="page">Forside</a>
+        <a href="/projekter/">Projekter</a>
+        <a href="/fotografi/">Fotografi</a>
+        <a href="/certifikater/">Certifikater</a>
+        <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
 
     <a href="#om" class="scroll-arrow" aria-label="Scroll ned">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1166,23 +1156,6 @@
         });
 
         // Hamburger
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-        });
-
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-
         // Scroll arrow — skjul ved scroll eller klik
         // Scroll arrow
         const scrollArrow = document.querySelector('.scroll-arrow');
