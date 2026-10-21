@@ -116,7 +116,7 @@ const shell = ({ title, description, canonicalPath, ogImage, ogAlt, ogWidth, ogH
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/fotografi/style-20261021.css">
+<link rel="stylesheet" href="/fotografi/style-20261021b.css">
 <link rel="stylesheet" href="/nav-20261021c.css">
 <script src="/nav-20261021.js" defer></script>
 ${jsonLd.map(data => `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>`).join("\n")}
