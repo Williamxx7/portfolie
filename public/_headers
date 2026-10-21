@@ -5,13 +5,15 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tryhackme.com https://*.tryhackme.com; connect-src 'self' https://cloudflareinsights.com; frame-src https://tryhackme.com https://*.tryhackme.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
-  Cache-Control: public, max-age=0, must-revalidate
 
 /images/*
+  ! Cache-Control
   Cache-Control: public, max-age=2592000
 
 /image.png
+  ! Cache-Control
   Cache-Control: public, max-age=2592000
 
 /data/*
+  ! Cache-Control
   Cache-Control: public, max-age=300
