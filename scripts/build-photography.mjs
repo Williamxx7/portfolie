@@ -112,7 +112,7 @@ const shell = ({ title, description, canonicalPath, ogImage, ogAlt, ogWidth, ogH
 <meta name="twitter:image:alt" content="${esc(ogAlt)}">
 <meta name="theme-color" content="#8b6c4f">
 <title>${esc(title)}</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon-20261021.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
