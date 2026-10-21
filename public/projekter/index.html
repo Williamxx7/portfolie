@@ -878,22 +878,26 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="/nav.css">
+    <script src="/nav.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a class="logo" href="/">WX7 - Projekter</a>
-            <div class="nav-right">
-                <a class="nav-back" href="/certifikater/">Certifikater</a>
-                <a class="nav-lab" href="https://lab.williamlarsen.dk">
-                    <span class="nav-lab-dot"></span>
-                    <span>Lab</span>
-                </a>
-                <a class="nav-back" href="/">← Tilbage</a>
-            </div>
-        </nav>
-    </header>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+        <a href="/">Forside</a>
+        <a href="/projekter/" class="is-active" aria-current="page">Projekter</a>
+        <a href="/fotografi/">Fotografi</a>
+        <a href="/certifikater/">Certifikater</a>
+        <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
 
     <div class="page-hero reveal">
         <p class="page-eyebrow">Arbejde &amp; uddannelse</p>
