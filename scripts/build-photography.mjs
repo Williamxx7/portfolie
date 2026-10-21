@@ -227,7 +227,10 @@ const sitemapUrls = [
   ...categories.map(category => ({ loc: absolute(`/fotografi/${category.slug}/`), priority: "0.7" })),
   { loc: `${origin}/projekter/sentinel/`, priority: "0.7" },
   { loc: `${origin}/projekter/skat/`, priority: "0.7" },
-  { loc: `${origin}/projekter/exif/`, priority: "0.7" }
+  { loc: `${origin}/projekter/exif/`, priority: "0.7" },
+  { loc: `${origin}/projekter/egalitarian/`, priority: "0.7" },
+  { loc: `${origin}/projekter/p3/`, priority: "0.7" },
+  { loc: `${origin}/certifikater/`, priority: "0.8" }
 ];
 
 const imageEntries = [];
