@@ -23,3 +23,11 @@ https://portfolio.williamlarsen2005.workers.dev/*
 /data/*
   ! Cache-Control
   Cache-Control: public, max-age=300
+
+/fotografi/*.css
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/fotografi/*.js
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
