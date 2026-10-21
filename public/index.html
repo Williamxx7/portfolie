@@ -604,6 +604,77 @@
         }
 
 
+        /* FOTOGRAFI */
+        .photo-teaser-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            margin-top: 0.5rem;
+        }
+
+        .photo-teaser {
+            position: relative;
+            display: block;
+            aspect-ratio: 2 / 3;
+            overflow: hidden;
+            background: var(--paper-warm);
+            text-decoration: none;
+        }
+
+        .photo-teaser picture,
+        .photo-teaser img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .photo-teaser img {
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .photo-teaser::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 55%, rgba(26, 25, 23, 0.62));
+            pointer-events: none;
+        }
+
+        .photo-teaser:hover img { transform: scale(1.04); }
+
+        .photo-teaser-label {
+            position: absolute;
+            left: 1.25rem;
+            bottom: 1.15rem;
+            z-index: 2;
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: var(--paper);
+            letter-spacing: 0.02em;
+        }
+
+        .photo-teaser-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.75rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-light);
+            padding-bottom: 0.25rem;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .photo-teaser-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .hero-inner { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
@@ -643,6 +714,8 @@
 
             .profile-frame { width: 240px; height: 290px; }
             .profile-badge { bottom: -1rem; right: -1rem; }
+
+            .photo-teaser-grid { grid-template-columns: 1fr; }
         }
     </style>
     <script type="application/ld+json">
@@ -654,6 +727,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="/" class="mobile-link">Forside</a>
         <a href="/projekter/" class="mobile-link">Projekter</a>
+        <a href="/projekter/#foto" class="mobile-link">Fotografi</a>
         <a href="#kontakt" class="mobile-link">Kontakt</a>
     </div>
 
@@ -662,6 +736,7 @@
             <a class="logo" href="/">WX7</a>
             <ul class="nav-links">
                 <li><a href="/projekter/">Projekter</a></li>
+                <li><a href="/projekter/#foto">Fotografi</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
@@ -838,6 +913,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="fotografi" class="photo-section">
+        <div class="section-inner">
+            <p class="section-label reveal">Fotografi</p>
+            <div class="photo-teaser-grid reveal" style="transition-delay: 0.1s">
+                <a class="photo-teaser" href="/projekter/#foto">
+                    <picture>
+                        <source type="image/avif" srcset="/images/photography/Bryllup/PX7_0332-400.avif 400w, /images/photography/Bryllup/PX7_0332-800.avif 800w, /images/photography/Bryllup/PX7_0332-1200.avif 1200w, /images/photography/Bryllup/PX7_0332-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <source type="image/webp" srcset="/images/photography/Bryllup/PX7_0332-400.webp 400w, /images/photography/Bryllup/PX7_0332-800.webp 800w, /images/photography/Bryllup/PX7_0332-1200.webp 1200w, /images/photography/Bryllup/PX7_0332-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <img src="/images/photography/Bryllup/PX7_0332-800.webp" alt="Bryllupsfotografi" width="800" height="1200" loading="lazy" decoding="async">
+                    </picture>
+                    <span class="photo-teaser-label">Bryllup</span>
+                </a>
+                <a class="photo-teaser" href="/projekter/#foto">
+                    <picture>
+                        <source type="image/avif" srcset="/images/photography/Sport/WX7_8724-400.avif 400w, /images/photography/Sport/WX7_8724-800.avif 800w, /images/photography/Sport/WX7_8724-1200.avif 1200w, /images/photography/Sport/WX7_8724-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <source type="image/webp" srcset="/images/photography/Sport/WX7_8724-400.webp 400w, /images/photography/Sport/WX7_8724-800.webp 800w, /images/photography/Sport/WX7_8724-1200.webp 1200w, /images/photography/Sport/WX7_8724-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <img src="/images/photography/Sport/WX7_8724-800.webp" alt="Sportfotografi" width="800" height="1200" loading="lazy" decoding="async">
+                    </picture>
+                    <span class="photo-teaser-label">Sport</span>
+                </a>
+                <a class="photo-teaser" href="/projekter/#foto">
+                    <picture>
+                        <source type="image/avif" srcset="/images/photography/portræt/Jens_Myrup_1-400.avif 400w, /images/photography/portræt/Jens_Myrup_1-800.avif 800w, /images/photography/portræt/Jens_Myrup_1-1200.avif 1200w, /images/photography/portræt/Jens_Myrup_1-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <source type="image/webp" srcset="/images/photography/portræt/Jens_Myrup_1-400.webp 400w, /images/photography/portræt/Jens_Myrup_1-800.webp 800w, /images/photography/portræt/Jens_Myrup_1-1200.webp 1200w, /images/photography/portræt/Jens_Myrup_1-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
+                        <img src="/images/photography/portræt/Jens_Myrup_1-800.webp" alt="Portrætfotografi" width="800" height="1200" loading="lazy" decoding="async">
+                    </picture>
+                    <span class="photo-teaser-label">Portræt</span>
+                </a>
+            </div>
+            <a class="photo-teaser-link" href="/projekter/#foto">Se hele fotogalleriet <span aria-hidden="true">→</span></a>
         </div>
     </section>
 
