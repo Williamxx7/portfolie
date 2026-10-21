@@ -718,6 +718,8 @@
             padding: 2rem 5%;
             border-top: 1px solid var(--paper-mid);
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
             justify-content: space-between;
             align-items: center;
         }
@@ -732,6 +734,10 @@
             text-transform: uppercase;
         }
 
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+        .footer-links a { font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.04em; text-transform: none; }
+        .footer-links a:hover { color: var(--accent); }
+
         /* PHOTO INTRO TEXT */
         .photo-intro {
             max-width: 640px;
@@ -745,6 +751,16 @@
             color: var(--ink);
             font-weight: 500;
         }
+
+        .photo-intro-link {
+            display: inline-block;
+            margin-left: 0.25rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-light);
+        }
+
+        .photo-intro-link:hover { color: var(--ink); }
 
         /* RESPONSIVE */
         @media (max-width: 860px) {
@@ -967,6 +983,7 @@
             og fotograferet <strong>bryllupper</strong> for private kunder.
             Derudover har jeg løst fotoopgaver for virksomheder som
             <strong>Løberen</strong>, <strong>Campfire Security</strong> og <strong>Verpan</strong>.
+            <a class="photo-intro-link" href="/fotografi/">Se hele fotogalleriet →</a>
         </p>
         <div id="photo-filters"></div>
         <div id="photo-gallery" class="photo-masonry"></div>
@@ -1088,6 +1105,14 @@
 
     <footer>
         <p>© 2026 William Larsen</p>
+        <nav class="footer-links" aria-label="Sidefodet navigation">
+            <a href="/projekter/">Projekter</a>
+            <a href="/fotografi/">Fotografi</a>
+            <a href="https://lab.williamlarsen.dk/">Lab</a>
+            <a href="https://github.com/Williamxx7">GitHub</a>
+            <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
+            <a href="mailto:william@aekko.com">Email</a>
+        </nav>
     </footer>
 
     <script>
