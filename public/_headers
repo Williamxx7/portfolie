@@ -36,11 +36,11 @@ https://portfolio.williamlarsen2005.workers.dev/*
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
-/nav.css
+/nav-20261021.css
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
-/nav.js
+/nav-20261021.js
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
