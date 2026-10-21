@@ -23,9 +23,25 @@
     .links a:hover { border-color: var(--accent); color: var(--accent); }
     footer { padding: 1.5rem 5%; border-top: 1px solid var(--paper-mid); font-size: 0.72rem; color: var(--ink-soft); }
   </style>
+    <link rel="stylesheet" href="/nav.css">
+    <script src="/nav.js" defer></script>
 </head>
 <body>
-  <header><a class="logo" href="/">WX7</a></header>
+  <header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+        <a href="/">Forside</a>
+        <a href="/projekter/">Projekter</a>
+        <a href="/fotografi/">Fotografi</a>
+        <a href="/certifikater/">Certifikater</a>
+        <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
   <main>
     <div class="inner">
       <p class="eyebrow">Fejl 404</p>
