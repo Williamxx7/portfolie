@@ -112,6 +112,10 @@ h1 {
 }
 .meta-chip.live { color: #4a6b53; border-color: #bdd0c3; }
 .meta-chip.live::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #5f8a6b; }
+.meta-chip.study { color: var(--accent); border-color: var(--accent-light); }
+.meta-chip.study::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light); }
+.meta-chip.wip { color: #c94f2a; border-color: #e6b6a8; }
+.meta-chip.wip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #c94f2a; }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
 .tech-tags span {
