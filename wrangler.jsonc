@@ -1,14 +1,21 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolie",
+  "main": "src/worker.js",
   "compatibility_date": "2026-04-07",
   "observability": {
     "enabled": true
   },
   "assets": {
     "directory": "./public",
+    "binding": "ASSETS",
     "not_found_handling": "404-page"
   },
+  "routes": [
+    { "pattern": "williamlarsen.dk", "custom_domain": true },
+    { "pattern": "portfolio.williamlarsen.dk", "custom_domain": true },
+    { "pattern": "www.williamlarsen.dk", "custom_domain": true }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]
