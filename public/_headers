@@ -24,7 +24,7 @@ https://portfolio.williamlarsen2005.workers.dev/*
   ! Cache-Control
   Cache-Control: public, max-age=300
 
-/fotografi/*.css
+/fotografi/style-20261021.css
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
@@ -32,11 +32,11 @@ https://portfolio.williamlarsen2005.workers.dev/*
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
-/projekter/case.css
+/projekter/case-20261021.css
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
-/nav-20261021b.css
+/nav-20261021c.css
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
