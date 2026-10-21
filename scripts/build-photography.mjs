@@ -117,19 +117,26 @@ const shell = ({ title, description, canonicalPath, ogImage, ogAlt, ogWidth, ogH
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/fotografi/style.css">
+<link rel="stylesheet" href="/nav.css">
+<script src="/nav.js" defer></script>
 ${jsonLd.map(data => `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>`).join("\n")}
 ${script}
 </head>
 <body>
-<header class="site-header">
-  <a class="logo" href="/">WX7</a>
-  <nav class="site-nav" aria-label="Primær navigation">
-    <a href="/">Forside</a>
-    <a href="/projekter/">Projekter</a>
-    <a href="/fotografi/" aria-current="page">Fotografi</a>
-    <a href="/certifikater/">Certifikater</a>
-    <a href="https://lab.williamlarsen.dk/">Lab</a>
-  </nav>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+      <a href="/">Forside</a>
+      <a href="/projekter/">Projekter</a>
+      <a href="/fotografi/" class="is-active" aria-current="page">Fotografi</a>
+      <a href="/certifikater/">Certifikater</a>
+      <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
 </header>
 ${body}
 <footer class="site-footer">
