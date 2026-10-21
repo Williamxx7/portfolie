@@ -334,8 +334,8 @@ const page = item => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/projekter/case.css">
-<link rel="stylesheet" href="/nav-20261021b.css">
+<link rel="stylesheet" href="/projekter/case-20261021.css">
+<link rel="stylesheet" href="/nav-20261021c.css">
 <script src="/nav-20261021.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(jsonLd, null, 2)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbs, null, 2)}</script>
