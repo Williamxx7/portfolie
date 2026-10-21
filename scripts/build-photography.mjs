@@ -210,7 +210,11 @@ const indexHtml = shell({
         name: category.label,
         url: absolute(`/fotografi/${category.slug}/`)
       }))
-    }
+    },
+    breadcrumbData([
+      { name: "Forside", path: "/" },
+      { name: "Fotografi", path: "/fotografi/" }
+    ])
   ]
 });
 
@@ -220,7 +224,10 @@ const sitemapUrls = [
   { loc: `${origin}/`, priority: "1.0" },
   { loc: `${origin}/projekter/`, priority: "0.8" },
   { loc: `${origin}/fotografi/`, priority: "0.9" },
-  ...categories.map(category => ({ loc: absolute(`/fotografi/${category.slug}/`), priority: "0.7" }))
+  ...categories.map(category => ({ loc: absolute(`/fotografi/${category.slug}/`), priority: "0.7" })),
+  { loc: `${origin}/projekter/sentinel/`, priority: "0.7" },
+  { loc: `${origin}/projekter/skat/`, priority: "0.7" },
+  { loc: `${origin}/projekter/exif/`, priority: "0.7" }
 ];
 
 const imageEntries = [];
