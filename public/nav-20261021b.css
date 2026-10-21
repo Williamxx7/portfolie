@@ -1,0 +1,111 @@
+.wx-header {
+  padding: 0;
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(250, 249, 247, 0.95);
+  border-bottom: 1px solid #e8e5e0;
+  backdrop-filter: blur(12px);
+}
+
+.wx-header-inner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.wx-logo {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #1a1917;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.wx-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  max-width: none;
+  margin: 0 0 0 auto;
+}
+
+.wx-nav a {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b6760;
+  text-decoration: none;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.wx-nav a:hover { color: #1a1917; }
+.wx-nav a.is-active { color: #8b6c4f; border-bottom-color: #c4a882; }
+
+.wx-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.wx-menu-btn span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #1a1917;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.wx-menu-btn.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.wx-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+.wx-menu-btn.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.wx-menu-btn:focus-visible { outline: 2px solid #8b6c4f; outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .wx-header-inner {
+    padding: 0.95rem 5%;
+  }
+
+  .wx-menu-btn { display: flex; }
+
+  .wx-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.15rem;
+    margin: 0;
+    padding: 1.5rem 5% 1.75rem;
+    background: rgba(250, 249, 247, 0.98);
+    border-bottom: 1px solid #e8e5e0;
+    box-shadow: 0 12px 24px rgba(26, 25, 23, 0.06);
+  }
+
+  .wx-nav.is-open { display: flex; }
+
+  .wx-nav a {
+    font-size: 0.78rem;
+    padding-bottom: 0.1rem;
+  }
+}
