@@ -269,6 +269,41 @@
             margin-bottom: 1.25rem;
         }
 
+        .project-meta {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-meta .project-tag { margin-bottom: 0; }
+
+        .project-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding-top: 0.25rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+
+        .project-status::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--ink-faint);
+        }
+
+        .project-status.live { color: #4a6b53; }
+        .project-status.live::before { background: #5f8a6b; }
+        .project-status.study { color: var(--accent); }
+        .project-status.study::before { background: var(--accent-light); }
+
         .project-title {
             font-family: var(--serif);
             font-size: 1.5rem;
@@ -416,6 +451,7 @@
         }
 
         .photo-item:hover .photo-overlay { opacity: 1; }
+        .photo-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 
         .photo-caption {
             font-family: var(--serif);
@@ -467,6 +503,15 @@
             letter-spacing: 0.04em;
         }
 
+        .lightbox-count {
+            position: fixed;
+            top: 1.75rem; left: 1.75rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.4);
+            z-index: 10000;
+        }
+
         .lightbox-close {
             position: fixed;
             top: 1.5rem; right: 1.5rem;
@@ -495,6 +540,12 @@
         .lightbox-nav:hover { color: #fff; }
         .lightbox-nav.prev { left: 1.5rem; }
         .lightbox-nav.next { right: 1.5rem; }
+
+        .lightbox-close:focus-visible,
+        .lightbox-nav:focus-visible {
+            outline: 2px solid rgba(255,255,255,0.6);
+            outline-offset: 4px;
+        }
 
         /* CERTIFICATES */
         .certs-grid {
@@ -749,7 +800,10 @@
         <div class="projects-grid reveal" style="transition-delay:0.1s">
 
             <div class="project-card">
-                <span class="project-tag">Digital Management System</span>
+                <div class="project-meta">
+                    <span class="project-tag">Digital Management System</span>
+                    <span class="project-status study">Studieprojekt</span>
+                </div>
                 <h3 class="project-title">Digital Management System for Waste Pickers in Brasília</h3>
                 <p class="project-desc">
                     International collaboration building technology to improve working conditions for
@@ -762,15 +816,18 @@
                     <span class="stack-tag">Thymeleaf</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
+                    <a href="https://github.com/Williamxx7" target="_blank" rel="noopener" class="project-link">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
-                        GitHub
+                        GitHub-profil
                     </a>
                 </div>
             </div>
 
             <div class="project-card">
-                <span class="project-tag">Cybersecurity</span>
+                <div class="project-meta">
+                    <span class="project-tag">Cybersecurity</span>
+                    <span class="project-status">Privat</span>
+                </div>
                 <h3 class="project-title">Cybersecurity Terminal Toolkit</h3>
                 <p class="project-desc">
                     Python-based security toolkit for own systems, CTF challenges and lab environments.
@@ -785,15 +842,18 @@
                     <span class="stack-tag">AI</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
+                    <a href="https://github.com/Williamxx7" target="_blank" rel="noopener" class="project-link">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
-                        GitHub
+                        GitHub-profil
                     </a>
                 </div>
             </div>
 
             <div class="project-card">
-                <span class="project-tag">Web</span>
+                <div class="project-meta">
+                    <span class="project-tag">Web</span>
+                    <span class="project-status live">Live</span>
+                </div>
                 <h3 class="project-title">Portfolio Website</h3>
                 <p class="project-desc">
                     Denne side — designet fra bunden med fokus på tidsløs æstetik, ren typografi og ingen afhængigheder. Ren HTML, CSS og vanilla JS.
@@ -804,7 +864,10 @@
                     <span class="stack-tag">JavaScript</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
+                    <a href="https://portfolio.williamlarsen.dk/" target="_blank" rel="noopener" class="project-link lab-link">
+                        ↗ Se siden
+                    </a>
+                    <a href="https://github.com/Williamxx7/portfolie" target="_blank" rel="noopener" class="project-link">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
                         GitHub
                     </a>
@@ -812,7 +875,10 @@
             </div>
 
             <div class="project-card">
-                <span class="project-tag">Finans</span>
+                <div class="project-meta">
+                    <span class="project-tag">Finans</span>
+                    <span class="project-status live">Live</span>
+                </div>
                 <h3 class="project-title">Dansk Skat-beregner</h3>
                 <p class="project-desc">
                     Beregn din danske indkomstskat hurtigt og enkelt. Håndterer personfradrag, AM-bidrag og kommuneskat. Bygget som et standalone værktøj under lab.williamlarsen.dk.
@@ -824,12 +890,58 @@
                     <span class="stack-tag">Cloudflare Workers</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://lab.williamlarsen.dk" target="_blank" class="project-link lab-link">
-                        ⬡ Åbn i Lab
+                    <a href="https://lab.williamlarsen.dk/skat/" target="_blank" rel="noopener" class="project-link lab-link">
+                        ⬡ Åbn beregner
                     </a>
-                    <a href="https://github.com/Williamxx7" target="_blank" class="project-link">
+                    <a href="https://github.com/Williamxx7/Dansk_skat_beregner" target="_blank" rel="noopener" class="project-link">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 10c0-1.5.7-2.5 2-2.5s2 1 2 2.5v1.5H6V10z"/><circle cx="8" cy="5" r="1"/></svg>
                         GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-tag">Cybersikkerhed</span>
+                    <span class="project-status live">Live</span>
+                </div>
+                <h3 class="project-title">Sentinel: sikkerhedsdashboard</h3>
+                <p class="project-desc">
+                    Personligt sikkerhedsdashboard til enheder, uptime, hændelser, breach-check og krypterede noter.
+                    En agent på Proxmox scanner netværket og sender data til en Cloudflare Worker med D1.
+                </p>
+                <div class="project-stack">
+                    <span class="stack-tag">Astro</span>
+                    <span class="stack-tag">TypeScript</span>
+                    <span class="stack-tag">Cloudflare Workers</span>
+                    <span class="stack-tag">D1</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://sentinel.williamlarsen2005.workers.dev/" target="_blank" rel="noopener" class="project-link lab-link">
+                        ↗ Se dashboard
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="project-tag">Værktøjer</span>
+                    <span class="project-status live">Live</span>
+                </div>
+                <h3 class="project-title">Lab: små værktøjer</h3>
+                <p class="project-desc">
+                    Samling af små, praktiske værktøjer. Lige nu en dansk skat-beregner og en EXIF-viewer,
+                    bygget som statiske sider og hostet på Cloudflare Workers.
+                </p>
+                <div class="project-stack">
+                    <span class="stack-tag">HTML</span>
+                    <span class="stack-tag">CSS</span>
+                    <span class="stack-tag">JavaScript</span>
+                    <span class="stack-tag">Cloudflare Workers</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://lab.williamlarsen.dk/" target="_blank" rel="noopener" class="project-link lab-link">
+                        ⬡ Åbn Lab
                     </a>
                 </div>
             </div>
@@ -841,7 +953,7 @@
     <div class="content-section" id="tab-foto">
         <p class="section-label reveal">Fotografering</p>
         <p class="photo-intro reveal">
-            Jeg har arbejdet i en fotografbutik, hvor jeg har taget en bred vifte af <strong>portrætter</strong>
+            Jeg har arbejdet i en fotoforretning, hvor jeg har taget en bred vifte af <strong>portrætter</strong>
             og fotograferet <strong>bryllupper</strong> for private kunder.
             Derudover har jeg løst fotoopgaver for virksomheder som
             <strong>Løberen</strong>, <strong>Campfire Security</strong> og <strong>Verpan</strong>.
@@ -975,27 +1087,54 @@
     const tabBtns     = document.querySelectorAll('.tab-btn');
     const tabSections = document.querySelectorAll('.content-section');
 
+    function activateTab(target, scroll = true) {
+        const btn = Array.from(tabBtns).find(b => b.dataset.tab === target);
+        if (!btn) return;
+
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabSections.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const section = document.getElementById('tab-' + target);
+        if (section) section.classList.add('active');
+
+        if (scroll) {
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            const bar = document.querySelector('.filter-bar');
+            if (bar) window.scrollTo({ top: bar.offsetTop - 80, behavior: 'smooth' });
+        }
+        triggerReveals();
+    }
+
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const target = btn.dataset.tab;
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabSections.forEach(s => s.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('tab-' + target).classList.add('active');
-            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            window.scrollTo({ top: document.querySelector('.filter-bar').offsetTop - 80, behavior: 'smooth' });
-            triggerReveals();
+            activateTab(btn.dataset.tab);
+            history.replaceState(null, '', '#' + btn.dataset.tab);
         });
     });
+
+    const initialTab = location.hash.replace('#', '');
+    if (['kode', 'foto', 'certs'].includes(initialTab)) {
+        requestAnimationFrame(() => activateTab(initialTab));
+    }
 
     /* =========================
        GALLERY SYSTEM
     ========================= */
+    const CATEGORY_LABELS = {
+        all: "Alle",
+        Bryllup: "Bryllup",
+        Sport: "Sport",
+        Street_Photography: "Street",
+        landscape: "Landskab",
+        portræt: "Portræt"
+    };
+
     let galleryData     = {};
     let currentCategory = "all";
     let flatImages      = [];
     let lightboxIndex   = 0;
     let lightboxEl      = null;
+    let lightboxTrigger = null;
 
     fetch("/data/gallery.json")
         .then(r => r.json())
@@ -1006,20 +1145,41 @@
         })
         .catch(() => console.warn("gallery.json ikke fundet"));
 
+    function categoryLabel(cat) {
+        return CATEGORY_LABELS[cat] || cat.replace(/_/g, " ");
+    }
+
+    function pad2(n) {
+        return String(n).padStart(2, "0");
+    }
+
+    function captionFor(img) {
+        return `${categoryLabel(img.category)} · ${pad2(img.categoryIndex + 1)}`;
+    }
+
     /* --- Filters --- */
     function buildFilters() {
         const wrap = document.getElementById("photo-filters");
         wrap.innerHTML = "";
 
+        const total = Object.values(galleryData).reduce((sum, items) => sum + items.length, 0);
+
         ["all", ...Object.keys(galleryData)].forEach(cat => {
             const btn = document.createElement("button");
-            btn.textContent = cat === "all" ? "Alle" : cat;
+            btn.type = "button";
+            const count = cat === "all" ? total : galleryData[cat].length;
+            btn.textContent = `${categoryLabel(cat)} (${count})`;
             btn.dataset.cat = cat;
-            if (cat === "all") btn.classList.add("active");
+            btn.setAttribute("aria-pressed", cat === currentCategory ? "true" : "false");
+            if (cat === currentCategory) btn.classList.add("active");
             btn.onclick = () => {
                 currentCategory = cat;
-                wrap.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+                wrap.querySelectorAll("button").forEach(b => {
+                    b.classList.remove("active");
+                    b.setAttribute("aria-pressed", "false");
+                });
                 btn.classList.add("active");
+                btn.setAttribute("aria-pressed", "true");
                 renderGallery();
             };
             wrap.appendChild(btn);
@@ -1031,13 +1191,25 @@
         const grid = document.getElementById("photo-gallery");
         grid.innerHTML = "";
 
-        flatImages = currentCategory === "all"
-            ? Object.values(galleryData).flat()
-            : (galleryData[currentCategory] || []);
+        if (currentCategory === "all") {
+            flatImages = Object.entries(galleryData).flatMap(([cat, images]) =>
+                images.map((img, i) => ({ ...img, category: cat, categoryIndex: i }))
+            );
+        } else {
+            flatImages = (galleryData[currentCategory] || []).map((img, i) => ({
+                ...img,
+                category: currentCategory,
+                categoryIndex: i
+            }));
+        }
 
         flatImages.forEach((img, idx) => {
             const item = document.createElement("div");
             item.className = "photo-item";
+            const captionText = captionFor(img);
+            item.setAttribute("role", "button");
+            item.setAttribute("tabindex", "0");
+            item.setAttribute("aria-label", `Åbn ${captionText.toLowerCase()}`);
 
             // Brug billedets faktiske aspect ratio fra JSON
             const ratio = img.aspectRatio || 0.75;
@@ -1065,7 +1237,7 @@
 
             const imgEl = document.createElement("img");
             imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
-            imgEl.alt      = friendlyName(img.name);
+            imgEl.alt      = captionText;
             imgEl.loading  = "lazy";
             imgEl.decoding = "async";
 
@@ -1083,32 +1255,50 @@
             overlay.className = "photo-overlay";
             const caption = document.createElement("p");
             caption.className = "photo-caption";
-            caption.textContent = friendlyName(img.name);
+            caption.textContent = captionText;
             overlay.appendChild(caption);
 
             item.appendChild(blur);
             item.appendChild(picture);
             item.appendChild(overlay);
 
-            item.addEventListener("click", () => openLightbox(idx));
+            item.addEventListener("click", () => openLightbox(idx, item));
+            item.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openLightbox(idx, item);
+                }
+            });
+
             grid.appendChild(item);
         });
     }
 
     /* --- Lightbox --- */
-    function openLightbox(idx) {
+    function openLightbox(idx, trigger) {
         lightboxIndex = idx;
+        lightboxTrigger = trigger || null;
         if (!lightboxEl) buildLightbox();
+        if (lightboxEl._closeTimer) {
+            clearTimeout(lightboxEl._closeTimer);
+            lightboxEl._closeTimer = null;
+        }
         updateLightboxImage();
         document.body.appendChild(lightboxEl);
         document.body.style.overflow = "hidden";
-        requestAnimationFrame(() => lightboxEl.classList.add("open"));
+        requestAnimationFrame(() => {
+            lightboxEl.classList.add("open");
+            if (lightboxEl._close) lightboxEl._close.focus();
+        });
         document.addEventListener("keydown", lightboxKeyHandler);
     }
 
     function buildLightbox() {
         lightboxEl = document.createElement("div");
         lightboxEl.className = "lightbox-bg";
+        lightboxEl.setAttribute("role", "dialog");
+        lightboxEl.setAttribute("aria-modal", "true");
+        lightboxEl.setAttribute("aria-label", "Fotogalleri");
 
         const inner = document.createElement("div");
         inner.className = "lightbox-inner";
@@ -1131,22 +1321,54 @@
         inner.appendChild(picture);
         inner.appendChild(caption);
 
+        const count = document.createElement("p");
+        count.className = "lightbox-count";
+        count.setAttribute("aria-live", "polite");
+
         const close = document.createElement("div");
         close.className = "lightbox-close";
         close.innerHTML = "×";
+        close.setAttribute("role", "button");
+        close.setAttribute("tabindex", "0");
+        close.setAttribute("aria-label", "Luk galleri");
         close.onclick = closeLightbox;
+        close.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                closeLightbox();
+            }
+        });
 
         const prev = document.createElement("div");
         prev.className = "lightbox-nav prev";
         prev.innerHTML = "‹";
+        prev.setAttribute("role", "button");
+        prev.setAttribute("tabindex", "0");
+        prev.setAttribute("aria-label", "Forrige billede");
         prev.onclick = (e) => { e.stopPropagation(); navigate(-1); };
+        prev.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                navigate(-1);
+            }
+        });
 
         const next = document.createElement("div");
         next.className = "lightbox-nav next";
         next.innerHTML = "›";
+        next.setAttribute("role", "button");
+        next.setAttribute("tabindex", "0");
+        next.setAttribute("aria-label", "Næste billede");
         next.onclick = (e) => { e.stopPropagation(); navigate(1); };
+        next.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                navigate(1);
+            }
+        });
 
         lightboxEl.appendChild(inner);
+        lightboxEl.appendChild(count);
         lightboxEl.appendChild(close);
         lightboxEl.appendChild(prev);
         lightboxEl.appendChild(next);
@@ -1159,16 +1381,21 @@
         lightboxEl._webpSrc = webpSrc;
         lightboxEl._imgEl   = imgEl;
         lightboxEl._caption = caption;
+        lightboxEl._count   = count;
+        lightboxEl._close   = close;
+        lightboxEl._focusables = [close, prev, next];
     }
 
     function updateLightboxImage() {
         const img = flatImages[lightboxIndex];
         if (!img) return;
+        const caption = captionFor(img);
         lightboxEl._avifSrc.srcset = img.avifSrcset;
         lightboxEl._webpSrc.srcset = img.webpSrcset;
         lightboxEl._imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
-        lightboxEl._imgEl.alt      = friendlyName(img.name);
-        lightboxEl._caption.textContent = friendlyName(img.name);
+        lightboxEl._imgEl.alt      = caption;
+        lightboxEl._caption.textContent = caption;
+        lightboxEl._count.textContent = `${lightboxIndex + 1} / ${flatImages.length}`;
     }
 
     function navigate(dir) {
@@ -1177,20 +1404,35 @@
     }
 
     function closeLightbox() {
+        if (!lightboxEl) return;
+        const trigger = lightboxTrigger;
         lightboxEl.classList.remove("open");
         document.body.style.overflow = "";
         document.removeEventListener("keydown", lightboxKeyHandler);
-        setTimeout(() => { if (lightboxEl.parentNode) lightboxEl.parentNode.removeChild(lightboxEl); }, 300);
+        lightboxEl._closeTimer = setTimeout(() => {
+            if (lightboxEl.parentNode) lightboxEl.parentNode.removeChild(lightboxEl);
+            lightboxEl._closeTimer = null;
+            if (trigger) trigger.focus();
+        }, 300);
     }
 
     function lightboxKeyHandler(e) {
         if (e.key === "Escape")     closeLightbox();
         if (e.key === "ArrowRight") navigate(1);
         if (e.key === "ArrowLeft")  navigate(-1);
-    }
-
-    function friendlyName(name) {
-        return name.replace(/[-_]/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+        if (e.key === "Tab") {
+            const focusables = lightboxEl._focusables || [];
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
     }
 
     /* =========================
