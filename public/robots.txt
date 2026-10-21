@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://portfolio.williamlarsen.dk/sitemap.xml
+Sitemap: https://portfolio.williamlarsen.dk/image-sitemap.xml
