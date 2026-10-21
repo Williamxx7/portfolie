@@ -555,11 +555,17 @@
             padding: 2rem 5%;
             border-top: 1px solid var(--paper-mid);
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
             justify-content: space-between;
             align-items: center;
         }
 
         footer p { font-size: 0.78rem; color: var(--ink-faint); letter-spacing: 0.04em; }
+
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+        .footer-links a { font-size: 0.72rem; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
 
         /* ANIMATIONS */
         .reveal {
@@ -732,7 +738,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="/" class="mobile-link">Forside</a>
         <a href="/projekter/" class="mobile-link">Projekter</a>
-        <a href="/projekter/#foto" class="mobile-link">Fotografi</a>
+        <a href="/fotografi/" class="mobile-link">Fotografi</a>
         <a href="#kontakt" class="mobile-link">Kontakt</a>
     </div>
 
@@ -741,7 +747,7 @@
             <a class="logo" href="/">WX7</a>
             <ul class="nav-links">
                 <li><a href="/projekter/">Projekter</a></li>
-                <li><a href="/projekter/#foto">Fotografi</a></li>
+                <li><a href="/fotografi/">Fotografi</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
@@ -925,7 +931,7 @@
         <div class="section-inner">
             <h2 class="section-label reveal">Fotografi</h2>
             <div class="photo-teaser-grid reveal" style="transition-delay: 0.1s">
-                <a class="photo-teaser" href="/projekter/#foto">
+                <a class="photo-teaser" href="/fotografi/bryllup/">
                     <picture>
                         <source type="image/avif" srcset="/images/photography/Bryllup/PX7_0332-400.avif 400w, /images/photography/Bryllup/PX7_0332-800.avif 800w, /images/photography/Bryllup/PX7_0332-1200.avif 1200w, /images/photography/Bryllup/PX7_0332-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
                         <source type="image/webp" srcset="/images/photography/Bryllup/PX7_0332-400.webp 400w, /images/photography/Bryllup/PX7_0332-800.webp 800w, /images/photography/Bryllup/PX7_0332-1200.webp 1200w, /images/photography/Bryllup/PX7_0332-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
@@ -933,7 +939,7 @@
                     </picture>
                     <span class="photo-teaser-label">Bryllup</span>
                 </a>
-                <a class="photo-teaser" href="/projekter/#foto">
+                <a class="photo-teaser" href="/fotografi/sport/">
                     <picture>
                         <source type="image/avif" srcset="/images/photography/Sport/WX7_8724-400.avif 400w, /images/photography/Sport/WX7_8724-800.avif 800w, /images/photography/Sport/WX7_8724-1200.avif 1200w, /images/photography/Sport/WX7_8724-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
                         <source type="image/webp" srcset="/images/photography/Sport/WX7_8724-400.webp 400w, /images/photography/Sport/WX7_8724-800.webp 800w, /images/photography/Sport/WX7_8724-1200.webp 1200w, /images/photography/Sport/WX7_8724-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
@@ -941,7 +947,7 @@
                     </picture>
                     <span class="photo-teaser-label">Sport</span>
                 </a>
-                <a class="photo-teaser" href="/projekter/#foto">
+                <a class="photo-teaser" href="/fotografi/portraet/">
                     <picture>
                         <source type="image/avif" srcset="/images/photography/portræt/Jens_Myrup_1-400.avif 400w, /images/photography/portræt/Jens_Myrup_1-800.avif 800w, /images/photography/portræt/Jens_Myrup_1-1200.avif 1200w, /images/photography/portræt/Jens_Myrup_1-1600.avif 1600w" sizes="(max-width: 600px) 100vw, 33vw">
                         <source type="image/webp" srcset="/images/photography/portræt/Jens_Myrup_1-400.webp 400w, /images/photography/portræt/Jens_Myrup_1-800.webp 800w, /images/photography/portræt/Jens_Myrup_1-1200.webp 1200w, /images/photography/portræt/Jens_Myrup_1-1600.webp 1600w" sizes="(max-width: 600px) 100vw, 33vw">
@@ -950,7 +956,7 @@
                     <span class="photo-teaser-label">Portræt</span>
                 </a>
             </div>
-            <a class="photo-teaser-link" href="/projekter/#foto">Se hele fotogalleriet <span aria-hidden="true">→</span></a>
+            <a class="photo-teaser-link" href="/fotografi/">Se hele fotogalleriet <span aria-hidden="true">→</span></a>
         </div>
     </section>
 
@@ -976,6 +982,14 @@
 
     <footer>
         <p>© 2026 William Larsen</p>
+        <nav class="footer-links" aria-label="Sidefodet navigation">
+            <a href="/projekter/">Projekter</a>
+            <a href="/fotografi/">Fotografi</a>
+            <a href="https://lab.williamlarsen.dk/">Lab</a>
+            <a href="https://github.com/Williamxx7">GitHub</a>
+            <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
+            <a href="mailto:william@aekko.com">Email</a>
+        </nav>
     </footer>
 
     <script>
