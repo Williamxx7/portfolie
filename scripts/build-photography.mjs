@@ -127,6 +127,7 @@ ${script}
     <a href="/">Forside</a>
     <a href="/projekter/">Projekter</a>
     <a href="/fotografi/" aria-current="page">Fotografi</a>
+    <a href="/certifikater/">Certifikater</a>
     <a href="https://lab.williamlarsen.dk/">Lab</a>
   </nav>
 </header>
@@ -136,6 +137,7 @@ ${body}
   <div class="footer-links">
     <a href="/projekter/">Projekter</a>
     <a href="/fotografi/">Fotografi</a>
+    <a href="/certifikater/">Certifikater</a>
     <a href="https://lab.williamlarsen.dk/">Lab</a>
     <a href="https://github.com/Williamxx7">GitHub</a>
     <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
