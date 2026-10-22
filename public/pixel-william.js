@@ -139,10 +139,9 @@
       ".pw.pw-live canvas{animation:pw-bob 1.4s steps(1,end) infinite}" +
       "@keyframes pw-bob{0%,49%{transform:translateY(0)}50%,100%{transform:translateY(calc(var(--pw-px) * -1))}}" +
       ".pixel-chat{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;align-items:center;gap:8px}" +
-      ".pixel-chat-bubble{position:relative;max-width:230px;padding:10px 13px;background:#fff;color:#1a1917;border:3px solid #14110f;box-shadow:inset 0 0 0 3px #d5d9de,0 2px 12px rgba(0,0,0,.12);font:500 12px/1.35 'DM Sans',system-ui,sans-serif;text-align:center;border-radius:2px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none}" +
+      ".pixel-chat-bubble{position:relative;max-width:220px;padding:9px 12px;background:#fffdf9;color:#1a1917;border:2px solid #1a1917;box-shadow:3px 3px 0 #d5d9de;font:500 12px/1.35 'DM Sans',system-ui,sans-serif;text-align:center;border-radius:0;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;pointer-events:none}" +
       ".pixel-chat-bubble.is-visible{opacity:1;visibility:visible;transform:translateY(0)}" +
-      ".pixel-chat-bubble::after{content:'';position:absolute;left:50%;bottom:-10px;width:13px;height:13px;background:#fff;border-right:3px solid #14110f;border-bottom:3px solid #14110f;transform:translateX(-50%) rotate(45deg);box-shadow:3px 3px 0 #d5d9de}" +
-      "@media(prefers-color-scheme:dark){.pixel-chat-bubble{background:#f2f1ed;color:#1a1917;border-color:#f2f1ed}.pixel-chat-bubble::after{background:#f2f1ed;border-color:#f2f1ed}}" +
+      ".pixel-chat-bubble::after{content:'';position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:#fffdf9;border-right:2px solid #1a1917;border-bottom:2px solid #1a1917;transform:translateX(-50%) rotate(45deg);box-shadow:2px 2px 0 #d5d9de}" +
       "@media(prefers-reduced-motion:reduce){.pixel-chat-bubble{transition:none}}" +
       ".pw.pw-jump{animation:pw-jump .5s steps(1,end)}" +
       "@keyframes pw-jump{0%,100%{transform:translateY(0)}20%,80%{transform:translateY(calc(var(--pw-px) * -2))}40%,60%{transform:translateY(calc(var(--pw-px) * -4))}}" +
@@ -199,7 +198,7 @@
     function onBubbleEnter() { showBubble(); }
     function onBubbleLeave() {
       clearTimeout(bubbleHideTimer);
-      bubbleHideTimer = setTimeout(function () { if (!destroyed) hideBubble(); }, 1200);
+      hideBubble();
     }
 
     function setupBubble() {
