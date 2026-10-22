@@ -138,6 +138,9 @@
       ".pw canvas{image-rendering:pixelated;image-rendering:crisp-edges}" +
       ".pw.pw-live canvas{animation:pw-bob 1.4s steps(1,end) infinite}" +
       "@keyframes pw-bob{0%,49%{transform:translateY(0)}50%,100%{transform:translateY(calc(var(--pw-px) * -1))}}" +
+      ".pixel-chat{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;align-items:center;gap:6px}" +
+      ".pixel-chat-label{font:500 11px/1.2 'DM Sans',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b6760;background:rgba(250,249,247,.94);border:1px solid #e8e5e0;border-radius:999px;padding:5px 10px;box-shadow:0 2px 10px rgba(0,0,0,.08);pointer-events:none}" +
+      "@media(prefers-color-scheme:dark){.pixel-chat-label{color:#d8d5ce;background:rgba(26,25,23,.94);border-color:#363532}}" +
       ".pw.pw-jump{animation:pw-jump .5s steps(1,end)}" +
       "@keyframes pw-jump{0%,100%{transform:translateY(0)}20%,80%{transform:translateY(calc(var(--pw-px) * -2))}40%,60%{transform:translateY(calc(var(--pw-px) * -4))}}" +
       ".pw-flash canvas{filter:brightness(1.8)}";
@@ -148,13 +151,14 @@
     opts = opts || {};
     injectCss();
     var scale = Number(opts.scale || host.dataset.scale) || 5;
+    var chatTrigger = host.dataset.chatTrigger === "true";
     var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "pw" + (still ? "" : " pw-live");
     btn.style.setProperty("--pw-px", scale + "px");
-    btn.setAttribute("aria-label", opts.label || "Pixelfigur af William. Tryk for at tage et billede.");
+    btn.setAttribute("aria-label", opts.label || (chatTrigger ? "Åbn chat med William" : "Pixelfigur af William. Tryk for at tage et billede."));
     var cv = document.createElement("canvas");
     cv.width = 18; cv.height = 26;
     cv.style.width = 18 * scale + "px";
@@ -247,7 +251,9 @@
     function onChatReply() { endType(); talk(1800); }
     function onChatDone() { endType(); }
 
-    btn.addEventListener("click", snap);
+    btn.addEventListener("click", chatTrigger ? function () {
+      window.dispatchEvent(new CustomEvent("williamchat:toggle"));
+    } : snap);
     btn.addEventListener("pointerenter", function () { wave(1400); });
     window.addEventListener("williamchat:open", onChatOpen);
     window.addEventListener("williamchat:thinking", onChatThinking);
