@@ -608,14 +608,6 @@
         .footer-links a { font-size: 0.72rem; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
 
-        .contact-pixel {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: 0 5% 2rem;
-            display: flex;
-            justify-content: flex-end;
-        }
-
         /* ANIMATIONS */
         .reveal {
             opacity: 0;
@@ -1118,8 +1110,6 @@
         </div>
     </section>
 
-    <div class="contact-pixel" data-pixel-william data-scale="4"></div>
-
     <footer>
         <p>© 2026 William Larsen</p>
         <nav class="footer-links" aria-label="Sidefodet navigation">
@@ -1186,7 +1176,11 @@
 
     </script>
 
+    <div class="pixel-chat">
+        <span class="pixel-chat-label">Spørg om William</span>
+        <div data-pixel-william data-chat-trigger="true" data-scale="4"></div>
+    </div>
     <script src="/pixel-william.js" defer></script>
-    <script src="/widget.js" data-endpoint="https://william-chat.williamlarsen2005.workers.dev" data-contact="https://williamlarsen.dk/#kontakt" defer></script>
+    <script src="/widget.js" data-endpoint="https://william-chat.williamlarsen2005.workers.dev" data-contact="https://williamlarsen.dk/#kontakt" data-hide-button="true" data-pixel-trigger="true" defer></script>
 </body>
 </html>
