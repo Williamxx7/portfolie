@@ -9,6 +9,8 @@
   var script = document.currentScript;
   var ENDPOINT = script && script.dataset.endpoint;
   var CONTACT = (script && script.dataset.contact) || "https://williamlarsen.dk/#kontakt";
+  var HIDE_BUTTON = script && script.dataset.hideButton === "true";
+  var PIXEL_TRIGGER = script && script.dataset.pixelTrigger === "true";
   if (!ENDPOINT) return console.error("chat-widget: mangler data-endpoint");
   try { new URL(ENDPOINT); } catch (e) { return console.error("chat-widget: ugyldig data-endpoint"); }
 
@@ -87,6 +89,9 @@
   }
   .p2-root.open .p2-panel { display: flex; }
   .p2-root.open .p2-btn { display: none; }
+  .p2-root.p2-hide-button .p2-btn { display: none; }
+  .p2-root.p2-pixel-trigger { bottom: 160px; }
+  .p2-root.p2-pixel-trigger .p2-panel { height: min(520px, calc(100dvh - 180px)); }
   .p2-head {
     display: flex;
     justify-content: space-between;
@@ -175,7 +180,7 @@
   document.head.appendChild(style);
 
   var root = document.createElement("div");
-  root.className = "p2-root";
+  root.className = "p2-root" + (HIDE_BUTTON ? " p2-hide-button" : "") + (PIXEL_TRIGGER ? " p2-pixel-trigger" : "");
   root.innerHTML =
     '<button class="p2-btn" type="button" aria-expanded="false" aria-controls="p2-chat-panel">Spørg om William</button>' +
     '<section class="p2-panel" id="p2-chat-panel" role="dialog" aria-labelledby="p2-chat-title">' +
@@ -194,6 +199,7 @@
   var form = root.querySelector(".p2-form");
   var input = root.querySelector(".p2-input");
   var send = root.querySelector(".p2-send");
+  var pixelTrigger = document.querySelector(".pixel-chat .pw");
 
   function add(kind, text) {
     var el = document.createElement("div");
@@ -227,12 +233,15 @@
       input.focus();
     } else {
       evt("done");
-      openBtn.focus();
+      (pixelTrigger || openBtn).focus();
     }
   }
 
   openBtn.addEventListener("click", function () { setOpen(true); });
   closeBtn.addEventListener("click", function () { setOpen(false); });
+  window.addEventListener("williamchat:toggle", function () {
+    setOpen(!root.classList.contains("open"));
+  });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && root.classList.contains("open")) setOpen(false);
   });
