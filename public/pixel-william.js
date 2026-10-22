@@ -5,7 +5,9 @@
  *        <script src="pixel-william.js" defer></script>
  *
  * Animationer: blink, vejrtrækning, kigger til siderne, nikker, hopper, vinker,
- * skriver på laptop, snakker og tager billede (klik).
+ * skriver på laptop, snakker, tager billede og holder certifikat.
+ * Temaer vælges automatisk ud fra siden: /fotografi = kamera,
+ * /certifikater = certifikat, /projekter = laptop. Kan overrides med data-theme.
  * Hover = vinker. Klik = kamera + flash.
  * Slår "reducer bevægelse" til i systemet, står figuren stille.
  *
@@ -73,31 +75,34 @@
   ]);
   var TYPE = NO_ARMS.concat([
     [4, 15, "L"], [5, 15, "L"], [6, 15, "L"], [7, 15, "L"], [8, 15, "L"], [9, 15, "L"], [10, 15, "L"], [11, 15, "L"],
-    [4, 16, "L"], [5, 16, "L"], [6, 16, "L"], [7, 16, "l"], [8, 16, "l"], [9, 16, "L"], [10, 16, "L"], [11, 16, "L"],
-    [4, 17, "L"], [5, 17, "L"], [6, 17, "L"], [7, 17, "L"], [8, 17, "L"], [9, 17, "L"], [10, 17, "L"], [11, 17, "L"],
+    [4, 16, "L"], [5, 16, "D"], [6, 16, "D"], [7, 16, "D"], [8, 16, "D"], [9, 16, "D"], [10, 16, "D"], [11, 16, "L"],
+    [4, 17, "L"], [5, 17, "l"], [6, 17, "l"], [7, 17, "l"], [8, 17, "l"], [9, 17, "l"], [10, 17, "l"], [11, 17, "L"],
     [3, 18, "D"], [4, 18, "D"], [5, 18, "D"], [6, 18, "D"], [7, 18, "D"], [8, 18, "D"], [9, 18, "D"], [10, 18, "D"], [11, 18, "D"], [12, 18, "D"]
   ]);
   var TYPE_A = [[3, 17, "S"], [12, 16, "S"]];
   var TYPE_B = [[3, 16, "S"], [12, 17, "S"]];
 
   var PROP_CAMERA = [
+    [6, 14, "C"], [7, 14, "C"], [8, 14, "C"],
     [4, 15, "C"], [5, 15, "C"], [6, 15, "C"], [7, 15, "C"], [8, 15, "C"], [9, 15, "C"], [10, 15, "C"], [11, 15, "C"],
-    [4, 16, "C"], [5, 16, "c"], [6, 16, "c"], [7, 16, "c"], [8, 16, "c"], [9, 16, "c"], [10, 16, "c"], [11, 16, "C"],
-    [5, 17, "C"], [6, 17, "C"], [7, 17, "C"], [8, 17, "C"], [9, 17, "C"], [10, 17, "C"],
+    [4, 16, "C"], [5, 16, "l"], [6, 16, "C"], [7, 16, "c"], [8, 16, "c"], [9, 16, "C"], [10, 16, "l"], [11, 16, "C"],
+    [4, 17, "C"], [5, 17, "C"], [6, 17, "c"], [7, 17, "f"], [8, 17, "f"], [9, 17, "c"], [10, 17, "C"], [11, 17, "C"],
     [3, 16, "S"], [12, 16, "S"]
   ];
   var PROP_CERT = [
-    [4, 15, "W"], [5, 15, "W"], [6, 15, "W"], [7, 15, "W"], [8, 15, "W"], [9, 15, "W"], [10, 15, "W"], [11, 15, "W"],
-    [4, 16, "W"], [5, 16, "l"], [6, 16, "l"], [7, 16, "l"], [8, 16, "l"], [9, 16, "l"], [10, 16, "l"], [11, 16, "W"],
+    [4, 14, "W"], [5, 14, "W"], [6, 14, "W"], [7, 14, "W"], [8, 14, "W"], [9, 14, "W"], [10, 14, "W"], [11, 14, "W"],
+    [4, 15, "W"], [5, 15, "l"], [6, 15, "l"], [7, 15, "l"], [8, 15, "l"], [9, 15, "l"], [10, 15, "l"], [11, 15, "W"],
+    [4, 16, "W"], [5, 16, "W"], [6, 16, "W"], [7, 16, "M"], [8, 16, "W"], [9, 16, "W"], [10, 16, "W"], [11, 16, "W"],
     [4, 17, "W"], [5, 17, "l"], [6, 17, "l"], [7, 17, "l"], [8, 17, "l"], [9, 17, "l"], [10, 17, "l"], [11, 17, "W"],
     [3, 16, "S"], [12, 16, "S"]
   ];
   var PROP_CERT_RAISED = [
-    [3, 11, "W"], [4, 11, "W"], [5, 11, "W"], [6, 11, "W"], [7, 11, "W"], [8, 11, "W"], [9, 11, "W"],
-    [3, 12, "W"], [4, 12, "l"], [5, 12, "l"], [6, 12, "l"], [7, 12, "l"], [8, 12, "l"], [9, 12, "W"],
-    [3, 13, "W"], [4, 13, "l"], [5, 13, "l"], [6, 13, "l"], [7, 13, "l"], [8, 13, "l"], [9, 13, "W"],
-    [3, 14, "W"], [4, 14, "W"], [5, 14, "W"], [6, 14, "W"], [7, 14, "W"], [8, 14, "W"], [9, 14, "W"],
-    [2, 12, "S"], [10, 13, "S"]
+    [2, 14, "W"], [3, 14, "W"], [4, 14, "W"], [5, 14, "W"], [6, 14, "W"], [7, 14, "W"], [8, 14, "W"], [9, 14, "W"], [10, 14, "W"],
+    [2, 15, "W"], [3, 15, "l"], [4, 15, "l"], [5, 15, "l"], [6, 15, "l"], [7, 15, "l"], [8, 15, "l"], [9, 15, "l"], [10, 15, "W"],
+    [2, 16, "W"], [3, 16, "W"], [4, 16, "W"], [5, 16, "W"], [6, 16, "M"], [7, 16, "W"], [8, 16, "W"], [9, 16, "W"], [10, 16, "W"],
+    [2, 17, "W"], [3, 17, "l"], [4, 17, "l"], [5, 17, "l"], [6, 17, "l"], [7, 17, "l"], [8, 17, "l"], [9, 17, "l"], [10, 17, "W"],
+    [2, 18, "W"], [3, 18, "W"], [4, 18, "W"], [5, 18, "W"], [6, 18, "W"], [7, 18, "W"], [8, 18, "W"], [9, 18, "W"], [10, 18, "W"],
+    [1, 16, "S"], [11, 17, "S"]
   ];
 
   function grid(over) {
@@ -266,7 +271,7 @@
     function busy() { return !!(st.snap || st.wave || st.type || st.nod || st.look || st.present); }
 
     function wave(ms) {
-      if (st.snap || st.type) return;
+      if (st.snap || st.type || st.present) return;
       loop("wave", 220, function (i) { st.wave = (i % 2) + 1; }, ms || 1400, function () { st.wave = 0; });
     }
     function nod() {
@@ -280,6 +285,7 @@
     }
     function typeFor(ms) {
       if (st.snap) return;
+      endPresent();
       stop("wave"); st.wave = 0;
       loop("type", 150, function (i) { st.type = (i % 2) + 1; }, ms || 2400, function () { st.type = 0; });
     }
@@ -289,16 +295,18 @@
     }
     function present() {
       if (busy() || still) return;
+      stop("present");
       st.present = 1; draw();
       T.presentE = setTimeout(function () { st.present = 0; draw(); }, 2000);
     }
+    function endPresent() { stop("present"); st.present = 0; }
     function jump() {
       if (still || st.snap) return;
       btn.classList.add("pw-jump");
       setTimeout(function () { btn.classList.remove("pw-jump"); }, 520);
     }
     function snap() {
-      stop("wave"); st.wave = 0; endType();
+      stop("wave"); st.wave = 0; endType(); endPresent();
       st.snap = 1; draw();
       if (!still) {
         setTimeout(function () { st.snap = 2; draw(); btn.classList.add("pw-flash"); }, 350);
@@ -338,9 +346,9 @@
     }
     function pickIdle() {
       var pools = {
-        camera: [["snap", 35], ["look", 20], ["nod", 15], ["wave", 15], ["jump", 10], ["type", 5]],
-        laptop: [["type", 35], ["look", 20], ["nod", 15], ["wave", 15], ["jump", 10], ["snap", 5]],
-        certificate: [["present", 35], ["look", 20], ["nod", 15], ["wave", 15], ["jump", 10], ["type", 5]],
+        camera: [["snap", 45], ["look", 18], ["nod", 14], ["wave", 13], ["jump", 10]],
+        laptop: [["type", 45], ["look", 18], ["nod", 14], ["wave", 13], ["jump", 10]],
+        certificate: [["present", 45], ["look", 18], ["nod", 14], ["wave", 13], ["jump", 10]],
         default: [["look", 30], ["nod", 20], ["wave", 15], ["jump", 10], ["type", 15], ["snap", 10]]
       };
       var pool = pools[theme] || pools.default;
@@ -352,7 +360,11 @@
         if (r <= 0) { choice = pool[i][0]; break; }
       }
       if (choice === lastIdle && pool.length > 1) {
-        choice = pool[(Math.floor(Math.random() * pool.length) + 1) % pool.length][0];
+        var idx = 0;
+        for (var j = 0; j < pool.length; j++) {
+          if (pool[j][0] === choice) { idx = j; break; }
+        }
+        choice = pool[(idx + 1) % pool.length][0];
       }
       return choice;
     }
@@ -401,7 +413,7 @@
       btn.remove();
     }
 
-    return { wave: wave, snap: snap, nod: nod, look: look, type: typeFor, talk: talk, jump: jump, destroy: destroy };
+    return { wave: wave, snap: snap, nod: nod, look: look, type: typeFor, talk: talk, jump: jump, present: present, destroy: destroy };
   }
 
   window.PixelWilliam = { mount: mount, _frame: frame, _pal: PAL };
