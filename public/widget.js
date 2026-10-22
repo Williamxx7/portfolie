@@ -3,7 +3,8 @@
  * Brug på siden:
  *   <script src="/widget.js"
  *           data-endpoint="https://william-chat.DIT-NAVN.workers.dev"
- *           data-contact="https://williamlarsen.dk/#kontakt" defer></script>
+ *           data-contact="https://williamlarsen.dk/#kontakt"
+ *           data-hide-button="true" data-pixel-trigger="true" defer></script>
  */
 (function () {
   var script = document.currentScript;
@@ -40,19 +41,6 @@
     font: 15px/1.45 "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--p2-ink);
   }
-  @media (prefers-color-scheme: dark) {
-    .p2-root {
-      --p2-bg: #1a1917;
-      --p2-ink: #f2f1ed;
-      --p2-muted: #b0ada8;
-      --p2-line: #363532;
-      --p2-accent: #c4a882;
-      --p2-accent-ink: #1a1917;
-      --p2-user: #c4a882;
-      --p2-bot: #242422;
-    }
-    .p2-msg.user { color: #1a1917; }
-  }
   .p2-root * { box-sizing: border-box; }
   .p2-btn {
     display: flex;
@@ -79,6 +67,8 @@
   .p2-panel {
     display: none;
     flex-direction: column;
+    padding: 0;
+    margin: 0;
     width: min(360px, calc(100vw - 32px));
     height: min(520px, calc(100dvh - 90px));
     background: var(--p2-bg);
@@ -97,12 +87,13 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 8px;
-    padding: 12px 14px;
+    padding: 14px 16px;
     border-bottom: 1px solid var(--p2-line);
+    background: #fffdf9;
   }
   .p2-title { font-weight: 600; }
   .p2-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--p2-muted);
     margin-top: 2px;
   }
@@ -118,10 +109,11 @@
   .p2-log {
     flex: 1;
     overflow-y: auto;
-    padding: 14px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    background: var(--p2-bg);
   }
   .p2-msg {
     max-width: 85%;
@@ -131,6 +123,7 @@
     overflow-wrap: anywhere;
   }
   .p2-msg.bot { background: var(--p2-bot); align-self: flex-start; }
+  .p2-msg.bot:first-child { margin-top: 2px; }
   .p2-msg.user { background: var(--p2-user); color: var(--p2-accent-ink); align-self: flex-end; }
   .p2-msg.note {
     background: none;
@@ -144,8 +137,17 @@
   .p2-form {
     display: flex;
     gap: 8px;
-    padding: 10px;
+    padding: 12px;
     border-top: 1px solid var(--p2-line);
+    background: #fffdf9;
+  }
+  .p2-footnote {
+    padding: 0 12px 10px;
+    background: #fffdf9;
+    color: var(--p2-muted);
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: center;
   }
   .p2-input {
     flex: 1;
@@ -185,12 +187,13 @@
     '<button class="p2-btn" type="button" aria-expanded="false" aria-controls="p2-chat-panel">Spørg om William</button>' +
     '<section class="p2-panel" id="p2-chat-panel" role="dialog" aria-labelledby="p2-chat-title">' +
     '<div class="p2-head"><div><div class="p2-title" id="p2-chat-title">Spørg om William</div>' +
-    '<div class="p2-sub">AI-assistent, ikke William selv. Skriv ikke følsomme oplysninger. Beskeder behandles af en AI-udbyder.</div></div>' +
+    '<div class="p2-sub">AI-assistent, ikke William selv</div></div>' +
     '<button class="p2-close" type="button" aria-label="Luk chat">×</button></div>' +
     '<div class="p2-log" aria-live="polite"></div>' +
     '<form class="p2-form"><input class="p2-input" type="text" maxlength="' + MAX_CHARS +
     '" placeholder="Skriv dit spørgsmål" aria-label="Dit spørgsmål" autocomplete="off">' +
-    '<button class="p2-send" type="submit">Send</button></form></section>';
+    '<button class="p2-send" type="submit">Send</button></form>' +
+    '<div class="p2-footnote">Skriv ikke følsomme oplysninger. Beskeder behandles af en AI-udbyder.</div></section>';
   document.body.appendChild(root);
 
   var openBtn = root.querySelector(".p2-btn");
@@ -228,7 +231,8 @@
     if (open) {
       evt("open");
       if (!log.children.length) {
-        add("bot", "Hej! Jeg er en AI-assistent, der kan svare på spørgsmål om William: hans uddannelse, projekter, erfaring og fotografi. Hvad vil du vide?");
+        add("bot", "Hej! Spørg mig om Williams uddannelse, projekter, erfaring eller fotografi.");
+        log.scrollTop = 0;
       }
       input.focus();
     } else {
