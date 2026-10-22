@@ -138,9 +138,12 @@
       ".pw canvas{image-rendering:pixelated;image-rendering:crisp-edges}" +
       ".pw.pw-live canvas{animation:pw-bob 1.4s steps(1,end) infinite}" +
       "@keyframes pw-bob{0%,49%{transform:translateY(0)}50%,100%{transform:translateY(calc(var(--pw-px) * -1))}}" +
-      ".pixel-chat{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;align-items:center;gap:6px}" +
-      ".pixel-chat-label{font:500 11px/1.2 'DM Sans',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b6760;background:rgba(250,249,247,.94);border:1px solid #e8e5e0;border-radius:999px;padding:5px 10px;box-shadow:0 2px 10px rgba(0,0,0,.08);pointer-events:none}" +
-      "@media(prefers-color-scheme:dark){.pixel-chat-label{color:#d8d5ce;background:rgba(26,25,23,.94);border-color:#363532}}" +
+      ".pixel-chat{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;align-items:center;gap:8px}" +
+      ".pixel-chat-bubble{position:relative;max-width:230px;padding:10px 13px;background:#fff;color:#1a1917;border:3px solid #14110f;box-shadow:inset 0 0 0 3px #d5d9de,0 2px 12px rgba(0,0,0,.12);font:500 12px/1.35 'DM Sans',system-ui,sans-serif;text-align:center;border-radius:2px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none}" +
+      ".pixel-chat-bubble.is-visible{opacity:1;visibility:visible;transform:translateY(0)}" +
+      ".pixel-chat-bubble::after{content:'';position:absolute;left:50%;bottom:-10px;width:13px;height:13px;background:#fff;border-right:3px solid #14110f;border-bottom:3px solid #14110f;transform:translateX(-50%) rotate(45deg);box-shadow:3px 3px 0 #d5d9de}" +
+      "@media(prefers-color-scheme:dark){.pixel-chat-bubble{background:#f2f1ed;color:#1a1917;border-color:#f2f1ed}.pixel-chat-bubble::after{background:#f2f1ed;border-color:#f2f1ed}}" +
+      "@media(prefers-reduced-motion:reduce){.pixel-chat-bubble{transition:none}}" +
       ".pw.pw-jump{animation:pw-jump .5s steps(1,end)}" +
       "@keyframes pw-jump{0%,100%{transform:translateY(0)}20%,80%{transform:translateY(calc(var(--pw-px) * -2))}40%,60%{transform:translateY(calc(var(--pw-px) * -4))}}" +
       ".pw-flash canvas{filter:brightness(1.8)}";
@@ -170,6 +173,48 @@
     var st = { blink: false, wave: 0, snap: 0, mouth: 0, look: null, type: 0, nod: 0 };
     var T = {};
     var destroyed = false;
+    var bubble = null;
+    var bubbleHideTimer = null;
+    var bubbleIntroTimer = null;
+
+    function showBubble(duration) {
+      if (!bubble || destroyed) return;
+      clearTimeout(bubbleHideTimer);
+      clearTimeout(bubbleIntroTimer);
+      bubble.classList.add("is-visible");
+      bubble.setAttribute("aria-hidden", "false");
+      if (duration) {
+        bubbleHideTimer = setTimeout(function () {
+          if (!destroyed) hideBubble();
+        }, duration);
+      }
+    }
+
+    function hideBubble() {
+      if (!bubble) return;
+      bubble.classList.remove("is-visible");
+      bubble.setAttribute("aria-hidden", "true");
+    }
+
+    function onBubbleEnter() { showBubble(); }
+    function onBubbleLeave() {
+      clearTimeout(bubbleHideTimer);
+      bubbleHideTimer = setTimeout(function () { if (!destroyed) hideBubble(); }, 1200);
+    }
+
+    function setupBubble() {
+      var wrap = host.closest(".pixel-chat");
+      bubble = wrap && wrap.querySelector(".pixel-chat-bubble");
+      if (!bubble) return;
+      bubble.setAttribute("aria-hidden", "true");
+      bubbleIntroTimer = setTimeout(function () {
+        if (!destroyed) showBubble(6000);
+      }, 800);
+      btn.addEventListener("pointerenter", onBubbleEnter);
+      btn.addEventListener("focus", onBubbleEnter);
+      btn.addEventListener("pointerleave", onBubbleLeave);
+      btn.addEventListener("blur", onBubbleLeave);
+    }
 
     function draw() { paint(ctx, frame(st)); }
     function stop(k) { clearInterval(T[k]); clearTimeout(T[k + "E"]); T[k] = T[k + "E"] = null; }
@@ -246,12 +291,13 @@
       }, 5000 + Math.random() * 5000);
     }
 
-    function onChatOpen() { wave(1600); }
+    function onChatOpen() { hideBubble(); wave(1600); }
     function onChatThinking() { typeFor(60000); }
     function onChatReply() { endType(); talk(1800); }
     function onChatDone() { endType(); }
 
     btn.addEventListener("click", chatTrigger ? function () {
+      hideBubble();
       window.dispatchEvent(new CustomEvent("williamchat:toggle"));
     } : snap);
     btn.addEventListener("pointerenter", function () { wave(1400); });
@@ -260,6 +306,7 @@
     window.addEventListener("williamchat:reply", onChatReply);
     window.addEventListener("williamchat:done", onChatDone);
 
+    setupBubble();
     draw();
     if (!still) {
       scheduleBlink();
@@ -279,6 +326,12 @@
       window.removeEventListener("williamchat:thinking", onChatThinking);
       window.removeEventListener("williamchat:reply", onChatReply);
       window.removeEventListener("williamchat:done", onChatDone);
+      clearTimeout(bubbleHideTimer);
+      clearTimeout(bubbleIntroTimer);
+      btn.removeEventListener("pointerenter", onBubbleEnter);
+      btn.removeEventListener("focus", onBubbleEnter);
+      btn.removeEventListener("pointerleave", onBubbleLeave);
+      btn.removeEventListener("blur", onBubbleLeave);
       btn.remove();
     }
 
