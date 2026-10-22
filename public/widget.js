@@ -204,10 +204,39 @@
   var send = root.querySelector(".p2-send");
   var pixelTrigger = document.querySelector(".pixel-chat .pw");
 
+  function appendTextWithLinks(el, text) {
+    var urlRe = /(https?:\/\/[^\s<>"']+|(?:www\.)?williamlarsen\.dk(?:\/[^\s<>"']*)?)/g;
+    var last = 0;
+    var match;
+    while ((match = urlRe.exec(text)) !== null) {
+      var url = match[0];
+      var trailing = "";
+      var tail = url.match(/[.,;:!?)]+$/);
+      if (tail) {
+        trailing = tail[0];
+        url = url.slice(0, -trailing.length);
+      }
+      if (match.index > last) {
+        el.appendChild(document.createTextNode(text.slice(last, match.index)));
+      }
+      var a = document.createElement("a");
+      a.href = /^https?:\/\//.test(url) ? url : "https://" + url;
+      a.textContent = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      el.appendChild(a);
+      if (trailing) el.appendChild(document.createTextNode(trailing));
+      last = match.index + match[0].length;
+    }
+    if (last < text.length) {
+      el.appendChild(document.createTextNode(text.slice(last)));
+    }
+  }
+
   function add(kind, text) {
     var el = document.createElement("div");
     el.className = "p2-msg " + kind;
-    el.textContent = text;
+    appendTextWithLinks(el, text);
     log.appendChild(el);
     log.scrollTop = log.scrollHeight;
     return el;
@@ -286,7 +315,8 @@
       })
       .then(function (res) {
         if (res.ok && res.data.reply) {
-          wait.textContent = res.data.reply;
+          wait.textContent = "";
+          appendTextWithLinks(wait, res.data.reply);
           evt("reply");
           history.push({ role: "assistant", content: res.data.reply });
         } else {
