@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Writeup af Campfire-opgaven It's Samba Time! med Nmap, Samba og Metasploit. Flags og lab-IP'er er fjernet.">
+<link rel="canonical" href="https://williamlarsen.dk/ctf/its-samba-time/">
+<meta property="og:title" content="It's Samba Time! — CTF-writeup | William Larsen">
+<meta property="og:description" content="Network- og exploitation-opgave med Samba, Nmap og Metasploit.">
+<meta property="og:image" content="https://williamlarsen.dk/image.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta property="og:url" content="https://williamlarsen.dk/ctf/its-samba-time/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="It's Samba Time! — CTF-writeup | William Larsen">
+<meta name="twitter:description" content="Network- og exploitation-opgave med Samba, Nmap og Metasploit.">
+<meta name="twitter:image" content="https://williamlarsen.dk/image.png">
+<meta name="twitter:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta name="theme-color" content="#8b6c4f">
+<title>It's Samba Time! — CTF-writeup | William Larsen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon-20261021.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/projekter/case-20261021b.css">
+<link rel="stylesheet" href="/ctf/ctf.css">
+<link rel="stylesheet" href="/nav-20261021c.css">
+<script src="/nav-20261021.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "It's Samba Time! — CTF-writeup",
+  "description": "Network- og exploitation-opgave med Samba, Nmap og Metasploit.",
+  "url": "https://williamlarsen.dk/ctf/its-samba-time/",
+  "inLanguage": "da-DK",
+  "author": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" },
+  "publisher": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" },
+  "about": ["Capture The Flag", "Samba", "Nmap", "Metasploit"],
+  "isPartOf": { "@type": "CollectionPage", "name": "CTF & writeups", "url": "https://williamlarsen.dk/ctf/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Forside", "item": "https://williamlarsen.dk/" },
+    { "@type": "ListItem", "position": 2, "name": "CTF & writeups", "item": "https://williamlarsen.dk/ctf/" },
+    { "@type": "ListItem", "position": 3, "name": "It's Samba Time!", "item": "https://williamlarsen.dk/ctf/its-samba-time/" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+      <a href="/">Forside</a>
+      <a href="/projekter/">Projekter</a>
+      <a href="/fotografi/">Fotografi</a>
+      <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/" class="is-active" aria-current="page">CTF</a>
+      <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs" aria-label="Brødkrumme">
+    <a href="/">Forside</a><span>/</span><a href="/ctf/">CTF</a><span>/</span><span>It's Samba Time!</span>
+  </nav>
+  <p class="eyebrow">Campfire CTF · writeup</p>
+  <h1>It's Samba Time!</h1>
+  <p class="lead">En klassisk network- og exploitation-opgave: find en sårbar SMB-tjeneste, vælg det rigtige værktøj og forstå, hvorfor den gamle Samba-version er et problem.</p>
+  <div class="meta-row">
+    <span class="meta-chip live">Løst</span>
+    <span class="meta-chip">Network / Exploitation</span>
+    <span class="meta-chip">35 point</span>
+    <span class="meta-chip">2026</span>
+  </div>
+  <div class="tech-tags">
+    <span>Nmap</span>
+    <span>Metasploit Framework</span>
+    <span>Samba</span>
+    <span>SMB</span>
+  </div>
+
+  <div class="writeup-note">Flags, adgangskoder og lab-IP'er er fjernet fra denne offentlige version. Kommandoerne bruger <code>TARGET</code> og <code>&lt;subnet&gt;</code> som placeholders.</div>
+
+  <article class="writeup-body">
+    <h2>Opgaven</h2>
+    <blockquote>Find en server, der kører en sårbar version af SMB-protokollen, og udnyt sårbarheden til at få adgang. Find derefter flaget.</blockquote>
+
+    <h2>1. Rekognoscering</h2>
+    <p>Jeg startede med at finde min egen placering på lab-netværket og identificere det subnet, opgaven foregik på. Det gav et afgrænset område at scanne i stedet for at skyde i blinde.</p>
+
+    <h2>2. Netværkssweep</h2>
+    <p>En ping-sweep viste flere aktive hosts på subnetterne. Et af dem skilte sig ud, fordi det svarede på SMB-portene. Jeg brugte derfor målet som udgangspunkt for den næste scanning.</p>
+<pre><code>nmap -sn &lt;subnet&gt;</code></pre>
+
+    <h2>3. Versionsscanning</h2>
+    <p>En service- og versionsscan af målet viste SMB på de klassiske porte 139 og 445. Nmap identificerede Samba som <code>3.X - 4.X</code>, hvilket pegede mod en ældre installation og en kendt sårbarhed.</p>
+<pre><code>nmap -sV TARGET</code></pre>
+
+    <h2>4. Valg af exploit</h2>
+    <p>Jeg søgte efter Samba-moduler i Metasploit og valgte <code>exploit/multi/samba/usermap_script</code>. Modulet udnytter <code>CVE-2007-2447</code> i Samba's <code>username map script</code>-funktion og kræver ikke autentificering på forhånd.</p>
+    <p>Det var et bevidst valg ud fra modulets rang og den version, scanningen havde peget på. Jeg undersøgte, hvad exploiteten gjorde, før jeg kørte den.</p>
+
+    <h2>5. Udnyttelse</h2>
+    <p>Jeg satte målet og SMB-porten i modulet og startede en reverse shell. Sessionsåbningen lykkedes, og jeg fik en shell som <code>root</code>.</p>
+<pre><code>use exploit/multi/samba/usermap_script
+set RHOSTS TARGET
+set RPORT 139
+run</code></pre>
+
+    <h2>6. Post-exploitation</h2>
+    <p>Jeg verificerede, hvilken bruger shellen kørte som, og søgte efter flagfilen. Flaget er ikke gengivet her, men selve fundet bekræftede, at exploiten gav adgang til den relevante fil.</p>
+<pre><code>whoami
+find ./ -name "flag.txt"</code></pre>
+
+    <h2>Hvad jeg lærte</h2>
+    <p>Opgaven viser, hvor farlig en gammel SMB-tjeneste kan være. <code>usermap_script</code> kræver ingen gyldig login og giver direkte kommandoeksekvering, så en uopdateret Samba-installation kan være et meget kort vej til root.</p>
+    <p>Det vigtigste for mig var ikke selve exploit-kommandoen, men rækkefølgen: afgræns netværket, find tjenesten, verificér versionen, forstå sårbarheden og først derefter vælge værktøj.</p>
+  </article>
+
+  <div class="writeup-footer">
+    <a href="/ctf/">← Alle CTF-writeups</a>
+    <span class="note">Ingen flags eller følsomme lab-detaljer er delt.</span>
+  </div>
+</main>
+<footer class="site-footer">
+  <span>© 2026 William Larsen</span>
+  <div class="footer-links">
+    <a href="/projekter/">Projekter</a>
+    <a href="/fotografi/">Fotografi</a>
+    <a href="/certifikater/">Certifikater</a>
+    <a href="/ctf/">CTF</a>
+    <a href="https://lab.williamlarsen.dk/">Lab</a>
+    <a href="https://github.com/Williamxx7">GitHub</a>
+    <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
+  </div>
+</footer>
+<div class="pixel-chat">
+  <div class="pixel-chat-bubble" role="status">Stil spørgsmål om William</div>
+  <div data-pixel-william data-chat-trigger="true" data-scale="4"></div>
+</div>
+<script src="/pixel-william.js" defer></script>
+<script src="/widget.js" data-endpoint="https://william-chat.williamlarsen2005.workers.dev" data-contact="https://williamlarsen.dk/#kontakt" data-hide-button="true" data-pixel-trigger="true" defer></script>
+</body>
+</html>

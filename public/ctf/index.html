@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CTF-writeups fra Campfire og TryHackMe. Fokus på metode, værktøjer og læring, uden flags eller følsomme lab-detaljer.">
+<link rel="canonical" href="https://williamlarsen.dk/ctf/">
+<meta property="og:title" content="CTF & writeups | William Larsen">
+<meta property="og:description" content="Praktisk cybersikkerhed fra Campfire og TryHackMe. Writeups med fokus på metode og læring.">
+<meta property="og:image" content="https://williamlarsen.dk/image.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta property="og:url" content="https://williamlarsen.dk/ctf/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CTF & writeups | William Larsen">
+<meta name="twitter:description" content="Praktisk cybersikkerhed fra Campfire og TryHackMe.">
+<meta name="twitter:image" content="https://williamlarsen.dk/image.png">
+<meta name="twitter:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta name="theme-color" content="#8b6c4f">
+<title>CTF & writeups | William Larsen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon-20261021.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/projekter/case-20261021b.css">
+<link rel="stylesheet" href="/ctf/ctf.css">
+<link rel="stylesheet" href="/nav-20261021c.css">
+<script src="/nav-20261021.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Forside", "item": "https://williamlarsen.dk/" },
+    { "@type": "ListItem", "position": 2, "name": "CTF & writeups", "item": "https://williamlarsen.dk/ctf/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "CTF-writeups",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "TechArticle",
+        "name": "It's Samba Time!",
+        "url": "https://williamlarsen.dk/ctf/its-samba-time/",
+        "description": "Network- og exploitation-opgave med Samba, Nmap og Metasploit.",
+        "author": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" }
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+      <a href="/">Forside</a>
+      <a href="/projekter/">Projekter</a>
+      <a href="/fotografi/">Fotografi</a>
+      <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/" class="is-active" aria-current="page">CTF</a>
+      <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs" aria-label="Brødkrumme">
+    <a href="/">Forside</a><span>/</span><span>CTF &amp; writeups</span>
+  </nav>
+  <p class="eyebrow">Praktisk sikkerhed</p>
+  <h1>CTF &amp; <em>writeups</em></h1>
+  <p class="lead ctf-intro">Capture The Flag-opgaver er min praktiske træning i netværk, exploitation og analyse. Her samler jeg writeups med fokus på metoden og det, jeg lærte undervejs.</p>
+
+  <div class="ctf-stats" aria-label="Overblik">
+    <div class="ctf-stat"><strong>1</strong><span>offentlig writeup</span></div>
+    <div class="ctf-stat"><strong>Campfire</strong><span>første platform</span></div>
+    <div class="ctf-stat"><strong>TryHackMe</strong><span>kommer</span></div>
+  </div>
+
+  <div class="ctf-filters" role="group" aria-label="Filtrér efter platform">
+    <button class="ctf-filter active" type="button" data-platform="alle" aria-pressed="true">Alle (1)</button>
+    <button class="ctf-filter" type="button" data-platform="campfire" aria-pressed="false">Campfire (1)</button>
+    <button class="ctf-filter" type="button" data-platform="tryhackme" aria-pressed="false">TryHackMe (0)</button>
+  </div>
+
+  <section class="ctf-grid" id="ctfGrid" aria-label="CTF-writeups">
+    <a class="ctf-card" href="/ctf/its-samba-time/" data-platform="campfire">
+      <div class="ctf-cover" aria-hidden="true">
+        <div class="ctf-cover-top"><span>Campfire CTF</span><span>Network / Exploitation</span></div>
+        <pre><span class="prompt">$</span> nmap -sV TARGET
+<span class="prompt">$</span> search Samba
+<span class="prompt">&gt;</span> usermap_script</pre>
+      </div>
+      <div class="ctf-body">
+        <span class="ctf-platform">Campfire</span>
+        <h2 class="ctf-title">It's Samba Time!</h2>
+        <p class="ctf-desc">En SMB-tjeneste med en gammel Samba-version bliver udgangspunktet for et klassisk exploitation-forløb.</p>
+        <div class="ctf-tags"><span>Network</span><span>Exploitation</span><span>Nmap</span><span>Metasploit</span></div>
+        <div class="ctf-card-foot"><span>2026 · 35 point</span><strong>Læs writeup →</strong></div>
+      </div>
+    </a>
+  </section>
+  <p class="ctf-empty" id="ctfEmpty">Der er endnu ingen offentlige writeups fra denne platform. De kommer, når jeg har noget, jeg vil dele.</p>
+
+  <p class="note">Writeups er skrevet som læring og dokumentation. Flags, adgangskoder og følsomme lab-detaljer er fjernet. Jeg deler metoden, ikke svarene.</p>
+</main>
+<footer class="site-footer">
+  <span>© 2026 William Larsen</span>
+  <div class="footer-links">
+    <a href="/projekter/">Projekter</a>
+    <a href="/fotografi/">Fotografi</a>
+    <a href="/certifikater/">Certifikater</a>
+    <a href="/ctf/">CTF</a>
+    <a href="https://lab.williamlarsen.dk/">Lab</a>
+    <a href="https://github.com/Williamxx7">GitHub</a>
+    <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
+  </div>
+</footer>
+<script>
+  (function () {
+    var filters = document.querySelectorAll('.ctf-filter');
+    var cards = document.querySelectorAll('.ctf-card');
+    var empty = document.getElementById('ctfEmpty');
+
+    function setFilter(platform, updateHash) {
+      var visible = 0;
+      filters.forEach(function (button) {
+        var active = button.getAttribute('data-platform') === platform;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      cards.forEach(function (card) {
+        var show = platform === 'alle' || card.getAttribute('data-platform') === platform;
+        card.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      empty.classList.toggle('is-visible', visible === 0);
+      if (updateHash) {
+        history.replaceState(null, '', platform === 'alle' ? location.pathname : location.pathname + '#' + platform);
+      }
+    }
+
+    filters.forEach(function (button) {
+      button.addEventListener('click', function () {
+        setFilter(button.getAttribute('data-platform'), true);
+      });
+    });
+
+    var initial = location.hash.replace('#', '');
+    if (initial === 'campfire' || initial === 'tryhackme') setFilter(initial, false);
+  })();
+</script>
+</body>
+</html>
