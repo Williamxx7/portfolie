@@ -161,7 +161,7 @@ h1 {
 }
 
 .category-card:hover img { transform: scale(1.035); }
-.category-card:last-child { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+.category-card:last-child { grid-column: auto; aspect-ratio: 4 / 3; }
 
 .category-copy {
   position: absolute;
