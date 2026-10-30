@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Projekter, uddannelse og fotografering fra William Larsen. Se studieprojekter, personlige projekter og fotogalleri.">
+    <meta name="description" content="Projekter og uddannelse fra William Larsen. Se studieprojekter og personlige projekter.">
     <link rel="canonical" href="https://williamlarsen.dk/projekter/">
     <meta property="og:title" content="Projekter — William Larsen">
-    <meta property="og:description" content="Projekter, uddannelse og fotografering fra William Larsen. Se studieprojekter, personlige projekter og fotogalleri.">
+    <meta property="og:description" content="Projekter og uddannelse fra William Larsen. Se studieprojekter og personlige projekter.">
     <meta property="og:image" content="https://williamlarsen.dk/image.png">
     <meta property="og:image:width" content="2400">
     <meta property="og:image:height" content="1260">
@@ -17,7 +17,7 @@
     <meta property="og:locale" content="da_DK">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Projekter — William Larsen">
-    <meta name="twitter:description" content="Projekter, uddannelse og fotografering fra William Larsen. Se studieprojekter, personlige projekter og fotogalleri.">
+    <meta name="twitter:description" content="Projekter og uddannelse fra William Larsen. Se studieprojekter og personlige projekter.">
     <meta name="twitter:image" content="https://williamlarsen.dk/image.png">
     <meta name="twitter:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
     <meta name="theme-color" content="#8b6c4f">
@@ -809,7 +809,7 @@
   "@type": "CollectionPage",
   "name": "Projekter",
   "url": "https://williamlarsen.dk/projekter/",
-  "description": "Projekter, uddannelse og fotografering fra William Larsen.",
+  "description": "Projekter og uddannelse fra William Larsen.",
   "isPartOf": {
     "@type": "WebSite",
     "url": "https://williamlarsen.dk/"
@@ -902,19 +902,13 @@
 
     <div class="page-hero reveal">
         <p class="page-eyebrow">Arbejde &amp; uddannelse</p>
-        <h1>Projekter,<br><em>uddannelse</em><br>&amp; fotografering</h1>
-        <p>Et samlet overblik over kode jeg har skrevet, billeder jeg har taget og kompetencer jeg har dokumenteret.</p>
+        <h1>Projekter &amp;<br><em>uddannelse</em></h1>
+        <p>Et samlet overblik over kode jeg har skrevet, og kompetencer jeg har dokumenteret.</p>
     </div>
 
-    <div class="filter-bar">
-        <div class="tabs" id="tabBar" role="tablist" aria-label="Projektkategorier">
-            <button class="tab-btn active" id="tab-btn-kode" data-tab="kode" role="tab" aria-selected="true" aria-controls="tab-kode" tabindex="0">Kodeprojekter</button>
-            <button class="tab-btn" id="tab-btn-foto" data-tab="foto" role="tab" aria-selected="false" aria-controls="tab-foto" tabindex="-1">Fotografering</button>
-        </div>
-    </div>
 
     <!-- KODE PROJEKTER -->
-    <div class="content-section active" id="tab-kode" role="tabpanel" aria-labelledby="tab-btn-kode" tabindex="0">
+    <div class="content-section active" id="tab-kode">
         <h2 class="section-label reveal">Projekter</h2>
         <h3 class="project-group-title reveal">Uddannelsesprojekter</h3>
         <div class="projects-grid reveal" style="transition-delay:0.1s">
@@ -1112,19 +1106,6 @@
         </div>
     </div>
 
-    <!-- FOTOGRAFERING -->
-    <div class="content-section" id="tab-foto" role="tabpanel" aria-labelledby="tab-btn-foto" tabindex="0" hidden>
-        <h2 class="section-label reveal">Fotografering</h2>
-        <p class="photo-intro reveal">
-            Jeg har arbejdet i en fotoforretning, hvor jeg har taget en bred vifte af <strong>portrætter</strong>
-            og fotograferet <strong>bryllupper</strong> for private kunder.
-            Derudover har jeg løst fotoopgaver for virksomheder som
-            <strong>Løberen</strong>, <strong>Campfire Security</strong> og <strong>Verpan</strong>.
-            <a class="photo-intro-link" href="/fotografi/">Se hele fotogalleriet →</a>
-        </p>
-        <div id="photo-filters"></div>
-        <div id="photo-gallery" class="photo-masonry"></div>
-    </div>
 
     <footer>
         <p>© 2026 William Larsen</p>
@@ -1142,389 +1123,6 @@
 
     <script>
     if (location.hash === '#certs') location.replace('/certifikater/');
-
-    /* =========================
-       TABS
-    ========================= */
-    const tabBtns     = document.querySelectorAll('.tab-btn');
-    const tabSections = document.querySelectorAll('.content-section');
-
-    function activateTab(target, scroll = true) {
-        const btn = Array.from(tabBtns).find(b => b.dataset.tab === target);
-        if (!btn) return;
-
-        tabBtns.forEach(button => {
-            const active = button === btn;
-            button.classList.toggle('active', active);
-            button.setAttribute('aria-selected', active ? 'true' : 'false');
-            button.tabIndex = active ? 0 : -1;
-        });
-
-        tabSections.forEach(section => {
-            const active = section.id === 'tab-' + target;
-            section.classList.toggle('active', active);
-            section.hidden = !active;
-        });
-
-        if (scroll) {
-            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            const bar = document.querySelector('.filter-bar');
-            if (bar) window.scrollTo({ top: bar.offsetTop - 80, behavior: 'smooth' });
-        }
-        triggerReveals();
-    }
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            activateTab(btn.dataset.tab);
-            history.replaceState(null, '', '#' + btn.dataset.tab);
-        });
-    });
-
-    const tabBar = document.getElementById('tabBar');
-    tabBar.addEventListener('keydown', event => {
-        const current = event.target.closest('.tab-btn');
-        if (!current) return;
-        const tabs = Array.from(tabBtns);
-        const index = tabs.indexOf(current);
-        let next;
-        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
-        else if (event.key === 'Home') next = 0;
-        else if (event.key === 'End') next = tabs.length - 1;
-        else return;
-        event.preventDefault();
-        tabs[next].focus();
-        tabs[next].click();
-    });
-
-    const initialTab = location.hash.replace('#', '');
-    if (['kode', 'foto'].includes(initialTab)) {
-        requestAnimationFrame(() => activateTab(initialTab));
-    }
-
-    window.addEventListener('hashchange', () => {
-        const tab = location.hash.replace('#', '');
-        if (['kode', 'foto'].includes(tab)) activateTab(tab);
-    });
-
-    /* =========================
-       GALLERY SYSTEM
-    ========================= */
-    const CATEGORY_LABELS = {
-        all: "Alle",
-        Bryllup: "Bryllup",
-        Sport: "Sport",
-        Street_Photography: "Street",
-        landscape: "Landskab",
-        portræt: "Portræt"
-    };
-
-    let galleryData     = {};
-    let currentCategory = "all";
-    let flatImages      = [];
-    let lightboxIndex   = 0;
-    let lightboxEl      = null;
-    let lightboxTrigger = null;
-
-    fetch("/data/gallery.json")
-        .then(r => r.json())
-        .then(data => {
-            galleryData = data;
-            buildFilters();
-            renderGallery();
-        })
-        .catch(() => console.warn("gallery.json ikke fundet"));
-
-    function categoryLabel(cat) {
-        return CATEGORY_LABELS[cat] || cat.replace(/_/g, " ");
-    }
-
-    function pad2(n) {
-        return String(n).padStart(2, "0");
-    }
-
-    function captionFor(img) {
-        return `${categoryLabel(img.category)} · ${pad2(img.categoryIndex + 1)}`;
-    }
-
-    /* --- Filters --- */
-    function buildFilters() {
-        const wrap = document.getElementById("photo-filters");
-        wrap.innerHTML = "";
-
-        const total = Object.values(galleryData).reduce((sum, items) => sum + items.length, 0);
-
-        ["all", ...Object.keys(galleryData)].forEach(cat => {
-            const btn = document.createElement("button");
-            btn.type = "button";
-            const count = cat === "all" ? total : galleryData[cat].length;
-            btn.textContent = `${categoryLabel(cat)} (${count})`;
-            btn.dataset.cat = cat;
-            btn.setAttribute("aria-pressed", cat === currentCategory ? "true" : "false");
-            if (cat === currentCategory) btn.classList.add("active");
-            btn.onclick = () => {
-                currentCategory = cat;
-                wrap.querySelectorAll("button").forEach(b => {
-                    b.classList.remove("active");
-                    b.setAttribute("aria-pressed", "false");
-                });
-                btn.classList.add("active");
-                btn.setAttribute("aria-pressed", "true");
-                renderGallery();
-            };
-            wrap.appendChild(btn);
-        });
-    }
-
-    /* --- Gallery render --- */
-    function renderGallery() {
-        const grid = document.getElementById("photo-gallery");
-        grid.innerHTML = "";
-
-        if (currentCategory === "all") {
-            flatImages = Object.entries(galleryData).flatMap(([cat, images]) =>
-                images.map((img, i) => ({ ...img, category: cat, categoryIndex: i }))
-            );
-        } else {
-            flatImages = (galleryData[currentCategory] || []).map((img, i) => ({
-                ...img,
-                category: currentCategory,
-                categoryIndex: i
-            }));
-        }
-
-        flatImages.forEach((img, idx) => {
-            const item = document.createElement("div");
-            item.className = "photo-item";
-            const captionText = captionFor(img);
-            item.setAttribute("role", "button");
-            item.setAttribute("tabindex", "0");
-            item.setAttribute("aria-label", `Åbn ${captionText.toLowerCase()}`);
-
-            // Brug billedets faktiske aspect ratio fra JSON
-            const ratio = img.aspectRatio || 0.75;
-            item.style.aspectRatio = ratio;
-
-            // Blur-up placeholder
-            const blur = document.createElement("img");
-            blur.className = "thumb-blur";
-            blur.src = img.placeholder;
-            blur.alt = "";
-            blur.setAttribute("aria-hidden", "true");
-
-            // Responsive <picture>
-            const picture = document.createElement("picture");
-
-            const avifSrc = document.createElement("source");
-            avifSrc.type   = "image/avif";
-            avifSrc.srcset = img.avifSrcset;
-            avifSrc.sizes  = "(max-width:480px) 100vw, (max-width:860px) 50vw, 33vw";
-
-            const webpSrc = document.createElement("source");
-            webpSrc.type   = "image/webp";
-            webpSrc.srcset = img.webpSrcset;
-            webpSrc.sizes  = "(max-width:480px) 100vw, (max-width:860px) 50vw, 33vw";
-
-            const imgEl = document.createElement("img");
-            imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
-            imgEl.alt      = captionText;
-            imgEl.loading  = "lazy";
-            imgEl.decoding = "async";
-
-            imgEl.onload = () => {
-                imgEl.classList.add("loaded");
-                item.classList.add("loaded");
-            };
-
-            picture.appendChild(avifSrc);
-            picture.appendChild(webpSrc);
-            picture.appendChild(imgEl);
-
-            // Caption overlay
-            const overlay = document.createElement("div");
-            overlay.className = "photo-overlay";
-            const caption = document.createElement("p");
-            caption.className = "photo-caption";
-            caption.textContent = captionText;
-            overlay.appendChild(caption);
-
-            item.appendChild(blur);
-            item.appendChild(picture);
-            item.appendChild(overlay);
-
-            item.addEventListener("click", () => openLightbox(idx, item));
-            item.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    openLightbox(idx, item);
-                }
-            });
-
-            grid.appendChild(item);
-        });
-    }
-
-    /* --- Lightbox --- */
-    function openLightbox(idx, trigger) {
-        lightboxIndex = idx;
-        lightboxTrigger = trigger || null;
-        if (!lightboxEl) buildLightbox();
-        if (lightboxEl._closeTimer) {
-            clearTimeout(lightboxEl._closeTimer);
-            lightboxEl._closeTimer = null;
-        }
-        updateLightboxImage();
-        document.body.appendChild(lightboxEl);
-        document.body.style.overflow = "hidden";
-        requestAnimationFrame(() => {
-            lightboxEl.classList.add("open");
-            if (lightboxEl._close) lightboxEl._close.focus();
-        });
-        document.addEventListener("keydown", lightboxKeyHandler);
-    }
-
-    function buildLightbox() {
-        lightboxEl = document.createElement("div");
-        lightboxEl.className = "lightbox-bg";
-        lightboxEl.setAttribute("role", "dialog");
-        lightboxEl.setAttribute("aria-modal", "true");
-        lightboxEl.setAttribute("aria-label", "Fotogalleri");
-
-        const inner = document.createElement("div");
-        inner.className = "lightbox-inner";
-
-        const picture = document.createElement("picture");
-        const avifSrc = document.createElement("source");
-        avifSrc.type = "image/avif";
-        const webpSrc = document.createElement("source");
-        webpSrc.type = "image/webp";
-        const imgEl = document.createElement("img");
-        imgEl.alt = "";
-
-        picture.appendChild(avifSrc);
-        picture.appendChild(webpSrc);
-        picture.appendChild(imgEl);
-
-        const caption = document.createElement("p");
-        caption.className = "lightbox-caption";
-
-        inner.appendChild(picture);
-        inner.appendChild(caption);
-
-        const count = document.createElement("p");
-        count.className = "lightbox-count";
-        count.setAttribute("aria-live", "polite");
-
-        const close = document.createElement("div");
-        close.className = "lightbox-close";
-        close.innerHTML = "×";
-        close.setAttribute("role", "button");
-        close.setAttribute("tabindex", "0");
-        close.setAttribute("aria-label", "Luk galleri");
-        close.onclick = closeLightbox;
-        close.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                closeLightbox();
-            }
-        });
-
-        const prev = document.createElement("div");
-        prev.className = "lightbox-nav prev";
-        prev.innerHTML = "‹";
-        prev.setAttribute("role", "button");
-        prev.setAttribute("tabindex", "0");
-        prev.setAttribute("aria-label", "Forrige billede");
-        prev.onclick = (e) => { e.stopPropagation(); navigate(-1); };
-        prev.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                navigate(-1);
-            }
-        });
-
-        const next = document.createElement("div");
-        next.className = "lightbox-nav next";
-        next.innerHTML = "›";
-        next.setAttribute("role", "button");
-        next.setAttribute("tabindex", "0");
-        next.setAttribute("aria-label", "Næste billede");
-        next.onclick = (e) => { e.stopPropagation(); navigate(1); };
-        next.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                navigate(1);
-            }
-        });
-
-        lightboxEl.appendChild(inner);
-        lightboxEl.appendChild(count);
-        lightboxEl.appendChild(close);
-        lightboxEl.appendChild(prev);
-        lightboxEl.appendChild(next);
-
-        lightboxEl.addEventListener("click", (e) => {
-            if (e.target === lightboxEl) closeLightbox();
-        });
-
-        lightboxEl._avifSrc = avifSrc;
-        lightboxEl._webpSrc = webpSrc;
-        lightboxEl._imgEl   = imgEl;
-        lightboxEl._caption = caption;
-        lightboxEl._count   = count;
-        lightboxEl._close   = close;
-        lightboxEl._focusables = [close, prev, next];
-    }
-
-    function updateLightboxImage() {
-        const img = flatImages[lightboxIndex];
-        if (!img) return;
-        const caption = captionFor(img);
-        lightboxEl._avifSrc.srcset = img.avifSrcset;
-        lightboxEl._webpSrc.srcset = img.webpSrcset;
-        lightboxEl._imgEl.src      = img.webpSrcset.split(", ").pop().split(" ")[0];
-        lightboxEl._imgEl.alt      = caption;
-        lightboxEl._caption.textContent = caption;
-        lightboxEl._count.textContent = `${lightboxIndex + 1} / ${flatImages.length}`;
-    }
-
-    function navigate(dir) {
-        lightboxIndex = (lightboxIndex + dir + flatImages.length) % flatImages.length;
-        updateLightboxImage();
-    }
-
-    function closeLightbox() {
-        if (!lightboxEl) return;
-        const trigger = lightboxTrigger;
-        lightboxEl.classList.remove("open");
-        document.body.style.overflow = "";
-        document.removeEventListener("keydown", lightboxKeyHandler);
-        lightboxEl._closeTimer = setTimeout(() => {
-            if (lightboxEl.parentNode) lightboxEl.parentNode.removeChild(lightboxEl);
-            lightboxEl._closeTimer = null;
-            if (trigger) trigger.focus();
-        }, 300);
-    }
-
-    function lightboxKeyHandler(e) {
-        if (e.key === "Escape")     closeLightbox();
-        if (e.key === "ArrowRight") navigate(1);
-        if (e.key === "ArrowLeft")  navigate(-1);
-        if (e.key === "Tab") {
-            const focusables = lightboxEl._focusables || [];
-            if (!focusables.length) return;
-            const first = focusables[0];
-            const last = focusables[focusables.length - 1];
-            if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault();
-                last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault();
-                first.focus();
-            }
-        }
-    }
 
     /* =========================
        REVEAL

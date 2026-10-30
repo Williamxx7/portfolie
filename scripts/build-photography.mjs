@@ -203,6 +203,7 @@ const indexBody = `
   <p class="eyebrow">Fotografi</p>
   <h1>Fotografi</h1>
   <p class="lead">Et udvalg af forlovelser, bryllupper, sport, portrætter, street og landskab. Alle billeder er taget af William Larsen.</p>
+  <p class="photo-about">Jeg har arbejdet i en fotoforretning, hvor jeg har taget en bred vifte af <strong>portrætter</strong> og fotograferet <strong>bryllupper</strong> for private kunder. Derudover har jeg løst fotoopgaver for virksomheder som <strong>Løberen</strong>, <strong>Campfire Security</strong> og <strong>Verpan</strong>.</p>
   <div class="category-grid">
 ${categoryCards}
   </div>
