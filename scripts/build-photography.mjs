@@ -5,7 +5,7 @@ const root = new URL("../", import.meta.url);
 const publicDir = new URL("public/", root);
 const outDir = new URL("fotografi/", publicDir);
 const origin = "https://williamlarsen.dk";
-const lastmod = "2026-10-21";
+const lastmod = "2026-10-30";
 
 const gallery = JSON.parse(await readFile(new URL("data/gallery.json", publicDir), "utf8"));
 
@@ -17,6 +17,14 @@ const categories = [
     alt: "Bryllupsfotografi",
     title: "Bryllupsfotografi",
     description: "Bryllupsfotografi med fokus på stemning, detaljer og de små øjeblikke. Til private kunder og større arrangementer."
+  },
+  {
+    key: "Forlovelser",
+    slug: "forlovelser",
+    label: "Forlovelser",
+    alt: "Forlovelsesfotografi",
+    title: "Forlovelsesfotografi",
+    description: "Forlovelsesfotografi i naturligt lys. Et udvalg af øjeblikke fra en forlovelse i København."
   },
   {
     key: "Sport",
@@ -134,6 +142,7 @@ ${script}
       <a href="/projekter/">Projekter</a>
       <a href="/fotografi/" class="is-active" aria-current="page">Fotografi</a>
       <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/">CTF</a>
       <a href="https://lab.williamlarsen.dk/">Lab</a>
     </nav>
   </div>
@@ -145,6 +154,7 @@ ${body}
     <a href="/projekter/">Projekter</a>
     <a href="/fotografi/">Fotografi</a>
     <a href="/certifikater/">Certifikater</a>
+    <a href="/ctf/">CTF</a>
     <a href="https://lab.williamlarsen.dk/">Lab</a>
     <a href="https://github.com/Williamxx7">GitHub</a>
     <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
@@ -192,15 +202,15 @@ const indexBody = `
   </nav>
   <p class="eyebrow">Fotografi</p>
   <h1>Fotografi</h1>
-  <p class="lead">Et udvalg af bryllupper, sport, portrætter, street og landskab. Alle billeder er taget af William Larsen.</p>
+  <p class="lead">Et udvalg af forlovelser, bryllupper, sport, portrætter, street og landskab. Alle billeder er taget af William Larsen.</p>
   <div class="category-grid">
 ${categoryCards}
   </div>
 </main>`;
 
 const indexHtml = shell({
-  title: "Fotografi — bryllup, sport, portræt og landskab | William Larsen",
-  description: "Se et udvalg af William Larsens fotografi: bryllupper, sport, portrætter, street og landskab. Fotograferet i København og omegn.",
+  title: "Fotografi — forlovelser, bryllup, sport og portræt | William Larsen",
+  description: "Se et udvalg af William Larsens fotografi: forlovelser, bryllupper, sport, portrætter, street og landskab. Fotograferet i København og omegn.",
   canonicalPath: "/fotografi/",
   ogImage: absolute("/image.png"),
   ogAlt: "William Larsen — fotografi",
@@ -213,7 +223,7 @@ const indexHtml = shell({
       "@type": "CollectionPage",
       name: "Fotografi",
       url: absolute("/fotografi/"),
-      description: "Et udvalg af bryllupper, sport, portrætter, street og landskab.",
+      description: "Et udvalg af forlovelser, bryllupper, sport, portrætter, street og landskab.",
       hasPart: categories.map(category => ({
         "@type": "ImageGallery",
         name: category.label,
@@ -239,7 +249,9 @@ const sitemapUrls = [
   { loc: `${origin}/projekter/exif/`, priority: "0.7" },
   { loc: `${origin}/projekter/egalitarian/`, priority: "0.7" },
   { loc: `${origin}/projekter/p3/`, priority: "0.7" },
-  { loc: `${origin}/certifikater/`, priority: "0.8" }
+  { loc: `${origin}/certifikater/`, priority: "0.8" },
+  { loc: `${origin}/ctf/`, priority: "0.8" },
+  { loc: `${origin}/ctf/its-samba-time/`, priority: "0.7" }
 ];
 
 const imageEntries = [];

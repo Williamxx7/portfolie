@@ -50,6 +50,85 @@
       "name": "PX7_6210"
     }
   ],
+  "Forlovelser": [
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-01-400.avif 400w, /images/photography/Forlovelser/forlovelse-01-800.avif 800w, /images/photography/Forlovelser/forlovelse-01-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-01-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-01-400.webp 400w, /images/photography/Forlovelser/forlovelse-01-800.webp 800w, /images/photography/Forlovelser/forlovelse-01-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-01-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwBACdASoUAA0APzmGuVOvKSWisAgB4CcJZACdMoADSsBWQVCCZsf0vwAA+orXvaqVOVoYNBGeSElxP7MU+HtBMeCOWLTlPSptO2jR4g/78/GAdxvy+2SIAAA=",
+      "aspectRatio": 1.5029,
+      "name": "forlovelse-01"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-02-400.avif 400w, /images/photography/Forlovelser/forlovelse-02-800.avif 800w, /images/photography/Forlovelser/forlovelse-02-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-02-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-02-400.webp 400w, /images/photography/Forlovelser/forlovelse-02-800.webp 800w, /images/photography/Forlovelser/forlovelse-02-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-02-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADQBACdASoUAB4APzmUwVmvKicjqAgB4CcJQBXDgeTD42vmSNjznRRGiTxajGyuAAD5VJv0dWQQoS0lC/DW124aaSHXrpfRt+/tnhbCdEqoxU1Havusgxy9+9pJzuBgYZZJg+uvMXUhrFluAWJaCVQ+9L/O9WvT0F6J3WI5lgSGRg5ce0uMV7JiXAtKQAAA",
+      "aspectRatio": 0.6654,
+      "name": "forlovelse-02"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-03-400.avif 400w, /images/photography/Forlovelser/forlovelse-03-800.avif 800w, /images/photography/Forlovelser/forlovelse-03-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-03-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-03-400.webp 400w, /images/photography/Forlovelser/forlovelse-03-800.webp 800w, /images/photography/Forlovelser/forlovelse-03-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-03-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACQAwCdASoUAA0APzmGuVOvKSWisAgB4CcJaACdMoADS6Nx5d1wAP6jUbF8rVv2orqztxLKcPq2+HJgyqRu8dWBmzwnIXvJu4inoEsRfKwAAA==",
+      "aspectRatio": 1.5031,
+      "name": "forlovelse-03"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-04-400.avif 400w, /images/photography/Forlovelser/forlovelse-04-800.avif 800w, /images/photography/Forlovelser/forlovelse-04-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-04-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-04-400.webp 400w, /images/photography/Forlovelser/forlovelse-04-800.webp 800w, /images/photography/Forlovelser/forlovelse-04-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-04-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoUAA0APzmGuVOvKSWisAgB4CcJZAC7ACHJ8EmcbthgAP6jMx4X2AOCcxigcsenpC/l4+zofvoZiK6Evcgscg3hHHgkAAAA",
+      "aspectRatio": 1.5028,
+      "name": "forlovelse-04"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-05-400.avif 400w, /images/photography/Forlovelser/forlovelse-05-800.avif 800w, /images/photography/Forlovelser/forlovelse-05-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-05-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-05-400.webp 400w, /images/photography/Forlovelser/forlovelse-05-800.webp 800w, /images/photography/Forlovelser/forlovelse-05-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-05-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAwCdASoUAA0APzmEuVOvKKWisAgB4CcJaACdMoADTQJydvsntgwA/rmg9px2PM9kDJpQQwZ5UxtKF1kGUh8ImwIE1hjMYwPz7cTh7yi9ELegAAA=",
+      "aspectRatio": 1.5029,
+      "name": "forlovelse-05"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-06-400.avif 400w, /images/photography/Forlovelser/forlovelse-06-800.avif 800w, /images/photography/Forlovelser/forlovelse-06-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-06-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-06-400.webp 400w, /images/photography/Forlovelser/forlovelse-06-800.webp 800w, /images/photography/Forlovelser/forlovelse-06-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-06-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABwBACdASoUAB4APzmMulYvKSWjqA1R4CcJYwDFCuiBVmSdHKtspGbuWkF6GAD0dh2sv+dfNIfHnCXcIV3HY/j/DLSNtuxOBKTXkiNNJ+Jt5nDAl2YHHLSNYe1cY06zLd7/zeUYZ8HT9Hil1su6VfpiKm/m0o0czIV0AAAA",
+      "aspectRatio": 0.6653,
+      "name": "forlovelse-06"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-07-400.avif 400w, /images/photography/Forlovelser/forlovelse-07-800.avif 800w, /images/photography/Forlovelser/forlovelse-07-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-07-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-07-400.webp 400w, /images/photography/Forlovelser/forlovelse-07-800.webp 800w, /images/photography/Forlovelser/forlovelse-07-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-07-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAQBQCdASoUAB4APzmEvVavJ6YjsBgIAeAnCUAYoVAANTqYIYDL2zKJGZy34JW+Tf4AAP7W9fSp2vp9fFuG6tz9MSayU0rnX7FeHBwMfme6ys479vkO5c57I0FVRyS2hY1HenrK4OT5qLF7L/0tDLRLt9neSu37WZxUbHUOPVV4AA==",
+      "aspectRatio": 0.6654,
+      "name": "forlovelse-07"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-08-400.avif 400w, /images/photography/Forlovelser/forlovelse-08-800.avif 800w, /images/photography/Forlovelser/forlovelse-08-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-08-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-08-400.webp 400w, /images/photography/Forlovelser/forlovelse-08-800.webp 800w, /images/photography/Forlovelser/forlovelse-08-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-08-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACQBACdASoUAB4APzmOwlavKaejqAqp4CcJZADDcBEY7fytR09vZsOLSrsXVmgA/t6AxY3C8vlAiq3W3OwSJJdmKnxjPym+Z9+wKwufLAqPLjNERYHc//a5DgrdwHIVfaFr7DXghzvBSsJmEQqu53KqoudaksugfFfSh1Y6bCSuGOCgw7ro4W3YO+GaQAAA",
+      "aspectRatio": 0.6654,
+      "name": "forlovelse-08"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-09-400.avif 400w, /images/photography/Forlovelser/forlovelse-09-800.avif 800w, /images/photography/Forlovelser/forlovelse-09-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-09-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-09-400.webp 400w, /images/photography/Forlovelser/forlovelse-09-800.webp 800w, /images/photography/Forlovelser/forlovelse-09-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-09-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADQAwCdASoUAA0APzmGulOvKKWisAgB4CcJZAC7AB57GwQA6vLw0XgA/hXd7nzrPu11YJ+MsWaFwk4QKzAr/saTQecqqGLnZ3lxbIcvlBkYyGW/wlbWI583eFj92GK0OxhDQeaLdKPYtyom4Gb70SAA",
+      "aspectRatio": 1.5029,
+      "name": "forlovelse-09"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-10-400.avif 400w, /images/photography/Forlovelser/forlovelse-10-800.avif 800w, /images/photography/Forlovelser/forlovelse-10-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-10-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-10-400.webp 400w, /images/photography/Forlovelser/forlovelse-10-800.webp 800w, /images/photography/Forlovelser/forlovelse-10-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-10-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAADwBACdASoUAB4APzmOwVcvKaejqAqp4CcJZACsMtpBLeAIu/MHJl95Mrc78mDJysAA/rm08VSQ69jSmSGfmSYmGIE6KLsL0qu7dbZOGozSuShIYRYPnr84NlbWpeNQdMSmx1+Q+hpv2aw0ue4w5VkmmoGFPvjLGH7GhDLnEq2rBdahHCyrKezBIKspsxw6LSV7uXQCywsEey0XCB4GQbYvihT7r9plicW54BTkJbAKnYfI2wHRQrGpkgAAAA==",
+      "aspectRatio": 0.6653,
+      "name": "forlovelse-10"
+    },
+    {
+      "avifSrcset": "/images/photography/Forlovelser/forlovelse-11-400.avif 400w, /images/photography/Forlovelser/forlovelse-11-800.avif 800w, /images/photography/Forlovelser/forlovelse-11-1200.avif 1200w, /images/photography/Forlovelser/forlovelse-11-1600.avif 1600w",
+      "webpSrcset": "/images/photography/Forlovelser/forlovelse-11-400.webp 400w, /images/photography/Forlovelser/forlovelse-11-800.webp 800w, /images/photography/Forlovelser/forlovelse-11-1200.webp 1200w, /images/photography/Forlovelser/forlovelse-11-1600.webp 1600w",
+      "placeholder": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAAAQBQCdASoUAB4APzmKvVYvKSYjsBgIAeAnCUAXnAIuBpEXuvBXrE5aKlwpkxqvuBYAAP4G54VNHZIPl2nDT//YyzlW9kz4ycSbXcbeakBqnfGvyHsG4O4ELoQQMoOlzTktOZ/B5ptxoEIxh9LYzsXKv/b5TCFl0lIPLS3lw08xBUunGd2rEs2rS3Cd45z90rkETIl4AT9T/6QrCq4IdPHvcADA2X88agAAAA==",
+      "aspectRatio": 0.6653,
+      "name": "forlovelse-11"
+    }
+  ],
   "Sport": [
     {
       "avifSrcset": "/images/photography/Sport/WX7_8724-400.avif 400w, /images/photography/Sport/WX7_8724-800.avif 800w, /images/photography/Sport/WX7_8724-1200.avif 1200w, /images/photography/Sport/WX7_8724-1600.avif 1600w",
