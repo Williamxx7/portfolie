@@ -247,6 +247,153 @@ const cases = [
       { label: "Åbn værktøj", href: "/exif/", primary: true }
     ],
     note: "Billederne behandles lokalt i browseren og uploades ikke."
+  },
+  {
+    slug: "homelab",
+    tag: "Hjemmelab",
+    title: "Homelab og Wazuh-lab",
+    displayTitle: "Homelab og Wazuh-lab",
+    description: "Et selvbygget hjemmelab på Proxmox med isolerede netværkssegmenter, Wazuh SIEM, Kali og et Ubuntu-mål. Brugt til at øve angreb og se, hvordan de samme hændelser ser ud i logs og alarmer.",
+    period: "2025 til 2026",
+    status: "I drift",
+    statusClass: "live",
+    tech: ["Proxmox VE", "Wazuh", "Kali Linux", "Ubuntu", "Docker", "Tailscale", "Hydra", "SSH"],
+    figures: [
+      {
+        src: "/projekter/homelab/homelab-v4.png",
+        srcset: "/projekter/homelab/homelab-v4.png 1x, /projekter/homelab/homelab-v4-2x.png 2x",
+        href: "/projekter/homelab/homelab-v4-2x.png",
+        alt: "Netværksdiagram over hjemmelabbet med Proxmox, LAN, lab-segment og isoleret målesegment",
+        caption: "Netværksdiagram for hjemmelabbet. Adresserne er dokumentationsadresser eller placeholders, ikke de faktiske. Klik for at åbne i fuld størrelse."
+      }
+    ],
+    sections: [
+      {
+        title: "Baggrund",
+        paragraphs: [
+          "Labbet startede som et sted at øve sig uden at røre produktion eller andre folks systemer. Målet var at få praktisk erfaring med virtualisering, netværksopdeling, logindsamling og detektion, ikke kun at køre et angreb én gang.",
+          "Det er bygget på eget udstyr og bruges løbende til små øvelser, hvor jeg både kan følge angrebet fra Kali og se konsekvenserne i Wazuh bagefter."
+        ]
+      },
+      {
+        title: "Arkitektur",
+        paragraphs: [
+          "Proxmox VE kører på en Lenovo Legion Y520 med 8 vCPU, 23 GB RAM og en 256 GB NVMe. Der er tre bridges: LAN til hjemmenetværket, et lab-segment med NAT til internettet og et isoleret målesegment uden gateway.",
+          "Wazuh kører som all-in-one i en VM med manager, indexer, filebeat og dashboard. Kali står i lab-segmentet, og Ubuntu-target står i målesegmentet, så angrebsmaskinen kan nå målet, men målet ikke kan nå internettet.",
+          "Management på Proxmox og SSH er kun åbent via Tailscale, og lab-broen dropper resten. Der er taget snapshots efter hver milepæl, så en øvelse kan rulles tilbage."
+        ]
+      },
+      {
+        title: "Wazuh-setup",
+        paragraphs: [
+          "Target kører en Wazuh-agent, auditd med execve og whodata på /etc og /home. Det giver både netværks- og loghændelser og et billede af, hvilken bruger eller proces der ændrede noget.",
+          "Juice Shop kører i Docker på port 3000 som et ekstra øvelsesmål. Agenttrafikken går på port 1514 og 1515 internt i målesegmentet, og Wazuh-manageren henter selv CVE-feeds og opdateringer via sit andet netkort."
+        ]
+      },
+      {
+        title: "Angrebsøvelse: Hydra mod SSH",
+        paragraphs: [
+          "Øvelsen var at se, hvad en brute force mod SSH efterlader sig. Fra Kali kørte jeg Hydra mod target med en ordliste og en bevidst svag testkonto. Der blev ikke brugt rigtige adgangskoder eller data fra andre systemer.",
+          "Da Hydra fandt et match, loggede jeg ind over SSH som den konto for at give Wazuh noget at korrelere: mange mislykkede forsøg fra samme kilde efterfulgt af en vellykket session."
+        ]
+      },
+      {
+        title: "Loganalyse i Wazuh",
+        paragraphs: [
+          "I Wazuh gav forsøgene flere lag. sshd-logs viste gentagne Failed password og forsøg på ikke-eksisterende brugere, og Wazuh samlede dem til en brute force-detektion med kilden og antallet af forsøg.",
+          "Det vellykkede SSH-login kunne ses som en separat hændelse, og auditd og whodata viste hvilke processer der blev startet, og om der blev skrevet i /etc eller /home. Det gjorde det muligt at følge rækkefølgen: scanning, brute force, login og aktivitet på maskinen.",
+          "Pointen var ikke selve indbruddet, men at se hvor tidligt det kunne være opdaget, og hvilke spor der manglede, hvis man kun kiggede på én logkilde."
+        ]
+      },
+      {
+        title: "Afgrænsning",
+        paragraphs: [
+          "Alt foregår på eget udstyr i et isoleret segment uden adgang til internettet. Der ligger ingen kundedata, og testkonti og adgangskoder er kun beregnet til labbet.",
+          "Labbet er privat og kan ikke tilgås udefra. Diagrammet er lavet til dokumentation og viser derfor ikke de faktiske adresser."
+        ]
+      },
+      {
+        title: "Næste skridt",
+        paragraphs: [
+          "Disken har været ustabil, så næste skridt er en ekstern backup og bedre køling. Derefter vil jeg arbejde videre med Active Response og Suricata for at koble netværksdetektion tættere på Wazuh."
+        ]
+      }
+    ],
+    features: [
+      "Tre netværkssegmenter med isoleret mål",
+      "Wazuh all-in-one SIEM",
+      "Agent på target med auditd og whodata",
+      "Hydra mod SSH i lukket lab",
+      "Loganalyse af sshd, auth og procesaktivitet",
+      "Snapshots før og efter øvelser"
+    ],
+    links: [],
+    note: "Labbet er privat og har ingen offentlig demo. Diagram og IP-adresser er til dokumentation."
+  },
+  {
+    slug: "pixel",
+    tag: "Web",
+    title: "Pixel-assistent",
+    displayTitle: "Pixel: AI-assistent på siden",
+    description: "En lille pixelfigur i ren JavaScript, der viser hvad chat-assistenten laver. Figuren skifter tema efter siden og reagerer, når chatten tænker eller svarer.",
+    period: "2026",
+    status: "Live",
+    statusClass: "live",
+    tech: ["HTML", "CSS", "JavaScript", "Cloudflare Workers"],
+    sections: [
+      {
+        title: "Problemet",
+        paragraphs: [
+          "Chat-assistenten på siden havde brug for at vise, at den lyttede, tænkte og svarede. En anonym tænkeboble gav ingen fornemmelse af, hvad der foregik, og figuren skulle samtidig kunne bruges overalt uden at gøre siderne tungere."
+        ]
+      },
+      {
+        title: "Figuren",
+        paragraphs: [
+          "Pixel er en sprite på 16 x 24 felter, der tegnes direkte i siden med ren HTML og CSS. Der er ingen billeder, spritesheets eller biblioteker, så figuren fylder næsten ingenting og kan skaleres uden at blive sløret.",
+          "Figuren har temaer, som vælges ud fra stien: kamera på /fotografi, certifikat på /certifikater og laptop på /projekter. Temaet kan overstyres med et data-attribut, hvis en side skal vise noget andet."
+        ]
+      },
+      {
+        title: "Animationer",
+        paragraphs: [
+          "Animationerne er blink, vejrtrækning, blik til siderne, nik, hop, vink, skrivning på laptop, snak, kamera og certifikat. De køres som små tilstande med egne intervaller, så figuren virker levende uden at kræve en animationspakke.",
+          "Chat-widgeten sender events som williamchat:open, williamchat:thinking, williamchat:reply og williamchat:done. Figuren lytter på dem, vinker når panelet åbnes, skriver mens svaret bliver hentet og snakker et øjeblik, når svaret er kommet."
+        ]
+      },
+      {
+        title: "Chatten",
+        paragraphs: [
+          "Selve chatten er en lille widget i vanilla JavaScript. Den viser samtalen i et flydende panel, holder styr på historikken og sender beskeder til en Cloudflare Worker, som står for svarene.",
+          "Der er sat grænser for længden på beskeder og antallet af udvekslinger, og der er timeout, hvis serveren ikke svarer. Fejl vises i panelet med et link videre til kontaktsektionen i stedet for en teknisk fejlmeddelelse."
+        ]
+      },
+      {
+        title: "Tilgængelighed",
+        paragraphs: [
+          "Hvis systemet er sat til reduceret bevægelse, står figuren stille. Panelet kan lukkes med Escape, knapperne har aria-expanded, og fokus flyttes tilbage til figuren, når chatten lukkes, så den også kan bruges med tastatur."
+        ]
+      },
+      {
+        title: "Afgrænsning",
+        paragraphs: [
+          "Assistenten svarer kun om Williams uddannelse, projekter, erfaring og fotografi. Den er ikke en generel chatbot, og når samtalen rammer sin grænse, henviser den til kontaktsektionen."
+        ]
+      }
+    ],
+    features: [
+      "Pixelfigur uden billeder eller biblioteker",
+      "Tema efter side: kamera, certifikat og laptop",
+      "Reagerer på chat-events",
+      "Reduceret bevægelse respekteres",
+      "Chat-widget i vanilla JavaScript",
+      "Svar via Cloudflare Worker"
+    ],
+    links: [
+      { label: "Se siden", href: "https://williamlarsen.dk/", primary: true },
+      { label: "GitHub", href: "https://github.com/Williamxx7/portfolie" }
+    ],
+    note: "Koden ligger i portfolie-repoet som pixel-william.js og widget.js."
   }
 ];
 
@@ -277,6 +424,56 @@ const page = item => {
   <h2>${esc(section.title)}</h2>
   ${section.paragraphs.map(paragraph => `<p>${esc(paragraph)}</p>`).join("\n  ")}
 </section>`).join("\n");
+
+  const figures = item.figures && item.figures.length ? item.figures.map(figure => {
+    const img = `<img src="${esc(figure.src)}"${figure.srcset ? ` srcset="${esc(figure.srcset)}"` : ""} alt="${esc(figure.alt)}" loading="lazy" decoding="async">`;
+    const media = figure.href ? `<a class="case-figure-link" href="${esc(figure.href)}" data-lightbox-src="${esc(figure.href)}" data-lightbox-alt="${esc(figure.alt)}">${img}</a>` : img;
+    return `<figure class="case-figure">
+  ${media}
+  ${figure.caption ? `<figcaption>${esc(figure.caption)}</figcaption>` : ""}
+</figure>`;
+  }).join("\n") + "\n" : "";
+
+  const lightbox = item.figures && item.figures.length ? `<div class="case-lightbox" id="case-lightbox" role="dialog" aria-modal="true" aria-label="Billede i fuld størrelse" hidden>
+  <button class="case-lightbox-close" type="button" aria-label="Luk billedet">&times;</button>
+  <img alt="">
+</div>
+<script>
+(function () {
+  var box = document.getElementById('case-lightbox');
+  if (!box) return;
+  var img = box.querySelector('img');
+  var closeBtn = box.querySelector('.case-lightbox-close');
+  var lastFocus = null;
+  function open(src, alt) {
+    lastFocus = document.activeElement;
+    img.src = src;
+    img.alt = alt || '';
+    box.hidden = false;
+    document.body.classList.add('lightbox-open');
+    closeBtn.focus();
+  }
+  function close() {
+    box.hidden = true;
+    img.removeAttribute('src');
+    document.body.classList.remove('lightbox-open');
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-lightbox-src]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      open(link.getAttribute('data-lightbox-src'), link.getAttribute('data-lightbox-alt'));
+    });
+  });
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', function (event) {
+    if (event.target === box) close();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (!box.hidden && event.key === 'Escape') close();
+  });
+})();
+</script>` : "";
 
   const features = item.features && item.features.length ? `<section class="case-section">
   <h2>Funktioner</h2>
@@ -334,7 +531,7 @@ const page = item => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/projekter/case-20261021b.css">
+<link rel="stylesheet" href="/projekter/case-20261021d.css">
 <link rel="stylesheet" href="/nav-20261021c.css">
 <script src="/nav-20261021.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(jsonLd, null, 2)}</script>
@@ -352,6 +549,7 @@ const page = item => {
       <a href="/projekter/" class="is-active" aria-current="page">Projekter</a>
       <a href="/fotografi/">Fotografi</a>
       <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/">CTF</a>
       <a href="https://lab.williamlarsen.dk/">Lab</a>
     </nav>
   </div>
@@ -370,7 +568,7 @@ const page = item => {
   <div class="tech-tags">
     ${item.tech.map(tech => `<span>${esc(tech)}</span>`).join("\n    ")}
   </div>
-${sections}
+${figures}${sections}
 ${features}
 ${item.note ? `<p class="note">${esc(item.note)}</p>` : ""}
   <div class="case-links">
@@ -385,11 +583,19 @@ ${item.note ? `<p class="note">${esc(item.note)}</p>` : ""}
     <a href="/projekter/">Projekter</a>
     <a href="/fotografi/">Fotografi</a>
     <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/">CTF</a>
     <a href="https://lab.williamlarsen.dk/">Lab</a>
     <a href="https://github.com/Williamxx7">GitHub</a>
     <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
   </div>
 </footer>
+    <div class="pixel-chat">
+        <div class="pixel-chat-bubble" role="status">Stil spørgsmål om William</div>
+        <div data-pixel-william data-chat-trigger="true" data-scale="4"></div>
+    </div>
+    <script src="/pixel-william.js" defer></script>
+    <script src="/widget.js" data-endpoint="https://william-chat.williamlarsen2005.workers.dev" data-contact="https://williamlarsen.dk/#kontakt" data-hide-button="true" data-pixel-trigger="true" defer></script>
+${lightbox}
 </body>
 </html>`;
 };
