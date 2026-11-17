@@ -104,9 +104,15 @@
   </url>
   <url>
     <loc>https://williamlarsen.dk/ctf/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://williamlarsen.dk/ctf/0day/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://williamlarsen.dk/ctf/its-samba-time/</loc>

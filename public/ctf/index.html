@@ -55,6 +55,17 @@
         "description": "Network- og exploitation-opgave med Samba, Nmap og Metasploit.",
         "author": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" }
       }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "TechArticle",
+        "name": "0day",
+        "url": "https://williamlarsen.dk/ctf/0day/",
+        "description": "Exploitation-opgave med Shellshock og privilege escalation via overlayfs.",
+        "author": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" }
+      }
     }
   ]
 }
@@ -86,18 +97,33 @@
   <p class="lead ctf-intro">Capture The Flag-opgaver er min praktiske træning i netværk, exploitation og analyse. Her samler jeg writeups med fokus på metoden og det, jeg lærte undervejs.</p>
 
   <div class="ctf-stats" aria-label="Overblik">
-    <div class="ctf-stat"><strong>1</strong><span>offentlig writeup</span></div>
+    <div class="ctf-stat"><strong>2</strong><span>offentlige writeups</span></div>
     <div class="ctf-stat"><strong>Campfire</strong><span>første platform</span></div>
-    <div class="ctf-stat"><strong>TryHackMe</strong><span>kommer</span></div>
+    <div class="ctf-stat"><strong>TryHackMe</strong><span>seneste platform</span></div>
   </div>
 
   <div class="ctf-filters" role="group" aria-label="Filtrér efter platform">
-    <button class="ctf-filter active" type="button" data-platform="alle" aria-pressed="true">Alle (1)</button>
+    <button class="ctf-filter active" type="button" data-platform="alle" aria-pressed="true">Alle (2)</button>
     <button class="ctf-filter" type="button" data-platform="campfire" aria-pressed="false">Campfire (1)</button>
-    <button class="ctf-filter" type="button" data-platform="tryhackme" aria-pressed="false">TryHackMe (0)</button>
+    <button class="ctf-filter" type="button" data-platform="tryhackme" aria-pressed="false">TryHackMe (1)</button>
   </div>
 
   <section class="ctf-grid" id="ctfGrid" aria-label="CTF-writeups">
+    <a class="ctf-card" href="/ctf/0day/" data-platform="tryhackme">
+      <div class="ctf-cover" aria-hidden="true">
+        <div class="ctf-cover-top"><span>TryHackMe</span><span>Exploitation / PrivEsc</span></div>
+        <pre><span class="prompt">$</span> curl -H "user-agent: () { :; };"
+<span class="prompt">$</span> uname -a
+<span class="prompt">&gt;</span> 3.13.0-32-generic</pre>
+      </div>
+      <div class="ctf-body">
+        <span class="ctf-platform">TryHackMe</span>
+        <h2 class="ctf-title">0day</h2>
+        <p class="ctf-desc">Shellshock i en CGI-tjeneste giver en shell, og en gammel kernel giver root via overlayfs.</p>
+        <div class="ctf-tags"><span>Shellshock</span><span>Privilege Escalation</span><span>Bash</span><span>Overlayfs</span></div>
+        <div class="ctf-card-foot"><span>2026</span><strong>Læs writeup →</strong></div>
+      </div>
+    </a>
     <a class="ctf-card" href="/ctf/its-samba-time/" data-platform="campfire">
       <div class="ctf-cover" aria-hidden="true">
         <div class="ctf-cover-top"><span>Campfire CTF</span><span>Network / Exploitation</span></div>

